@@ -1,12 +1,10 @@
-package com.fastcampus.ch4.security;
+package com.jangbogo.admin.security;
 
 
-import com.fastcampus.ch4.dao.Dao;
-import lombok.RequiredArgsConstructor;
+import com.jangbogo.admin.dao.Dao;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

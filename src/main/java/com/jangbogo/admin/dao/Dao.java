@@ -1,7 +1,6 @@
-package com.fastcampus.ch4.dao;
+package com.jangbogo.admin.dao;
 
-import com.fastcampus.ch4.security.UserDetailsDto;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.jangbogo.admin.security.UserDetailsDto;
 
 import java.util.ArrayList;
 

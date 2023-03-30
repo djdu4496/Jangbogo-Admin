@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.fastcampus.ch4.dao.FindUserMapper">
+<mapper namespace="com.jangbogo.admin.dao.FindUserMapper">
 
     <select id="checkExistingUser" resultType="int" parameterType="User">
         SELECT COUNT(*) FROM MEMBER WHERE ID = #{id} AND EMAIL =#{email}

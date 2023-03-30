@@ -1,13 +1,12 @@
-package com.fastcampus.ch4;
+package com.jangbogo.admin;
 
 
-import com.fastcampus.ch4.dao.FindUserDao;
-import com.fastcampus.ch4.domain.User;
+import com.jangbogo.admin.dao.FindUserDao;
+import com.jangbogo.admin.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 

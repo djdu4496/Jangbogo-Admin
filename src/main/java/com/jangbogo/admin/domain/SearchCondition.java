@@ -1,4 +1,4 @@
-package com.fastcampus.ch4.domain;
+package com.jangbogo.admin.domain;
 
 import org.springframework.web.util.UriComponentsBuilder;
 

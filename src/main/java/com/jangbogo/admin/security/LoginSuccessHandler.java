@@ -1,4 +1,4 @@
-package com.fastcampus.ch4.security;
+package com.jangbogo.admin.security;
 
 
 import lombok.extern.slf4j.Slf4j;

@@ -3,8 +3,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.fastcampus.ch4.dao.Dao">
-    <select id="selectUser" resultType="com.fastcampus.ch4.security.UserDetailsDto">
+<mapper namespace="com.jangbogo.admin.dao.Dao">
+    <select id="selectUser" resultType="com.jangbogo.admin.security.UserDetailsDto">
         SELECT * FROM USERACC WHERE ID=#{param1}
     </select>
 

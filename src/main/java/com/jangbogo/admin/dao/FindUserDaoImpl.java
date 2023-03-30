@@ -1,7 +1,7 @@
-package com.fastcampus.ch4.dao;
+package com.jangbogo.admin.dao;
 
 
-import com.fastcampus.ch4.domain.User;
+import com.jangbogo.admin.domain.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

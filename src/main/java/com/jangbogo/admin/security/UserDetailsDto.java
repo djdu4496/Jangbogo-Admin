@@ -1,4 +1,4 @@
-package com.fastcampus.ch4.security;
+package com.jangbogo.admin.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

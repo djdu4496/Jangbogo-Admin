@@ -1,13 +1,12 @@
-package com.fastcampus.ch4.controller;
+package com.jangbogo.admin.controller;
 
-import com.fastcampus.ch4.domain.PageHandler;
-import com.fastcampus.ch4.domain.User;
-import com.fastcampus.ch4.service.MemberServiceImpl;
+import com.jangbogo.admin.domain.PageHandler;
+import com.jangbogo.admin.domain.User;
+import com.jangbogo.admin.service.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 

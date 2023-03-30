@@ -1,7 +1,7 @@
-package com.fastcampus.ch4.security;
+package com.jangbogo.admin.security;
 
 
-import com.fastcampus.ch4.dao.Dao;
+import com.jangbogo.admin.dao.Dao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

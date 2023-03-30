@@ -1,7 +1,7 @@
-package com.fastcampus.ch4.service;
+package com.jangbogo.admin.service;
 
-import com.fastcampus.ch4.dao.FindUserDao;
-import com.fastcampus.ch4.domain.User;
+import com.jangbogo.admin.dao.FindUserDao;
+import com.jangbogo.admin.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

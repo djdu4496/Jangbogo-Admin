@@ -1,6 +1,6 @@
-package com.fastcampus.ch4.service;
+package com.jangbogo.admin.service;
 
-import com.fastcampus.ch4.domain.User;
+import com.jangbogo.admin.domain.User;
 
 import java.util.List;
 import java.util.Map;

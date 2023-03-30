@@ -1,4 +1,4 @@
-package com.fastcampus.ch4.security;
+package com.jangbogo.admin.security;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

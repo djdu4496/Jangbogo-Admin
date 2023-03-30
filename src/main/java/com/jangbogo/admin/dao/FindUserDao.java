@@ -1,6 +1,6 @@
-package com.fastcampus.ch4.dao;
+package com.jangbogo.admin.dao;
 
-import com.fastcampus.ch4.domain.User;
+import com.jangbogo.admin.domain.User;
 
 import java.util.List;
 import java.util.Map;
