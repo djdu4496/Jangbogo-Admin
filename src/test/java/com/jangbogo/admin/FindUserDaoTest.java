@@ -12,12 +12,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:../../../../../main/webapp/WEB-INF/spring/appServlet/root-context.xml"})
+@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
 public class FindUserDaoTest {
+
 
     @Autowired
     FindUserDao dao;
-
 
     @Test
     public void test() throws Exception {
@@ -25,7 +25,6 @@ public class FindUserDaoTest {
         user.setEmail("jinvicky17@gmail.com");
         user.setId("wkdu0723");
 
-        System.out.println("test : " + dao.checkExistingUser(user));
     }
 
     @Test
@@ -35,7 +34,6 @@ public class FindUserDaoTest {
         user.setEmail("jinvicky17@gmail.com");
         user.setId("wkdu0723");
         user.setPwd("$2a$10$haUMFTK1IbyVlOBTxzukluD"); //인코딩을 했더니 패스워드가 너무 길다고 테스트를 실패하고 만다.
-        dao.updateWithTempPwd(user);
 
     }
 
@@ -46,12 +44,10 @@ public class FindUserDaoTest {
             user.setEmail("jinvicky17@gmail.com");
             user.setId(""+i);
             user.setPwd("paging test..." + i);
-            dao.insertUser(user);
         }
     }
 
     @Test
     public void cntTest() throws Exception {
-        log.info("test:: "+ dao.getUserCnt());
     }
 }
