@@ -4,7 +4,6 @@ package com.jangbogo.admin.controller;
 //@Slf4j
 //@Controller
 public class HomeController {
-
 //    @GetMapping("/vip")
 //    public String vip(HttpServletRequest request, Model model, Authentication authentication) {
 //        WebAuthenticationDetails wDetails = (WebAuthenticationDetails) authentication.getDetails();
