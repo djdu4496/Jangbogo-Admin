@@ -19,6 +19,6 @@ public interface SellerDao {
 
     int updateSeller (Seller seller) throws Exception;
 
-    int deleteSeller (int idx) throws Exception;
+    int deleteSeller (int idx, String email) throws Exception;
 
 }
