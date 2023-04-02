@@ -54,14 +54,6 @@ public class UserController {
         return "/user/list";
     }
 
-    @GetMapping("/list/seller")
-    public String sellerList () {
-        return "/seller/list";
-    };
 
-    @GetMapping("/list/seller/{state}")
-    public String sellerListByState (@PathVariable String state ) {
-        return "/seller/list";
-    };
 
 }

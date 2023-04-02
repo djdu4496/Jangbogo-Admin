@@ -63,12 +63,12 @@
                                 <tbody>
                                 <%--                                <c:forEach var="userDto" items="${list}">--%>
                                 <tr>
-                                    <a href="/read/seller/100">
-                                        <td class="id">${userDto.id}100</td>
-                                    </a>
-                                    <a href="/read/seller/100">
-                                        <td class="id">${userDto.pwd}jinvicky</td>
-                                    </a>
+
+                                        <td class="id">${userDto.id}<a href="/read/seller/100">100</a></td>
+
+
+                                        <td class="id">${userDto.pwd}<a href="/read/seller/100">jinvicky</a></td>
+
                                     <td class="id">${userDto.email}jin</td>
 <%--                                        code에 따른 String 처리 필요 0: 대기--%>
                                     <td class="id">${userDto.email}대기</td>
