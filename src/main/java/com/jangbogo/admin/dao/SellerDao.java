@@ -7,18 +7,18 @@ import java.util.List;
 import java.util.Map;
 
 public interface SellerDao {
-//    crud 순
 
-    int insertSeller (Seller seller) throws Exception;
+    //판매자 신고.
+    int reportSeller (int idx, String email) throws Exception;
 
-    Seller select (int idx) throws Exception;
+    //판매자 승인.
+    int approveSeller (int idx, String email) throws Exception;
+
+    //판매자 상세 조회.
+    Seller selectSeller (int idx) throws Exception;
 
     List<Seller> selectListPage (Map map) throws Exception;
 
     List<Seller> searchSelectPage (SearchCondition sc) throws Exception;
-
-    int updateSeller (Seller seller) throws Exception;
-
-    int deleteSeller (int idx, String email) throws Exception;
 
 }

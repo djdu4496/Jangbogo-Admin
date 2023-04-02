@@ -4,15 +4,16 @@
 
 <mapper namespace="com.jangbogo.admin.dao.SellerMapper">
 
-    <insert id="insertSeller" parameterType="Seller">
-        INSERT INTO SELER (AUTH_IDX, EMAIL, CPNM, REPR_NM, PWD, MPNO, REPR_TELNO, BIZ_TYPE, BRNO, SLE_BIZ_NO, BSPLC_ZPCD, BSPLC_BASE, BSPLC_DTL, ACC_BANK, ACC_NO, ACC_NM, SELER_AGRE_YN, BRND_BNR_UPLOAD_PATH, BRND_UPLOAD_PATH, BRND_CN)
-        VALUES (1, 'jinvicky1008', '진이회사3', '진이', '1234', '26558945', '4444', 1, '20000', '10000', '16836', '기본', '어딘가', '하나은행', '10', '남궁진', 'Y', 'banner.png', 'default.png', '브랜드내용' );
-    </insert>
-
-    <update id="deleteSeller" parameterType="map">
+    <update id="reportSeller" parameterType="map">
         UPDATE SELER SET STATE_CD = 3 WHERE IDX = #{idx} AND EMAIL = #{email};
     </update>
 
+    <update id="approveSeller" parameterType="map">
+        UPDATE SELER SET STATE_CD = 2 WHERE IDX = #{idx} AND EMAIL = #{email};
+    </update>
 
+    <select id="selectSeller" resultType="Seller">
+        SELECT * FROM SELER WHERE IDX = #{idx};
+    </select>
 
 </mapper>

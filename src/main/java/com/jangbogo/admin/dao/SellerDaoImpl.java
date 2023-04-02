@@ -19,15 +19,29 @@ public class SellerDaoImpl implements SellerDao{
     private static String nameSpace = "com.jangbogo.admin.dao.SellerMapper.";
 
     @Override
-    public int insertSeller (Seller seller) throws Exception {
-        return session.insert(nameSpace + "insertSeller", seller);
+    public int reportSeller (int idx, String email) throws Exception {
+        Map map = new HashMap();
+        map.put("idx", idx);
+        map.put("email", email);
+        return session.update(nameSpace + "reportSeller", map);
+        //상태를 3로 변경 (신고)
     }
 
     @Override
-    public Seller select (int idx) throws Exception {
-        return session.selectOne(nameSpace + "select");
+    public int approveSeller (int idx, String email) throws Exception {
+        Map map = new HashMap();
+        map.put("idx", idx);
+        map.put("email", email);
+        return session.update(nameSpace + "approveSeller", map);
+        //상태를 2로 변경 (승인)
     }
 
+    @Override
+    public Seller selectSeller (int idx) throws Exception {
+        return session.selectOne(nameSpace + "selectSeller", idx);
+    }
+
+//    TODO:: 추가 구현
     @Override
     public List<Seller> selectListPage (Map map) throws Exception {
         return session.selectList(nameSpace + "selectListPage", map);
@@ -38,17 +52,4 @@ public class SellerDaoImpl implements SellerDao{
         return session.selectList(nameSpace +"searchSelectPage", sc);
     }
 
-    @Override
-    public int updateSeller (Seller seller) throws Exception {
-        return session.update(nameSpace + "updateSeller", seller);
-    }
-
-    @Override
-    public int deleteSeller (int idx, String email) throws Exception {
-        Map map = new HashMap();
-        map.put("idx", idx);
-        map.put("email", email);
-        return session.update(nameSpace + "deleteSeller", map);
-        //상태를 3으로 변경
-    }
 }

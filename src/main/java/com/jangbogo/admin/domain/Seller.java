@@ -19,49 +19,47 @@ public class Seller {
     private int auth_idx; //권한번호 1:사용자, 2:판매자 3:관리자
 
     private String email; //이메일
-    private String company_name; //회사이름
-    private String repr_name; //대표이름
+    private String cpnm; //회사이름
+    private String repr_nm; //대표이름
 
     private String pwd; //비밀번호
 
-    private String mobile_num; //휴대전화
-    private String repr_tell_num; //회사대표전화 ??
+    private String mpno; //휴대전화
+    private String repr_tellno; //회사대표전화
 
-    private int type; //사업자유형 1:개인사업, 2:법인사업
+    private int biz_type; //사업자유형 1:개인사업, 2:법인사업
 
-    private String biz_num; //사업자번호
-    private String sale_biz_num; //통신판매업신고번호
+    private String brno; //사업자번호
+    private String sle_biz_no; //통신판매업신고번호
 
-    private String postcode; //우편번호
-    private String address; //기본주소
-    private String address_detail;
+    private String bsplc_zpcd; //우편번호
+    private String bsplc_base; //기본주소
+    private String bsplc_dtl; //상세주소
 
-    private String bank_name; //은행이름
-    private String bank_num; //계좌번호
-    private String bank_owner; //주인이름
+    private String acc_bank; //은행이름
+    private String acc_no; //계좌번호
+    private String acc_nm; //주인이름
 
-    private boolean is_agreed; //판매자동의여부
+    private boolean seler_agre_yn; //판매자동의여부
 
-    private String banner_img_url;  //브랜드배너파일경로
-    private String img_url;  //브랜드프로필파일경로
+    private String brnd_bnr_upload_path;  //브랜드배너파일경로
+    private String brnd_upload_path;  //브랜드프로필파일경로
 
-    private String content;  //브랜드내용
+    private String brnd_cn;  //브랜드내용
 
     private int subs_cnt; //팔로워수
 
-    private int state;  //상태코드; MemberState
+    private int state_cd;  //상태코드; MemberState
 
     @DateTimeFormat(pattern ="yyyy-MM-dd")
-    private Date reg_date; //등록날짜
+    private Date reg_tm; //등록날짜
     @DateTimeFormat(pattern ="yyyy-MM-dd")
-    private Date aprv_date; //승인날짜
+    private Date aprv_tm; //승인날짜
     @DateTimeFormat(pattern ="yyyy-MM-dd")
-    private Date up_date; //수정날짜
+    private Date chg_tm; //수정날짜
     @DateTimeFormat(pattern ="yyyy-MM-dd")
-    private Date pwd_up_date;  //비번변경날짜
+    private Date pwd_upt_tm;  //비번변경날짜
     @DateTimeFormat(pattern ="yyyy-MM-dd")
-    private Date last_login_date;  //최종로그인날짜
+    private Date last_login_tm;  //최종로그인날짜
 
-
-    //TODO:: 판매자상세 iv 추가
 }
