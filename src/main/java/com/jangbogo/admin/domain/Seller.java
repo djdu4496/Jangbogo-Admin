@@ -25,7 +25,7 @@ public class Seller {
     private String pwd; //비밀번호
 
     private String mpno; //휴대전화
-    private String repr_tellno; //회사대표전화
+    private String repr_telno; //회사대표전화
 
     private int biz_type; //사업자유형 1:개인사업, 2:법인사업
 

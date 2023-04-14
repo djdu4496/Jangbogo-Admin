@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class SellerController {
 
     @Autowired
-    SellerService sellerService; //다른 service 쓸 가능성 대비 상세적기
+    SellerService service;
 
     @GetMapping("/list/seller")
-    public String sellerList () {
+    public String sellerList (Model m) {
+
         return "/seller/list";
     };
 
@@ -27,7 +28,16 @@ public class SellerController {
 
     @GetMapping("/read/seller/{idx}")
     public String readSeller (@PathVariable int idx, Model m) throws Exception {
-        m.addAttribute("seller", sellerService.selectSeller(idx));
+
+        m.addAttribute("seller",service.selectSeller(idx));
+//        판매자 선택 정보도 가져와야 한다. sellerOption
+        return "/seller/read";
+    }
+
+    @GetMapping("/read/seller")
+    public String readSeller2 ( Model m) throws Exception {
+
+        m.addAttribute("seller",service.selectSeller(6));
 //        판매자 선택 정보도 가져와야 한다. sellerOption
         return "/seller/read";
     }

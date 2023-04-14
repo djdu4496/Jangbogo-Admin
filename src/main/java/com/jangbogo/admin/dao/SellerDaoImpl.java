@@ -41,15 +41,5 @@ public class SellerDaoImpl implements SellerDao{
         return session.selectOne(nameSpace + "selectSeller", idx);
     }
 
-//    TODO:: 추가 구현
-    @Override
-    public List<Seller> selectListPage (Map map) throws Exception {
-        return session.selectList(nameSpace + "selectListPage", map);
-    }
-
-    @Override
-    public List<Seller> searchSelectPage (SearchCondition sc) throws Exception {
-        return session.selectList(nameSpace +"searchSelectPage", sc);
-    }
 
 }

@@ -17,8 +17,5 @@ public interface SellerDao {
     //판매자 상세 조회.
     Seller selectSeller (int idx) throws Exception;
 
-    List<Seller> selectListPage (Map map) throws Exception;
-
-    List<Seller> searchSelectPage (SearchCondition sc) throws Exception;
 
 }

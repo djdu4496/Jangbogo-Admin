@@ -8,7 +8,7 @@
 
     <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
-
+<!--함부로 주석 금지 프로젝트 실행이 안됨-->
     <s:http auto-config="true" use-expressions="true">
         <s:form-login
                 username-parameter="user_id"
