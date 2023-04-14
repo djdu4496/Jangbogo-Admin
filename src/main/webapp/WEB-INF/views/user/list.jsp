@@ -96,5 +96,9 @@
 </div>
 
 <%@ include file="/WEB-INF/views/include/script.jsp" %>
+<script>
+    let msg = "${msg}";
+    if (msg == "EXCEPTION_ERR")  alert("오류가 발생했습니다. 다시 시도해 주세요");
+</script>
 </body>
 </html>

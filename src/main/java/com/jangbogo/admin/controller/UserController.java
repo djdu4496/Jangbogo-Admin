@@ -1,5 +1,7 @@
 package com.jangbogo.admin.controller;
 
+import com.jangbogo.admin.domain.User;
+import com.jangbogo.admin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,9 @@ public class UserController {
     //주입
 //    @Autowired
 //    MemberServiceImpl service;
+
+    @Autowired
+    UserService service;
 
     //    전체 조회.
     @GetMapping("/list/user")
@@ -51,16 +56,16 @@ public class UserController {
 
     //회원 상세 조회
     @GetMapping("/read/user/{idx}")
-    public String readSeller(@PathVariable Integer idx, RedirectAttributes rattr) {
+    public String readSeller(@PathVariable Integer idx, Model m, RedirectAttributes rattr) {
         try {
-//            유저를 idx로 조회하는 dao, service 개발
+            User user = service.getUserByIdx(idx); //세션 아님
+            m.addAttribute("user", user);
             return "/user/read";
+
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg", "EXCEPTION_ERR");
             return "redirect:/list/user";
         }
     }
-
-
 }

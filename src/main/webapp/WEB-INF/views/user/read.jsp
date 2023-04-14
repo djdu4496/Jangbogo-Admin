@@ -39,83 +39,64 @@
                                 <td class="id">${user.email}</td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">브랜드 이름</td>
+                                <td class="col-3 light-blue">닉네임</td>
                                 <td class="id">${user.nick_nm}</td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">브랜드 대표이름</td>
-                                <td class="id">${seller.cpnm}</td>
+                                <td class="col-3 light-blue">휴대전화번호</td>
+                                <td class="id">${user.mpno}</td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">휴대전화</td>
-                                <td class="id">${seller.mpno}</td>
+                                <td class="col-3 light-blue">생일</td>
+                                <td class="id">${user.brdy}</td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">브랜드 대표연락처</td>
-                                <td class="id">${seller.repr_telno}</td>
+                                <td class="col-3 light-blue">마케팅수신동의여부</td>
+                                <td class="id">${user.markt_agre_yn}</td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">사업 유형</td>
-                                <td class="id">${seller.biz_type}</td>
-                            </tr>
-                            <tr>
-                                <td class="col-3 light-blue">사업자 번호</td>
-                                <td class="id">${seller.sle_biz_no}</td>
-                            </tr>
-                            <tr>
-                                <td class="col-3 light-blue">통신판매업 신고번호</td>
-                                <td class="id">${seller.sle_biz_no}</td>
-                            </tr>
-                            <tr>
-                                <td class="col-3 light-blue">우편번호</td>
-                                <td class="id">${seller.bsplc_zpcd}</td>
-                            </tr>
-                            <tr>
-                                <td class="col-3 light-blue">기본주소</td>
-                                <td class="id">${seller.bsplc_base}</td>
-                            </tr>
-                            <tr>
-                                <td class="col-3 light-blue">상세주소</td>
-                                <td class="id">${seller.bsplc_dtl}</td>
-                            </tr>
-                            <tr>
-                                <td class="col-3 light-blue">브랜드 내용</td>
-                                <td class="id">${seller.brnd_cn}</td>
-                            </tr>
-                            <tr>
-                                <td class="col-3 light-blue">브랜드 배너</td>
+                                <td class="col-3 light-blue">로그인(가입) 유형</td>
                                 <td class="id">
-                                    <img src="display?fileName=${seller.brnd_bnr_upload_path}">
+                                    <c:choose>
+                                        <c:when test="${user.login_tp_cd == 1}">일반</c:when>
+                                        <c:when test="${user.login_tp_cd == 2}">소셜(카카오)</c:when>
+                                        <c:when test="${user.login_tp_cd == 3}">소셜(네이버)</c:when>
+                                    </c:choose>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">브랜드 프로필</td>
-                                <td class="id">
-                                    <img src="display?fileName=${seller.brnd_upload_path}">
-                                </td>
+                                <td class="col-3 light-blue">비밀번호 변경날짜</td>
+                                <td class="id">${user.pwd_upt_tm}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-3 light-blue">마지막 로그인날짜</td>
+                                <td class="id">${user.last_login_tm}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-3 light-blue">신고당한 횟수</td>
+                                <td class="id">${user.decl_cnt}</td>
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">상태코드</td>
                                 <td class="id">
                                     <c:choose>
-                                        <c:when test="${seller.state_cd == 1}">승인(정상)</c:when>
-                                        <c:when test="${seller.state_cd == 2}">신고</c:when>
-                                        <c:when test="${seller.state_cd == 3}">탈퇴</c:when>
-                                        <c:when test="${seller.state_cd == 4}">휴면</c:when>
-                                        <c:when test="${seller.state_cd == 99}">대기</c:when>
+                                        <c:when test="${user.state_cd == 1}">승인(정상)</c:when>
+                                        <c:when test="${user.state_cd == 2}">신고</c:when>
+                                        <c:when test="${user.state_cd == 3}">탈퇴</c:when>
+                                        <c:when test="${user.state_cd == 4}">휴면</c:when>
+                                        <c:when test="${user.state_cd == 99}">대기</c:when>
                                     </c:choose>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">등록날짜</td>
-                                <td class="id">${seller.reg_tm}</td>
+                                <td class="col-3 light-blue">회원가입날짜</td>
+                                <td class="id">${user.reg_tm}</td>
                             </tr>
-                            <c:if test="${seller.state_cd == 1}">
-                                <tr>
-                                    <td class="col-3 light-blue">승인날짜</td>
-                                    <td class="id">${seller.aprv_tm}</td>
-                                </tr>
-                            </c:if>
+                            <%-- 수정날짜가 Null이 아니면 보이게 --%>
+                            <tr>
+                                <td class="col-3 light-blue">회원수정날짜</td>
+                                <td class="id">${user.chg_tm}</td>
+                            </tr>
                         </table>
                         <div class="col-3 ml-auto">
                             <c:if test="${seller.state_cd == 99}">
@@ -124,7 +105,6 @@
                             <button class="btn btn-danger px-md-4 py-md-2">신고하기</button>
                         </div>
                     </div>
-                    <%--  end of card-body  --%>
                 </div>
             </div>
         </div>
@@ -133,11 +113,11 @@
 </div>
 <%@ include file="/WEB-INF/views/include/script.jsp" %>
 <script>
-    $().click(function() {
+    $().click(function () {
 
     });
 
-    $().click(function() {
+    $().click(function () {
 
     })
 
