@@ -22,37 +22,12 @@ public class UserController {
     @Autowired
     UserService service;
 
-    //    전체 조회.
+    //회원 전체 조회
     @GetMapping("/list/user")
     public String userList() {
         return "/user/list";
     }
 
-    //    상태별 조회.
-    @GetMapping("/list/user/{state}")
-    public String userListByState(@RequestParam(defaultValue = "1") Integer page,
-                                  @RequestParam(defaultValue = "10") Integer pageSize,
-                                  @PathVariable String state,
-                                  Model m, HttpServletRequest request) throws Exception {
-
-//        int totalCnt = service.getUserCnt();
-//        m.addAttribute("totalCnt", totalCnt);
-//
-//        PageHandler pageHandler = new PageHandler(totalCnt, page, pageSize);
-//
-//        if(page < 0 || page > pageHandler.getTotalPage())
-//            page = 1;
-//        if(pageSize < 0 || pageSize > 50)
-//            pageSize = 10;
-//        Map map = new HashMap();
-//        map.put("offset", (page-1)*pageSize);
-//        map.put("pageSize", pageSize);
-//
-//        List<User> list = service.selectPage(map);
-//        m.addAttribute("list", list);
-//        m.addAttribute("ph", pageHandler);
-        return "/user/list";
-    }
 
     //회원 상세 조회
     @GetMapping("/read/user/{idx}")

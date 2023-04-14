@@ -67,15 +67,15 @@
                                 <td class="id">${seller.sle_biz_no}</td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">우편번호</td>
+                                <td class="col-3 light-blue">사업장 우편번호</td>
                                 <td class="id">${seller.bsplc_zpcd}</td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">기본주소</td>
+                                <td class="col-3 light-blue">사업장 기본주소</td>
                                 <td class="id">${seller.bsplc_base}</td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">상세주소</td>
+                                <td class="col-3 light-blue">사업장 상세주소</td>
                                 <td class="id">${seller.bsplc_dtl}</td>
                             </tr>
                             <tr>
@@ -93,6 +93,11 @@
                                 <td class="id">
                                     <img src="display?fileName=${seller.brnd_upload_path}">
                                 </td>
+                                ${pageContext.request.requestURI}
+                            </tr>
+                            <tr>
+                                <td class="col-3 light-blue">팔로워수</td>
+                                <td class="id">${seller.subs_cnt}</td>
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">상태코드</td>
@@ -107,13 +112,29 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">등록날짜</td>
+                                <td class="col-3 light-blue">비밀번호 변경일자</td>
+                                <td class="id">${seller.pwd_upt_tm}</td>
+                            </tr>
+                            <c:if test="${not empty seller.last_login_tm}">
+                                <tr>
+                                    <td class="col-3 light-blue">최종 로그인일시</td>
+                                    <td class="id">${seller.last_login_tm}</td>
+                                </tr>
+                            </c:if>
+                            <tr>
+                                <td class="col-3 light-blue">등록일자</td>
                                 <td class="id">${seller.reg_tm}</td>
                             </tr>
                             <c:if test="${seller.state_cd == 1}">
                                 <tr>
-                                    <td class="col-3 light-blue">승인날짜</td>
+                                    <td class="col-3 light-blue">승인일자</td>
                                     <td class="id">${seller.aprv_tm}</td>
+                                </tr>
+                            </c:if>
+                            <c:if test="${not empty seller.chg_tm}">
+                                <tr>
+                                    <td class="col-3 light-blue">수정일자</td>
+                                    <td class="id">${seller.chg_tm}</td>
                                 </tr>
                             </c:if>
                         </table>
@@ -124,7 +145,6 @@
                             <button class="btn btn-danger px-md-4 py-md-2">신고하기</button>
                         </div>
                     </div>
-                    <%--  end of card-body  --%>
                 </div>
             </div>
         </div>
@@ -133,11 +153,11 @@
 </div>
 <%@ include file="/WEB-INF/views/include/script.jsp" %>
 <script>
-    $().click(function() {
+    $().click(function () {
 
     });
 
-    $().click(function() {
+    $().click(function () {
 
     })
 

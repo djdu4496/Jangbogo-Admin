@@ -17,10 +17,8 @@
 <div id="wrapper">
     <%@ include file="/WEB-INF/views/include/navBar.jsp" %>
     <div id="content-wrapper" class="d-flex flex-column">
-        <!-- Main Content -->
         <div id="content">
             <%@ include file="/WEB-INF/views/include/topbar.jsp" %>
-
             <div class="container-md">
                 <div class="card shadow mb-4">
                     <div class="card-header py-md-4">
@@ -35,6 +33,22 @@
                                 <td>${user.idx}</td>
                             </tr>
                             <tr>
+                                <td class="col-3 light-blue">등급</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${user.rnk_idx == 1}">
+                                            일반
+                                        </c:when>
+                                        <c:when test="${user.rnk_idx == 2}">
+                                            단골
+                                        </c:when>
+                                        <c:when test="${user.rnk_idx == 3}">
+                                            vip
+                                        </c:when>
+                                    </c:choose>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="col-3 light-blue">이메일</td>
                                 <td class="id">${user.email}</td>
                             </tr>
@@ -46,10 +60,13 @@
                                 <td class="col-3 light-blue">휴대전화번호</td>
                                 <td class="id">${user.mpno}</td>
                             </tr>
-                            <tr>
-                                <td class="col-3 light-blue">생일</td>
-                                <td class="id">${user.brdy}</td>
-                            </tr>
+                            <%-- 생일 값이 있을 때만--%>
+                            <c:if test="${not empty user.brdy}">
+                                <tr>
+                                    <td class="col-3 light-blue">생일</td>
+                                    <td class="id">${user.brdy}</td>
+                                </tr>
+                            </c:if>
                             <tr>
                                 <td class="col-3 light-blue">마케팅수신동의여부</td>
                                 <td class="id">${user.markt_agre_yn}</td>
@@ -65,16 +82,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">비밀번호 변경날짜</td>
-                                <td class="id">${user.pwd_upt_tm}</td>
-                            </tr>
-                            <tr>
-                                <td class="col-3 light-blue">마지막 로그인날짜</td>
-                                <td class="id">${user.last_login_tm}</td>
-                            </tr>
-                            <tr>
-                                <td class="col-3 light-blue">신고당한 횟수</td>
-                                <td class="id">${user.decl_cnt}</td>
+                                <td class="col-3 light-blue">소셜연동여부</td>
+                                <td class="id">${user.social_yn}</td>
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">상태코드</td>
@@ -89,14 +98,32 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">회원가입날짜</td>
+                                <td class="col-3 light-blue">비밀번호 변경일자</td>
+                                <td class="id">${user.pwd_upt_tm}</td>
+                            </tr>
+                            <%-- 마지막 로그인날짜가 null이 아닐 때만--%>
+                            <c:if test="${not empty user.chg_tm}">
+                                <tr>
+                                    <td class="col-3 light-blue">최종 로그인일자</td>
+                                    <td class="id">${user.last_login_tm}</td>
+                                </tr>
+                            </c:if>
+                            <tr>
+                                <td class="col-3 light-blue">신고당한 횟수</td>
+                                <td class="id">${user.decl_cnt}</td>
+                            </tr>
+
+                            <tr>
+                                <td class="col-3 light-blue">가입일자</td>
                                 <td class="id">${user.reg_tm}</td>
                             </tr>
-                            <%-- 수정날짜가 Null이 아니면 보이게 --%>
-                            <tr>
-                                <td class="col-3 light-blue">회원수정날짜</td>
-                                <td class="id">${user.chg_tm}</td>
-                            </tr>
+                            <%-- 수정날짜가 Null이 아닐 때만 보인다 --%>
+                            <c:if test="${not empty user.chg_tm}">
+                                <tr>
+                                    <td class="col-3 light-blue">수정일자</td>
+                                    <td class="id">${user.chg_tm}</td>
+                                </tr>
+                            </c:if>
                         </table>
                         <div class="col-3 ml-auto">
                             <c:if test="${seller.state_cd == 99}">
@@ -120,7 +147,6 @@
     $().click(function () {
 
     })
-
 </script>
 </body>
 </html>
