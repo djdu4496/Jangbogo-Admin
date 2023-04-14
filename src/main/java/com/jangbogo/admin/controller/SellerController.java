@@ -27,19 +27,12 @@ public class SellerController {
     };
 
     @GetMapping("/read/seller/{idx}")
-    public String readSeller (@PathVariable int idx, Model m) throws Exception {
+    public String readSeller (@PathVariable Integer idx, Model m) throws Exception {
 
         m.addAttribute("seller",service.selectSeller(idx));
 //        판매자 선택 정보도 가져와야 한다. sellerOption
         return "/seller/read";
     }
 
-    @GetMapping("/read/seller")
-    public String readSeller2 ( Model m) throws Exception {
-
-        m.addAttribute("seller",service.selectSeller(6));
-//        판매자 선택 정보도 가져와야 한다. sellerOption
-        return "/seller/read";
-    }
 
 }

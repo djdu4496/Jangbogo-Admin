@@ -1,9 +1,9 @@
 package com.jangbogo.admin;
 
 
-import com.jangbogo.admin.dao.FindUserDao;
 import com.jangbogo.admin.dao.UserDao;
 import com.jangbogo.admin.domain.User;
+import com.jangbogo.admin.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,14 +16,14 @@ import static org.junit.Assert.assertTrue;
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
-public class UserDaoTest {
+public class UserServiceTest {
 
     @Autowired
-    UserDao dao;
+    UserService service;
 
     @Test //ok
     public void test1() throws Exception {
-       User user = dao.getUserByIdx(32); //존재하는 idx
+       User user = service.getUserByIdx(32); //존재하는 idx
        log.info(".....test...." + user);
        assertTrue(user != null);
     }

@@ -15,7 +15,7 @@ public class Seller {
 
     public Seller() {} //기본 생성자
 
-    private int idx; //번호
+    private Integer idx; //번호
     private int auth_idx; //권한번호 1:사용자, 2:판매자 3:관리자
 
     private String email; //이메일

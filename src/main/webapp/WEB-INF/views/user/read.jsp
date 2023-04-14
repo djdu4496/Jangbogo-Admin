@@ -25,22 +25,22 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-md-4">
                         <h5 class="m-0 font-weight-bold text-primary">
-                            판매자 상세
+                            회원 상세
                         </h5>
                     </div>
                     <div class="card-body py-5 px-5">
                         <table class="table table-bordered py-md-3" id="dataTable" width="100%" cellspacing="0">
                             <tr>
                                 <td class="col-3 light-blue">번호(idx)</td>
-                                <td>${seller.idx}</td>
+                                <td>${user.idx}</td>
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">이메일</td>
-                                <td class="id">${seller.email}</td>
+                                <td class="id">${user.email}</td>
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">브랜드 이름</td>
-                                <td class="id">${seller.cpnm}</td>
+                                <td class="id">${user.nick_nm}</td>
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">브랜드 대표이름</td>
