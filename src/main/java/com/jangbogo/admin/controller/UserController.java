@@ -22,6 +22,12 @@ public class UserController {
     @Autowired
     UserService service;
 
+    //관리자 로그인
+    @GetMapping("/admin/login")
+    public String loginView () {
+        return "login";
+    }
+
     //회원 전체 조회
     @GetMapping("/list/user")
     public String userList() {
