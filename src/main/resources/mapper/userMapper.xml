@@ -12,5 +12,32 @@
         SELECT * FROM USER WHERE EMAIL = #{email} AND AUTH_IDX = 3;
     </select>
 
+    <select id="getSearchResultCnt" parameterType="SearchCondition" resultType="int">
+        SELECT COUNT(*)
+        FROM  USER
+        WHERE true
+        <include refid="searchCondition"/>
+    </select>
+
+    <sql id="searchCondition">
+        <choose>
+            <when test='option=="I"'>
+                AND IDX LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="E"'>
+                AND EMAIL LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="N"'>
+                AND NICK_NM LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="S"'>
+                AND STATE_CD LIKE concat('%', #{keyword}, '%')
+            </when>
+            <otherwise>
+                AND (EMAIL   LIKE concat('%', #{keyword}, '%')
+                OR   NICK_NM LIKE concat('%', #{keyword}, '%'))
+            </otherwise>
+        </choose>
+    </sql>
 
 </mapper>

@@ -13,4 +13,6 @@ public interface UserDao {
     User getUserByIdx (Integer idx) throws Exception;
 
     User getAdminByEmail (String email) throws Exception;
+
+    int getSearchResultCnt (SearchCondition sc) throws Exception;
 }

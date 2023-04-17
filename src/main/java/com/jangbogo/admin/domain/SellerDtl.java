@@ -4,7 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-public class SellerOption {//판매자선택정보
+public class SellerDtl {//판매자선택정보
 
     private String guid_nm;  //안내담당자이름
     private String guid_email;  //안내담당자이메일

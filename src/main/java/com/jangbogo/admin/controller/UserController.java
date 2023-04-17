@@ -15,28 +15,26 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class UserController {
 
-    //주입
-//    @Autowired
-//    MemberServiceImpl service;
-
     @Autowired
     UserService service;
 
-    //관리자 로그인
-    @GetMapping("/admin/login")
-    public String loginView () {
-        return "login";
-    }
-
     //회원 전체 조회
-    @GetMapping("/list/user")
-    public String userList() {
+    @GetMapping("/user/list")
+    public String userList(Model m, RedirectAttributes rattr) {
+        try {
+
+            //get userList
+
+        } catch (Exception e) {
+            rattr.addFlashAttribute("msg", "EXCEPTION_ERR");
+            e.printStackTrace();
+            return "redirect:/";
+        }
         return "/user/list";
     }
 
-
     //회원 상세 조회
-    @GetMapping("/read/user/{idx}")
+    @GetMapping("/user/read/{idx}")
     public String readSeller(@PathVariable Integer idx, Model m, RedirectAttributes rattr) {
         try {
             User user = service.getUserByIdx(idx); //세션 아님
@@ -46,7 +44,7 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg", "EXCEPTION_ERR");
-            return "redirect:/list/user";
+            return "redirect:/user/list";
         }
     }
 }

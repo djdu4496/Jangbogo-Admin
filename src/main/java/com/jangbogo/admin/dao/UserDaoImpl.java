@@ -1,5 +1,6 @@
 package com.jangbogo.admin.dao;
 
+import com.jangbogo.admin.domain.SearchCondition;
 import com.jangbogo.admin.domain.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,10 @@ public class UserDaoImpl implements UserDao{
     @Override
     public User getAdminByEmail (String email) throws Exception {
         return session.selectOne(nameSpace + "getAdminByEmail", email);
+    }
+
+    @Override
+    public int getSearchResultCnt (SearchCondition sc) throws Exception {
+        return session.selectOne(nameSpace + "getSearchResultCnt", sc);
     }
 }

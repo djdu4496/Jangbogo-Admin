@@ -12,6 +12,7 @@
 <head>
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
     <link rel="stylesheet" href="/css/color.css">
+    <link rel="stylesheet" href="/css/display.css">
 </head>
 <body id="page-top">
 <div id="wrapper">
@@ -126,10 +127,12 @@
                             </c:if>
                         </table>
                         <div class="col-3 ml-auto">
-                            <c:if test="${seller.state_cd == 99}">
-                                <button class="btn btn-primary px-md-4 py-md-2 mr-2">승인하기</button>
-                            </c:if>
-                            <button class="btn btn-danger px-md-4 py-md-2">신고하기</button>
+                            <button class="btn btn-primary px-md-4 py-md-2 mr-2 <c:if test='${seller.state_cd != 99}'>hidden</c:if>"
+                                    id="approve_btn"
+                            >
+                                승인하기
+                            </button>
+                            <button class="btn btn-danger px-md-4 py-md-2" id="report_btn">신고하기</button>
                         </div>
                     </div>
                 </div>
@@ -140,13 +143,15 @@
 </div>
 <%@ include file="/WEB-INF/views/include/script.jsp" %>
 <script>
-    $().click(function () {
+    $(document).ready(function () {
+        $().click(function () {
 
+        });
+
+        $().click(function () {
+
+        })
     });
-
-    $().click(function () {
-
-    })
 </script>
 </body>
 </html>

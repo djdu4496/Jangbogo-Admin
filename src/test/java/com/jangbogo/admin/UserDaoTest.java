@@ -2,6 +2,7 @@ package com.jangbogo.admin;
 
 
 import com.jangbogo.admin.dao.UserDao;
+import com.jangbogo.admin.domain.SearchCondition;
 import com.jangbogo.admin.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -42,5 +43,17 @@ public class UserDaoTest {
     public void test3() throws Exception {
         log.info("...encode...." + passwordEncoder.encode("test1007"));
         //$2a$10$WX7vUbgBA8K5kPaeFGa.VeZ3RUOsZO0MhxbsISjbM7kD0X1ai6rOi
+    }
+
+    @Test //ok
+    public void test4() throws Exception {
+        SearchCondition sc = new SearchCondition();
+//        sc.setOption("E");
+//        sc.setKeyword("");
+        int cnt = dao.getSearchResultCnt(sc);
+
+        log.info("cnt...." + cnt);
+        assertTrue(cnt != 0);
+        //검색 조건 없을 때 전체, 있을 때 부분 테스트 ok
     }
 }
