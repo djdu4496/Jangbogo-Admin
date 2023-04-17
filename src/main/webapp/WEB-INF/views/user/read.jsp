@@ -131,7 +131,9 @@
                                     id="list_btn">
                                 목록으로
                             </button>
-                            <button class="btn btn-danger px-md-4 py-md-2" id="report_btn">신고하기</button>
+                            <c:if test="${user.state_cd != 2}">
+                                <button class="btn btn-danger px-md-4 py-md-2" id="report_btn">신고하기</button>
+                            </c:if>
                         </div>
                     </div>
                 </div>
