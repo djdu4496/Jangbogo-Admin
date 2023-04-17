@@ -2,6 +2,7 @@ package com.jangbogo.admin;
 
 
 import com.jangbogo.admin.dao.UserDao;
+import com.jangbogo.admin.domain.SearchCondition;
 import com.jangbogo.admin.domain.User;
 import com.jangbogo.admin.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,5 +34,17 @@ public class UserServiceTest {
         boolean result = service.verifyAdmin("jinvicky@naver.com", "test1007");
         log.info("....." + result);
         assertTrue(result);
+    }
+
+    @Test //ok
+    public void test3() throws Exception {
+        SearchCondition sc = new SearchCondition();
+        sc.setOption("E");
+        sc.setKeyword("test");
+        int cnt = service.getSearchResultCnt(sc);
+
+        log.info("cnt...." + cnt);
+        assertTrue(cnt != 0);
+        //검색 조건 없을 때 전체, 있을 때 부분 테스트 ok
     }
 }

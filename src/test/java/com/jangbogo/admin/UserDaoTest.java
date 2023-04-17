@@ -12,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
 
 @Slf4j
@@ -50,10 +52,19 @@ public class UserDaoTest {
         SearchCondition sc = new SearchCondition();
 //        sc.setOption("E");
 //        sc.setKeyword("");
-        int cnt = dao.getSearchResultCnt(sc);
+        int cnt = dao.searchResultCnt(sc);
 
         log.info("cnt...." + cnt);
         assertTrue(cnt != 0);
         //검색 조건 없을 때 전체, 있을 때 부분 테스트 ok
+    }
+
+    @Test
+    public void test5() throws Exception {
+        SearchCondition sc = new SearchCondition();
+        sc.setPage(1);
+        sc.setPageSize(10);
+        List<User> list = dao.searchSelectPage(sc);
+        log.info("list...."+ list +"....length ..." + list.size()); //ok
     }
 }

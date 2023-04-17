@@ -5,19 +5,37 @@
 <mapper namespace="com.jangbogo.admin.dao.UserMapper">
 
     <select id="getUserByIdx" resultType="User">
-        SELECT * FROM USER WHERE IDX = #{idx}
+        SELECT *
+        FROM USER
+        WHERE IDX = #{idx}
     </select>
 
     <select id="getAdminByEmail" resultType="User">
-        SELECT * FROM USER WHERE EMAIL = #{email} AND AUTH_IDX = 3;
+        SELECT *
+        FROM USER
+        WHERE EMAIL = #{email}
+          AND AUTH_IDX = 3;
     </select>
 
-    <select id="getSearchResultCnt" parameterType="SearchCondition" resultType="int">
+    <select id="searchResultCnt" parameterType="SearchCondition" resultType="int">
         SELECT COUNT(*)
-        FROM  USER
+        FROM USER
         WHERE true
         <include refid="searchCondition"/>
     </select>
+
+    <select id="searchSelectPage" parameterType="SearchCondition" resultType="User">
+        <include refid="selectUser"/>
+        WHERE TRUE
+        <include refid="searchCondition"/>
+        ORDER BY REG_TM DESC, IDX DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <sql id="selectUser">
+        SELECT *
+        FROM USER
+    </sql>
 
     <sql id="searchCondition">
         <choose>
@@ -34,8 +52,8 @@
                 AND STATE_CD LIKE concat('%', #{keyword}, '%')
             </when>
             <otherwise>
-                AND (EMAIL   LIKE concat('%', #{keyword}, '%')
-                OR   NICK_NM LIKE concat('%', #{keyword}, '%'))
+                AND (EMAIL LIKE concat('%', #{keyword}, '%')
+                OR NICK_NM LIKE concat('%', #{keyword}, '%'))
             </otherwise>
         </choose>
     </sql>

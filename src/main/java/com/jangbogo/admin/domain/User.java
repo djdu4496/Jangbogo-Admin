@@ -22,7 +22,9 @@ public class User {
     private String nick_nm; //닉네임
     private String pwd; //비밀번호
     private String mpno; //휴대전화번호
-    private String brdy; //생일
+
+    @DateTimeFormat(pattern ="yyyy-MM-dd")
+    private Date brdy; //생일
 
     private String user_agre_yn; //개인정보수집동의여부
     private String markt_agre_yn; //마케팅수신동의여부

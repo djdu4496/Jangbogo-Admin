@@ -1,5 +1,7 @@
 package com.jangbogo.admin.controller;
 
+import com.jangbogo.admin.domain.PageHandler;
+import com.jangbogo.admin.domain.SearchCondition;
 import com.jangbogo.admin.domain.User;
 import com.jangbogo.admin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -20,10 +26,19 @@ public class UserController {
 
     //회원 전체 조회
     @GetMapping("/user/list")
-    public String userList(Model m, RedirectAttributes rattr) {
+    public String userList(Model m, SearchCondition sc, RedirectAttributes rattr) {
         try {
+            int totalCnt = service.getSearchResultCnt(sc);
+            m.addAttribute("totalCnt", totalCnt);
 
-            //get userList
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);
+
+            List<User> list = service.getSearchSelectPage(sc);
+            m.addAttribute("list", list);
+            m.addAttribute("ph", pageHandler);
+
+            Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
+            m.addAttribute("startOfToday", startOfToday.toEpochMilli());
 
         } catch (Exception e) {
             rattr.addFlashAttribute("msg", "EXCEPTION_ERR");

@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class UserDaoImpl implements UserDao{
 
@@ -25,7 +27,12 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public int getSearchResultCnt (SearchCondition sc) throws Exception {
-        return session.selectOne(nameSpace + "getSearchResultCnt", sc);
+    public int searchResultCnt (SearchCondition sc) throws Exception {
+        return session.selectOne(nameSpace + "searchResultCnt", sc);
+    }
+
+    @Override
+    public List<User> searchSelectPage (SearchCondition sc) throws Exception {
+        return session.selectList(nameSpace + "searchSelectPage", sc);
     }
 }

@@ -14,5 +14,7 @@ public interface UserDao {
 
     User getAdminByEmail (String email) throws Exception;
 
-    int getSearchResultCnt (SearchCondition sc) throws Exception;
+    int searchResultCnt (SearchCondition sc) throws Exception;
+
+    List<User> searchSelectPage (SearchCondition sc) throws Exception;
 }
