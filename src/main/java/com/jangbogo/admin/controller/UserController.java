@@ -46,9 +46,9 @@ public class UserController {
 //            m.addAttribute("startOfToday", startOfToday.toEpochMilli());
 
         } catch (Exception e) {
-            rattr.addFlashAttribute("msg", "EXCEPTION_ERR");
+//            rattr.addFlashAttribute("msg", "EXCEPTION_ERR");
             e.printStackTrace();
-            return "redirect:/";
+//            return "redirect:/";
         }
         return "/user/list";
     }

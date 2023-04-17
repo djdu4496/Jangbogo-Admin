@@ -12,23 +12,29 @@
         <div id="content">
             <%@ include file="/WEB-INF/views/include/topbar.jsp" %>
             <div class="container-fluid">
-                <select
-                        class="custom-select col-xl-3"
-                        aria-label="select example"
-                >
-                    <option selected>제목</option>
-                    <option value="1"></option>
-                    <option value="2">Two</option>
-                </select>
                 <form
-                        id=""
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                        class="d-none form-inline mr-auto d-flex mb-4 mt-lg-5"
+                        action="<c:url value='/user/list'/>"
+                        method="get"
                 >
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                               aria-label="Search" aria-describedby="basic-addon2">
+                    <select
+                            class="custom-select col-xl-3"
+                            name="option"
+                    >
+                        <option value="A"  ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>이메일+닉네임</option>
+                        <option value="E" ${ph.sc.option=='E' ? "selected" : ""}>이메일</option>
+                        <option value="N" ${ph.sc.option=='N' ? "selected" : ""}>닉네임</option>
+                    </select>
+                    <div class="input-group col-md-5">
+                        <input type="text"
+                               name="keyword"
+                               class="form-control border-1 small"
+                               placeholder="검색어를 입력해 주세요"
+                               aria-label="Search" aria-describedby="basic-addon2"
+                               value="${ph.sc.keyword}"
+                        >
                         <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
+                            <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-search fa-sm"></i>
                             </button>
                         </div>
@@ -81,27 +87,6 @@
                                             </c:choose>
                                         </td>
                                         <td class="id">${user.reg_tm}</td>
-                                            <%--                                        500에러. 추후 수정--%>
-                                            <%--                                        <c:choose>--%>
-                                            <%--                                            <c:when test="${user.reg_tm >= startOfToday}">--%>
-                                            <%--                                                <td class="id">--%>
-                                            <%--                                                    <fmt:formatDate--%>
-                                            <%--                                                            value="${user.reg_tm}"--%>
-                                            <%--                                                            pattern="HH:mm"--%>
-                                            <%--                                                            type="time"--%>
-                                            <%--                                                    />--%>
-                                            <%--                                                </td>--%>
-                                            <%--                                            </c:when>--%>
-                                            <%--                                            <c:otherwise>--%>
-                                            <%--                                                <td class="id">--%>
-                                            <%--                                                    <fmt:formatDate--%>
-                                            <%--                                                            value="${user.reg_tm}"--%>
-                                            <%--                                                            pattern="yyyy-MM-dd"--%>
-                                            <%--                                                            type="date"--%>
-                                            <%--                                                    />--%>
-                                            <%--                                                </td>--%>
-                                            <%--                                            </c:otherwise>--%>
-                                            <%--                                        </c:choose>--%>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -111,18 +96,20 @@
                     <%--  end of card-body  --%>
                     <c:choose>
                         <c:when test="${totalCnt == null || totalCnt == 0}">
-                            <div>회원이 존재하지 않습니다</div>
+                            <div class="pb-5 text-center">회원이 존재하지 않습니다</div>
                         </c:when>
                         <c:otherwise>
                             <ul class="d-flex justify-content-center pagination">
                                 <c:if test="${ph.showPrev}">
                                     <li class="page-item">
-                                        <a class="page-link" href="<c:url value="/user/list${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
+                                        <a class="page-link"
+                                           href="<c:url value="/user/list${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
                                     </li>
                                 </c:if>
                                 <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
                                     <li class="page-item ${i==ph.sc.page? "active" : ""}">
-                                        <a class="page-link" href="<c:url value="/user/list${ph.sc.getQueryString(i)}"/>">${i}</a>
+                                        <a class="page-link"
+                                           href="<c:url value="/user/list${ph.sc.getQueryString(i)}"/>">${i}</a>
                                     </li>
                                 </c:forEach>
                                 <c:if test="${ph.showNext}">
