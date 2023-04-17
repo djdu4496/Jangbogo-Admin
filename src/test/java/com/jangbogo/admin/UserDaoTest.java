@@ -67,4 +67,11 @@ public class UserDaoTest {
         List<User> list = dao.searchSelectPage(sc);
         log.info("list...."+ list +"....length ..." + list.size()); //ok
     }
+
+    @Test
+    public void test6() throws Exception {
+        int result = dao.reportUser(62, "test995@naver.com");
+        log.info("result..." + result);
+        assertTrue(result != 0);
+    }
 }

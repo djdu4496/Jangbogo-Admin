@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class UserDaoImpl implements UserDao{
@@ -34,5 +36,13 @@ public class UserDaoImpl implements UserDao{
     @Override
     public List<User> searchSelectPage (SearchCondition sc) throws Exception {
         return session.selectList(nameSpace + "searchSelectPage", sc);
+    }
+
+    @Override
+    public int reportUser (Integer idx, String email) throws Exception {
+        Map map = new HashMap();
+        map.put("idx", idx);
+        map.put("email", email);
+        return session.update(nameSpace + "reportUser", map);
     }
 }

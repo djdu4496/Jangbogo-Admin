@@ -127,11 +127,11 @@
                             </c:if>
                         </table>
                         <div class="col-3 ml-auto">
-                            <button class="btn btn-primary px-md-4 py-md-2 mr-2 <c:if test='${seller.state_cd != 99}'>hidden</c:if>"
-                                    id="approve_btn"
-                            >
-                                승인하기
-                            </button>
+<%--                            <button class="btn btn-primary px-md-4 py-md-2 mr-2 <c:if test='${seller.state_cd == 99}'>hidden</c:if>"--%>
+<%--                                    id="approve_btn"--%>
+<%--                            >--%>
+<%--                                승인하기--%>
+<%--                            </button>--%>
                             <button class="btn btn-danger px-md-4 py-md-2" id="report_btn">신고하기</button>
                         </div>
                     </div>
@@ -144,11 +144,17 @@
 <%@ include file="/WEB-INF/views/include/script.jsp" %>
 <script>
     $(document).ready(function () {
-        $().click(function () {
-
+        $("#list_btn").click(function () {
+            window.location.href = "/";  //경로 이전페이지로 가기
         });
 
-        $().click(function () {
+        $("#report_btn").click(function (e) {
+            e.preventDefault();
+
+            if (confirm("해당 회원을 신고하시겠습니까?")) {
+
+                //ajax로 회원신고하고 성공 시 유저리스트 페이지로 이동
+            }
 
         })
     });

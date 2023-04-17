@@ -38,7 +38,6 @@ public class UserController {
             log.info("....." + sc.getOffset() + sc);
 
             List<User> list = service.getSearchSelectPage(sc);
-//            List<User> list = new ArrayList<>();
             m.addAttribute("list", list);
             m.addAttribute("ph", pageHandler);
 
@@ -46,9 +45,7 @@ public class UserController {
 //            m.addAttribute("startOfToday", startOfToday.toEpochMilli());
 
         } catch (Exception e) {
-//            rattr.addFlashAttribute("msg", "EXCEPTION_ERR");
             e.printStackTrace();
-//            return "redirect:/";
         }
         return "/user/list";
     }
