@@ -64,6 +64,10 @@
 </div>
 <jsp:include page="include/script.jsp"/>
 <script>
+    let msg = "${msg}";
+    if (msg == "ADMIN_NOT_FOUND") alert("정보가 일치하지 않습니다");
+    if (msg == "EXCEPTION_ERR") alert("오류가 발생했습니다. 다시 시도해 주세요");
+
     $(document).ready(function () {
         let email = $("input[name=email]");
         let pwd = $("input[name=pwd]");
