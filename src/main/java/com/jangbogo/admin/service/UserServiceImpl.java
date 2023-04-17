@@ -42,4 +42,9 @@ public class UserServiceImpl implements UserService{
     public List<User> getSearchSelectPage (SearchCondition sc) throws Exception {
         return dao.searchSelectPage(sc);
     }
+
+    @Override
+    public int reportUser (Integer idx, String email) throws Exception {
+        return dao.reportUser(idx, email);
+    }
 }

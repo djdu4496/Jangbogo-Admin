@@ -47,4 +47,10 @@ public class UserServiceTest {
         assertTrue(cnt != 0);
         //검색 조건 없을 때 전체, 있을 때 부분 테스트 ok
     }
+
+    @Test
+    public void test4() throws Exception {
+        int result = service.reportUser(156, "test9999@naver.com");
+        log.info("result..."+ result);
+    }
 }

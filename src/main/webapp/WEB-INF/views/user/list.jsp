@@ -69,8 +69,10 @@
                                 <tbody>
                                 <c:forEach var="user" items="${list}">
                                     <tr>
-                                        <td class="id"><a href="/user/read/${user.idx}">${user.idx}</a></td>
-                                        <td class="id"><a href="/user/read/${user.idx}">${user.email}</a></td>
+                                        <td class="id">${user.idx}</td>
+                                        <td class="id"><a
+                                                href="<c:url value="/user/read${ph.sc.queryString}&idx=${user.idx}"/>">${user.email}</a>
+                                        </td>
                                         <td class="id">${user.nick_nm}</td>
                                         <td class="id">${user.mpno}</td>
                                         <td class="id">

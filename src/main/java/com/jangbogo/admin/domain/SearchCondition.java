@@ -8,14 +8,15 @@ import static java.util.Objects.requireNonNullElse;
 public class SearchCondition {
     private Integer page = 1;
     private Integer pageSize = DEFAULT_PAGE_SIZE;
-    private String  option = "";
-    private String  keyword = "";
+    private String option = "";
+    private String keyword = "";
 
     public static final int MIN_PAGE_SIZE = 5;
     public static final int DEFAULT_PAGE_SIZE = 10;
     public static final int MAX_PAGE_SIZE = 50;
 
-    public SearchCondition(){}
+    public SearchCondition() {
+    }
 
     public SearchCondition(Integer page, Integer pageSize) {
         this(page, pageSize, "", "");
@@ -35,12 +36,13 @@ public class SearchCondition {
     public String getQueryString(Integer page) {
         // ?page=10&pageSize=10&option=A&keyword=title
         return UriComponentsBuilder.newInstance()
-                .queryParam("page",  page)
+                .queryParam("page", page)
                 .queryParam("pageSize", pageSize)
-                .queryParam("option",   option)
-                .queryParam("keyword",  keyword)
+                .queryParam("option", option)
+                .queryParam("keyword", keyword)
                 .build().toString();
     }
+
     public Integer getPage() {
         return page;
     }
@@ -77,7 +79,7 @@ public class SearchCondition {
     }
 
     public Integer getOffset() {
-        return (page-1) * pageSize;
+        return page == 0 ? 1 : (page - 1) * pageSize;
     }
 
     @Override

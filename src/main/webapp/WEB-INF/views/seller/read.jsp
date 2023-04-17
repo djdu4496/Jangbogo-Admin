@@ -139,6 +139,7 @@
                             </c:if>
                         </table>
                         <div class="col-3 ml-auto">
+                            <button class="btn btn-light px-md-4 py-md-2 mr-2" id="list_btn">목록으로 가기</button>
                             <c:if test="${seller.state_cd == 99}">
                                 <button class="btn btn-primary px-md-4 py-md-2 mr-2">승인하기</button>
                             </c:if>
@@ -153,8 +154,8 @@
 </div>
 <%@ include file="/WEB-INF/views/include/script.jsp" %>
 <script>
-    $().click(function () {
-
+    $("#list_btn").click(function () {
+        window.location.href = "<c:url value='/user/list${searchCondition.queryString}'/>";
     });
 
     $().click(function () {
