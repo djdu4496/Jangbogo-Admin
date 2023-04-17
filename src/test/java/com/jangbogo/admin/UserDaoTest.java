@@ -1,7 +1,6 @@
 package com.jangbogo.admin;
 
 
-import com.jangbogo.admin.dao.FindUserDao;
 import com.jangbogo.admin.dao.UserDao;
 import com.jangbogo.admin.domain.User;
 import lombok.extern.slf4j.Slf4j;

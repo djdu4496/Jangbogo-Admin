@@ -26,7 +26,4 @@
 
     <view-controller path="/" view-name="index"/>
 
-    <beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-
-
 </beans:beans>
