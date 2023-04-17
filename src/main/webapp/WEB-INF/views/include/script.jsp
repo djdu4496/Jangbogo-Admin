@@ -9,7 +9,11 @@
 <script src="/js/sb-admin-2.min.js"></script>
 <script src="/js/msg.js"></script>
 
-<!-- Page level plugins -->
+<%-- date format--%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+
+<!-- Page level plugins TODO:: 추후 그래프, 차트 적용 예정-->
 <%--<script src="/vendor/chart.js/Chart.min.js"></script>--%>
 
 <!-- Page level custom scripts -->

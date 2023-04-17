@@ -88,7 +88,9 @@
                                                 </c:when>
                                             </c:choose>
                                         </td>
-                                        <td class="id">${user.reg_tm}</td>
+                                        <td class="id">
+                                            <fmt:formatDate value="${user.reg_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

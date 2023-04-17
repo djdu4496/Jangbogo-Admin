@@ -100,29 +100,37 @@
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">비밀번호 변경일자</td>
-                                <td class="id">${user.pwd_upt_tm}</td>
+                                <td class="id">
+                                    <fmt:formatDate value="${user.pwd_upt_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                </td>
                             </tr>
                             <%-- 마지막 로그인날짜가 null이 아닐 때만--%>
                             <c:if test="${not empty user.chg_tm}">
                                 <tr>
                                     <td class="col-3 light-blue">최종 로그인일자</td>
                                     <td class="id">${user.last_login_tm}</td>
+                                    <td class="id">
+                                        <fmt:formatDate value="${user.last_login_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                    </td>
                                 </tr>
                             </c:if>
                             <tr>
                                 <td class="col-3 light-blue">신고당한 횟수</td>
                                 <td class="id">${user.decl_cnt}</td>
                             </tr>
-
                             <tr>
                                 <td class="col-3 light-blue">가입일자</td>
-                                <td class="id">${user.reg_tm}</td>
+                                <td class="id">
+                                    <fmt:formatDate value="${user.reg_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                </td>
                             </tr>
                             <%-- 수정날짜가 Null이 아닐 때만 보인다 --%>
                             <c:if test="${not empty user.chg_tm}">
                                 <tr>
                                     <td class="col-3 light-blue">수정일자</td>
-                                    <td class="id">${user.chg_tm}</td>
+                                    <td class="id">
+                                        <fmt:formatDate value="${user.chg_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                    </td>
                                 </tr>
                             </c:if>
                         </table>
@@ -143,8 +151,21 @@
     </div>
 </div>
 <%@ include file="/WEB-INF/views/include/script.jsp" %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
 <script>
     $(document).ready(function () {
+        let reg_tm = "${user.reg_tm}";
+
+        let reg_date = new Date(reg_tm);
+// [3]. moment 라이브러리 사용해 24시간 형태 날짜 및 시간 확인
+        let now24Date = moment(reg_tm).format("YYYY-MM-DD");
+
+        const date = moment(reg_tm, 'YYYYMMDDHHmmss').format('YYYY-MM-DD HH:mm:ss');
+        const date2 = moment(reg_date, 'YYYYMMDDHHmmss').format('YYYY-MM-DD HH:mm:ss');
+
+        console.log("?????", date, date2);
+
         let redirect_url = "<c:url value='/user/list${searchCondition.queryString}'/>"
 
         $("#list_btn").click(function (e) {
@@ -161,7 +182,7 @@
                     type: 'POST',
                     success: function (msg) {
                         if (msg === "REPORT_OK") {
-                            alert("회원 신고 완료했습니다");
+                            alert(report_ok);
                             location.href = redirect_url;
                         }
                     },

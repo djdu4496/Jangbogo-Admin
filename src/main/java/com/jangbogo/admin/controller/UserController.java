@@ -68,7 +68,6 @@ public class UserController {
 
     //회원 신고
     @PostMapping("/user/report")
-    @ResponseBody
     public ResponseEntity<String> reportUser(Integer idx, String email) {
         try {
             if (service.reportUser(idx, email) != 1)
