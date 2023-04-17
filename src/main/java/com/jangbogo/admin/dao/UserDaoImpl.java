@@ -17,4 +17,9 @@ public class UserDaoImpl implements UserDao{
     public User getUserByIdx (Integer idx) throws Exception {
         return session.selectOne( nameSpace + "getUserByIdx", idx);
     }
+
+    @Override
+    public User getAdminByEmail (String email) throws Exception {
+        return session.selectOne(nameSpace + "getAdminByEmail", email);
+    }
 }

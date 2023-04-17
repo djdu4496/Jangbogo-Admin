@@ -13,23 +13,23 @@ public class SellerController {
     @Autowired
     SellerService service;
 
-    @GetMapping("/list/seller")
-    public String sellerList (Model m) {
-
+    @GetMapping("/seller/list/pending")
+    public String pendingListView (Model m) {
+        m.addAttribute("seller", "seller"); //대기자 리스트만 출력
         return "/seller/list";
-    };
+    }
 
-    @GetMapping("/list/seller/{state}")
-    public String sellerListByState (@PathVariable String state) {
-//        switch ~ case: PENDINNG~ 식
+    @GetMapping("/seller/list")
+    public String AllListView (Model m) {
+        m.addAttribute("seller", "seller"); //대기자 리스트만 출력
         return "/seller/list";
-    };
+    }
 
-    @GetMapping("/read/seller/{idx}")
+    @GetMapping("/seller/read/{idx}")
     public String readSeller (@PathVariable Integer idx, Model m) throws Exception {
 
         m.addAttribute("seller",service.selectSeller(idx));
-//        판매자 선택 정보도 가져와야 한다. sellerOption
+//        판매자 선택 정보도 가져와야 한다. sellerDetail
         return "/seller/read";
     }
 

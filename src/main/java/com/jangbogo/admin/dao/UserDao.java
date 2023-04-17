@@ -11,4 +11,6 @@ public interface UserDao {
 
     //회원 상세 조회
     User getUserByIdx (Integer idx) throws Exception;
+
+    User getAdminByEmail (String email) throws Exception;
 }

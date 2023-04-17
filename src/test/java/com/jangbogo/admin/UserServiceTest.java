@@ -23,8 +23,15 @@ public class UserServiceTest {
 
     @Test //ok
     public void test1() throws Exception {
-       User user = service.getUserByIdx(32); //존재하는 idx
-       log.info(".....test...." + user);
-       assertTrue(user != null);
+        User user = service.getUserByIdx(32); //존재하는 idx
+        log.info(".....test...." + user);
+        assertTrue(user != null);
+    }
+
+    @Test //ok
+    public void test2() throws Exception {
+        boolean result = service.verifyAdmin("jinvicky@naver.com", "test1007");
+        log.info("....." + result);
+        assertTrue(result);
     }
 }

@@ -8,6 +8,9 @@
         SELECT * FROM USER WHERE IDX = #{idx}
     </select>
 
+    <select id="getAdminByEmail" resultType="User">
+        SELECT * FROM USER WHERE EMAIL = #{email} AND AUTH_IDX = 3;
+    </select>
 
 
 </mapper>
