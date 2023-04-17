@@ -48,12 +48,6 @@
                                     </label>
                                 </div>
                             </div>
-                            <%--                            <a--%>
-                            <%--                                    href="index.html"--%>
-                            <%--                                    class="btn btn-primary btn-user btn-block"--%>
-                            <%--                            >--%>
-                            <%--                                Login--%>
-                            <%--                            </a>--%>
                             <button type="submit" class="btn btn-primary btn-user btn-block" id="login">
                                 Login
                             </button>
@@ -88,7 +82,6 @@
                 pwd.focus();
                 return false;
             }
-
             $("#login_form").submit();
         });
     });
