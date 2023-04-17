@@ -13,10 +13,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle (HttpServletRequest req, HttpServletResponse resp, Object obj) throws Exception {
 
         HttpSession session = req.getSession();
-        User admin = (User)session.getAttribute("user"); //TODO:: 추후 개발 예정
+        User admin = (User)session.getAttribute("admin");
 
-        if(admin == null || admin.getAuth_idx()  != 3) { //권한 3: 관리자
-            resp.sendRedirect("/admin/login");
+        if(session == null || admin == null) { //세션이 없거나 admin에 저장된 세션이 없는 경우
+            resp.sendRedirect("/login");
             return false;
         }
         return true;

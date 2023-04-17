@@ -1,7 +1,9 @@
 package com.jangbogo.admin.controller;
 
 
+import com.jangbogo.admin.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +15,9 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 
+    @Autowired
+    UserService service;
+
     @GetMapping("/login")
     public String loginView() {
         return "login";
@@ -20,12 +25,13 @@ public class HomeController {
 
     @PostMapping("/login")
     public String login(String email, String pwd, HttpSession session, RedirectAttributes rattr) {
-        try {
-
             log.info("login....." + email + "....." +pwd);
-
-
-            session.setAttribute("admin", "admin"); //세션에 어드민 정보 저장
+        try {
+            if (!service.verifyAdmin(email, pwd)) { //인증 실패
+                rattr.addFlashAttribute("msg", "ADMIN_NOT_FOUND");
+                return "redirect:/login";
+            }
+            session.setAttribute("admin", email); //세션에 어드민 이메일 정보 저장
             return "redirect:/";
         } catch (Exception e) {
             e.printStackTrace();

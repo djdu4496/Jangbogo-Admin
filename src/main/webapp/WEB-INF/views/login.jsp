@@ -18,7 +18,7 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                         </div>
-                        <form class="user" action="/login" method="post">
+                        <form class="user" action="/login" method="post" id="login_form">
                             <div class="form-group">
                                 <input
                                         type="email"
@@ -54,7 +54,7 @@
                             <%--                            >--%>
                             <%--                                Login--%>
                             <%--                            </a>--%>
-                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                            <button type="submit" class="btn btn-primary btn-user btn-block" id="login">
                                 Login
                             </button>
                             <hr/>
@@ -69,5 +69,29 @@
     </div>
 </div>
 <jsp:include page="include/script.jsp"/>
+<script>
+    $(document).ready(function () {
+        let email = $("input[name=email]");
+        let pwd = $("input[name=pwd]");
+
+        $("#login").click(function (e) {
+            e.preventDefault();
+
+            if (email.val().trim() == "") {
+                alert("이메일을 입력해 주세요");
+                email.focus();
+                return false;
+            }
+
+            if (pwd.val().trim() == "") {
+                alert("비밀번호를 입력해 주세요");
+                pwd.focus();
+                return false;
+            }
+
+            $("#login_form").submit();
+        });
+    });
+</script>
 </body>
 </html>
