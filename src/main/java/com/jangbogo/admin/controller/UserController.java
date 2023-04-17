@@ -4,6 +4,7 @@ import com.jangbogo.admin.domain.PageHandler;
 import com.jangbogo.admin.domain.SearchCondition;
 import com.jangbogo.admin.domain.User;
 import com.jangbogo.admin.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -32,13 +35,15 @@ public class UserController {
             m.addAttribute("totalCnt", totalCnt);
 
             PageHandler pageHandler = new PageHandler(totalCnt, sc);
+            log.info("....." + sc.getOffset() + sc);
 
             List<User> list = service.getSearchSelectPage(sc);
+//            List<User> list = new ArrayList<>();
             m.addAttribute("list", list);
             m.addAttribute("ph", pageHandler);
 
-            Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
-            m.addAttribute("startOfToday", startOfToday.toEpochMilli());
+//            Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
+//            m.addAttribute("startOfToday", startOfToday.toEpochMilli());
 
         } catch (Exception e) {
             rattr.addFlashAttribute("msg", "EXCEPTION_ERR");

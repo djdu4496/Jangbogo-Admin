@@ -10,7 +10,6 @@ public class SearchCondition {
     private Integer pageSize = DEFAULT_PAGE_SIZE;
     private String  option = "";
     private String  keyword = "";
-//    private Integer  offset;
 
     public static final int MIN_PAGE_SIZE = 5;
     public static final int DEFAULT_PAGE_SIZE = 10;
@@ -36,7 +35,7 @@ public class SearchCondition {
     public String getQueryString(Integer page) {
         // ?page=10&pageSize=10&option=A&keyword=title
         return UriComponentsBuilder.newInstance()
-                .queryParam("page",     page)
+                .queryParam("page",  page)
                 .queryParam("pageSize", pageSize)
                 .queryParam("option",   option)
                 .queryParam("keyword",  keyword)
@@ -78,7 +77,7 @@ public class SearchCondition {
     }
 
     public Integer getOffset() {
-        return (page-1)*pageSize;
+        return (page-1) * pageSize;
     }
 
     @Override
