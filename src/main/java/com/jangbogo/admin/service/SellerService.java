@@ -1,7 +1,11 @@
 package com.jangbogo.admin.service;
 
+import com.jangbogo.admin.domain.SearchCondition;
 import com.jangbogo.admin.domain.Seller;
 import com.jangbogo.admin.domain.SellerDtl;
+import com.jangbogo.admin.domain.User;
+
+import java.util.List;
 
 public interface SellerService {
 
@@ -14,5 +18,11 @@ public interface SellerService {
 
     //판매자 상세 조회
     SellerDtl selectSellerDtl (Integer idx)  throws Exception;
+
+    int getSearchResultCnt (SearchCondition sc) throws Exception;
+
+    //회원 리스트 조회
+    List<Seller> getSearchSelectPage (SearchCondition sc) throws Exception;
+
 
 }

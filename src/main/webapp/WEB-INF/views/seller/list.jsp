@@ -21,9 +21,9 @@
                             class="custom-select col-xl-3"
                             name="option"
                     >
-                        <option value="A"  ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>이메일+닉네임</option>
+                        <option value="A"  ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>이메일+브랜드명</option>
                         <option value="E" ${ph.sc.option=='E' ? "selected" : ""}>이메일</option>
-                        <option value="N" ${ph.sc.option=='N' ? "selected" : ""}>닉네임</option>
+                        <option value="N" ${ph.sc.option=='N' ? "selected" : ""}>브랜드명</option>
                     </select>
                     <div class="input-group col-md-5">
                         <input type="text"
@@ -44,11 +44,11 @@
                     <div class="card-header py-3 d-flex align-items-center">
                         <h6 class="m-0 font-weight-bold text-primary">
                             <c:choose>
-                                <c:when test="${user.state_cd == 2}">
-                                    신고된 회원 리스트
+                                <c:when test="${seller.state_cd == 99}">
+                                    승인 대기 판매자 리스트
                                 </c:when>
                                 <c:otherwise>
-                                    회원 리스트
+                                    판매자 리스트
                                 </c:otherwise>
                             </c:choose>
                         </h6>
@@ -68,29 +68,30 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="user" items="${list}">
+                                <c:forEach var="seller" items="${list}">
                                     <tr>
-                                        <td class="id">${user.idx}</td>
+                                        <td class="id">${seller.idx}</td>
                                         <td class="id"><a
-                                                href="<c:url value="/user/read${ph.sc.queryString}&idx=${user.idx}"/>">${user.email}</a>
+                                                href="<c:url value="/seller/read${ph.sc.queryString}&idx=${seller.idx}"/>">${seller.email}</a>
                                         </td>
-                                        <td class="id">${user.nick_nm}</td>
-                                        <td class="id">${user.mpno}</td>
+                                        <td class="id">${seller.cpnm}</td>
+                                        <td class="id">${seller.repr_nm}</td>
+                                        <td class="id">${seller.mpno}</td>
                                         <td class="id">
                                             <c:choose>
-                                                <c:when test="${user.state_cd == 1}">
+                                                <c:when test="${seller.state_cd == 1}">
                                                     승인
                                                 </c:when>
-                                                <c:when test="${user.state_cd == 2}">
+                                                <c:when test="${seller.state_cd == 2}">
                                                     신고 정지
                                                 </c:when>
-                                                <c:when test="${user.state_cd == 3}">
+                                                <c:when test="${seller.state_cd == 3}">
                                                     탈퇴
                                                 </c:when>
                                             </c:choose>
                                         </td>
                                         <td class="id">
-                                            <fmt:formatDate value="${user.reg_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                            <fmt:formatDate value="${seller.reg_tm}" pattern="yyyy-MM-dd" type="date"/>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -101,7 +102,7 @@
                     <%--  end of card-body  --%>
                     <c:choose>
                         <c:when test="${totalCnt == null || totalCnt == 0}">
-                            <div class="pb-5 text-center">회원이 존재하지 않습니다</div>
+                            <div class="pb-5 text-center">판매자가 존재하지 않습니다</div>
                         </c:when>
                         <c:otherwise>
                             <ul class="d-flex justify-content-center pagination">

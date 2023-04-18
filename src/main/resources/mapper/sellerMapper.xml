@@ -21,8 +21,7 @@
     </update>
 
     <select id="selectSeller" resultType="Seller">
-        SELECT *
-        FROM SELER
+        <include refid="selectSeller" />
         WHERE IDX = #{idx};
     </select>
 
@@ -31,5 +30,40 @@
         FROM SELER_DTL
         WHERE SELER_IDX = #{seler_idx}
     </select>
+
+    <select id="searchResultCnt" parameterType="SearchCondition" resultType="int">
+        SELECT COUNT(*)
+        FROM SELER
+        WHERE true
+        <include refid="searchCondition"/>
+    </select>
+
+    <select id="searchSelectPage" parameterType="SearchCondition" resultType="Seller">
+        <include refid="selectSeller"/>
+        WHERE TRUE
+        <include refid="searchCondition"/>
+        ORDER BY REG_TM DESC, IDX DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <sql id="selectSeller">
+        SELECT *
+        FROM SELER
+    </sql>
+
+    <sql id="searchCondition">
+        <choose>
+            <when test='option=="E"'>
+                AND EMAIL LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="N"'>
+                AND CPNM LIKE concat('%', #{keyword}, '%')
+            </when>
+            <otherwise>
+                AND (EMAIL LIKE concat('%', #{keyword}, '%')
+                OR CPNM LIKE concat('%', #{keyword}, '%'))
+            </otherwise>
+        </choose>
+    </sql>
 
 </mapper>

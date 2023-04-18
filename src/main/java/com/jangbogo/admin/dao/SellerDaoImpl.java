@@ -3,6 +3,7 @@ package com.jangbogo.admin.dao;
 import com.jangbogo.admin.domain.SearchCondition;
 import com.jangbogo.admin.domain.Seller;
 import com.jangbogo.admin.domain.SellerDtl;
+import com.jangbogo.admin.domain.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -45,6 +46,16 @@ public class SellerDaoImpl implements SellerDao{
     @Override
     public SellerDtl selectSellerDtl (Integer idx) throws Exception {
         return session.selectOne(nameSpace + "selectSellerDtl", idx);
+    }
+
+    @Override
+    public int searchResultCnt (SearchCondition sc) throws Exception {
+        return session.selectOne(nameSpace + "searchResultCnt", sc);
+    }
+
+    @Override
+    public List<Seller> searchSelectPage (SearchCondition sc) throws Exception {
+        return session.selectList(nameSpace + "searchSelectPage", sc);
     }
 
 

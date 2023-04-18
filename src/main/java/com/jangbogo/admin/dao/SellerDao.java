@@ -3,6 +3,7 @@ package com.jangbogo.admin.dao;
 import com.jangbogo.admin.domain.SearchCondition;
 import com.jangbogo.admin.domain.Seller;
 import com.jangbogo.admin.domain.SellerDtl;
+import com.jangbogo.admin.domain.User;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,11 @@ public interface SellerDao {
 
     //판매자 상세 조회
     SellerDtl selectSellerDtl (Integer idx) throws Exception;
+
+    int searchResultCnt (SearchCondition sc) throws Exception;
+
+    //회원 수 10개 단위 페이징 + 검색 조회
+    List<Seller> searchSelectPage (SearchCondition sc) throws Exception;
 
 
 }

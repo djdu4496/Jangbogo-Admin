@@ -1,10 +1,14 @@
 package com.jangbogo.admin.service;
 
 import com.jangbogo.admin.dao.SellerDao;
+import com.jangbogo.admin.domain.SearchCondition;
 import com.jangbogo.admin.domain.Seller;
 import com.jangbogo.admin.domain.SellerDtl;
+import com.jangbogo.admin.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SellerServiceImpl implements SellerService{
@@ -30,5 +34,15 @@ public class SellerServiceImpl implements SellerService{
     @Override
     public SellerDtl selectSellerDtl (Integer idx) throws Exception {
         return dao.selectSellerDtl(idx);
+    }
+
+    @Override
+    public int getSearchResultCnt (SearchCondition sc) throws Exception {
+        return dao.searchResultCnt(sc);
+    }
+
+    @Override
+    public List<Seller> getSearchSelectPage (SearchCondition sc) throws Exception {
+        return dao.searchSelectPage(sc);
     }
 }

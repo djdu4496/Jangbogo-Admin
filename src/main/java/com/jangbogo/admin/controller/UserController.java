@@ -41,9 +41,6 @@ public class UserController {
             m.addAttribute("list", list);
             m.addAttribute("ph", pageHandler);
 
-//            Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
-//            m.addAttribute("startOfToday", startOfToday.toEpochMilli());
-
         } catch (Exception e) {
             e.printStackTrace();
         }
