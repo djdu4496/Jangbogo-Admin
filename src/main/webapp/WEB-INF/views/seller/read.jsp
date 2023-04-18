@@ -90,13 +90,13 @@
                             <tr>
                                 <td class="col-3 light-blue">브랜드 배너</td>
                                 <td class="id">
-                                    <img src="display?fileName=${seller.brnd_bnr_upload_path}">
+                                    <img src="${pageContext.request.contextPath}/display?fileName=${seller.brnd_bnr_upload_path}">
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">브랜드 프로필</td>
                                 <td class="id">
-                                    <img src="display?fileName=${seller.brnd_upload_path}">
+                                    <img src="${pageContext.request.contextPath}/display?fileName=${seller.brnd_upload_path}">
                                 </td>
                             </tr>
                             <tr>
