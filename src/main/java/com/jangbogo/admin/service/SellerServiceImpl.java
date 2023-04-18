@@ -2,6 +2,7 @@ package com.jangbogo.admin.service;
 
 import com.jangbogo.admin.dao.SellerDao;
 import com.jangbogo.admin.domain.Seller;
+import com.jangbogo.admin.domain.SellerDtl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +25,10 @@ public class SellerServiceImpl implements SellerService{
     @Override
     public Seller selectSeller (int idx) throws Exception {
         return dao.selectSeller(idx);
+    }
+
+    @Override
+    public SellerDtl selectSellerDtl (Integer idx) throws Exception {
+        return dao.selectSellerDtl(idx);
     }
 }

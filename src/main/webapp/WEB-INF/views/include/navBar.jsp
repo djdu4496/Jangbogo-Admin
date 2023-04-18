@@ -36,7 +36,6 @@
             </div>
         </div>
     </li>
-<%--    ---------%>
     <hr class="sidebar-divider d-none d-md-block">
     <div class="sidebar-heading">
         상품 관리

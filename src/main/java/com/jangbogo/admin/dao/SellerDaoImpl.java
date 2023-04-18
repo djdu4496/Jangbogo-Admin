@@ -2,6 +2,7 @@ package com.jangbogo.admin.dao;
 
 import com.jangbogo.admin.domain.SearchCondition;
 import com.jangbogo.admin.domain.Seller;
+import com.jangbogo.admin.domain.SellerDtl;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,7 @@ public class SellerDaoImpl implements SellerDao{
         map.put("idx", idx);
         map.put("email", email);
         return session.update(nameSpace + "reportSeller", map);
-        //상태를 3로 변경 (신고)
+        //상태를 2로 변경 (신고)
     }
 
     @Override
@@ -33,12 +34,17 @@ public class SellerDaoImpl implements SellerDao{
         map.put("idx", idx);
         map.put("email", email);
         return session.update(nameSpace + "approveSeller", map);
-        //상태를 2로 변경 (승인)
+        //상태를 1로 변경 (승인)
     }
 
     @Override
-    public Seller selectSeller (int idx) throws Exception {
+    public Seller selectSeller (Integer idx) throws Exception {
         return session.selectOne(nameSpace + "selectSeller", idx);
+    }
+
+    @Override
+    public SellerDtl selectSellerDtl (Integer idx) throws Exception {
+        return session.selectOne(nameSpace + "selectSellerDtl", idx);
     }
 
 

@@ -61,13 +61,10 @@
                                 <td class="col-3 light-blue">휴대전화번호</td>
                                 <td class="id">${user.mpno}</td>
                             </tr>
-                            <%-- 생일 값이 있을 때만--%>
-                            <c:if test="${not empty user.brdy}">
-                                <tr>
-                                    <td class="col-3 light-blue">생일</td>
-                                    <td class="id">${user.brdy}</td>
-                                </tr>
-                            </c:if>
+                            <tr>
+                                <td class="col-3 light-blue">생일</td>
+                                <td class="id">${user.brdy}</td>
+                            </tr>
                             <tr>
                                 <td class="col-3 light-blue">마케팅수신동의여부</td>
                                 <td class="id">${user.markt_agre_yn}</td>
@@ -104,16 +101,13 @@
                                     <fmt:formatDate value="${user.pwd_upt_tm}" pattern="yyyy-MM-dd" type="date"/>
                                 </td>
                             </tr>
-                            <%-- 마지막 로그인날짜가 null이 아닐 때만--%>
-                            <c:if test="${not empty user.chg_tm}">
-                                <tr>
-                                    <td class="col-3 light-blue">최종 로그인일자</td>
-                                    <td class="id">${user.last_login_tm}</td>
-                                    <td class="id">
-                                        <fmt:formatDate value="${user.last_login_tm}" pattern="yyyy-MM-dd" type="date"/>
-                                    </td>
-                                </tr>
-                            </c:if>
+                            <tr>
+                                <td class="col-3 light-blue">최종 로그인일자</td>
+                                <td class="id">${user.last_login_tm}</td>
+                                <td class="id">
+                                    <fmt:formatDate value="${user.last_login_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                </td>
+                            </tr>
                             <tr>
                                 <td class="col-3 light-blue">신고당한 횟수</td>
                                 <td class="id">${user.decl_cnt}</td>
@@ -124,15 +118,12 @@
                                     <fmt:formatDate value="${user.reg_tm}" pattern="yyyy-MM-dd" type="date"/>
                                 </td>
                             </tr>
-                            <%-- 수정날짜가 Null이 아닐 때만 보인다 --%>
-                            <c:if test="${not empty user.chg_tm}">
-                                <tr>
-                                    <td class="col-3 light-blue">수정일자</td>
-                                    <td class="id">
-                                        <fmt:formatDate value="${user.chg_tm}" pattern="yyyy-MM-dd" type="date"/>
-                                    </td>
-                                </tr>
-                            </c:if>
+                            <tr>
+                                <td class="col-3 light-blue">수정일자</td>
+                                <td class="id">
+                                    <fmt:formatDate value="${user.chg_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                </td>
+                            </tr>
                         </table>
                         <div class="d-flex justify-content-center mt-5">
                             <button class="btn btn-primary px-md-4 py-md-2 mr-2"

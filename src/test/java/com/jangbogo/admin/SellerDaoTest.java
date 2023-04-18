@@ -3,6 +3,7 @@ package com.jangbogo.admin;
 
 import com.jangbogo.admin.dao.SellerDao;
 import com.jangbogo.admin.domain.Seller;
+import com.jangbogo.admin.domain.SellerDtl;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,5 +38,10 @@ public class SellerDaoTest {
     public void selectSeller() throws Exception {
         Seller result = dao.selectSeller(6);
         log.info("result=" + result);
+    }
+    @Test //OK
+    public void selectSellerDtl() throws Exception {
+        SellerDtl result = dao.selectSellerDtl(6);
+        log.info("result=" + result.toString());
     }
 }

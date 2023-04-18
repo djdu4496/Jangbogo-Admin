@@ -103,13 +103,22 @@
                                 <td class="col-3 light-blue">팔로워수</td>
                                 <td class="id">${seller.subs_cnt}</td>
                             </tr>
-<%--                            판매자 상세 정보.... 있을 경우에만 보여줌--%>
-                            <c:if test="${ not empty sellerDtl.cllr_nm}">
-                                <tr>
-                                    <td class="col-3 light-blue">고객센터 담당자 이름</td>
-                                    <td class="id">${sellerDtl.cllr_nm}</td>
-                                </tr>
-                            </c:if>
+                            <tr>
+                                <td class="col-3 light-blue">안내 담당자 이름</td>
+                                <td class="id">${sellerDtl.guid_nm}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-3 light-blue">안내 담당자 이메일</td>
+                                <td class="id">${sellerDtl.guid_email}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-3 light-blue">고객센터 담당자 이름</td>
+                                <td class="id">${sellerDtl.cllr_nm}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-3 light-blue">고객센터 담당자 전화번호</td>
+                                <td class="id">${sellerDtl.cllr_telno}</td>
+                            </tr>
                             <tr>
                                 <td class="col-3 light-blue">상태코드</td>
                                 <td class="id">
@@ -128,42 +137,36 @@
                                     <fmt:formatDate value="${seller.pwd_upt_tm}" pattern="yyyy-MM-dd" type="date"/>
                                 </td>
                             </tr>
-                            <c:if test="${not empty seller.last_login_tm}">
-                                <tr>
-                                    <td class="col-3 light-blue">최종 로그인일시</td>
-                                    <td class="id">
-                                        <fmt:formatDate
-                                                value="${seller.last_login_tm}"
-                                                pattern="yyyy-MM-dd"
-                                                type="date"
-                                        />
-                                    </td>
-                                </tr>
-                            </c:if>
+                            <tr>
+                                <td class="col-3 light-blue">최종 로그인일시</td>
+                                <td class="id">
+                                    <fmt:formatDate
+                                            value="${seller.last_login_tm}"
+                                            pattern="yyyy-MM-dd"
+                                            type="date"
+                                    />
+                                </td>
+                            </tr>
                             <tr>
                                 <td class="col-3 light-blue">등록일자</td>
                                 <td class="id">
                                     <fmt:formatDate value="${seller.reg_tm}" pattern="yyyy-MM-dd" type="date"/>
                                 </td>
                             </tr>
-                            <c:if test="${seller.state_cd == 1}">
-                                <tr>
-                                    <td class="col-3 light-blue">승인일자</td>
-                                    <td class="id">
-                                        <fmt:formatDate value="${seller.aprv_tm}" pattern="yyyy-MM-dd" type="date"/>
-                                    </td>
-                                </tr>
-                            </c:if>
-                            <c:if test="${not empty seller.chg_tm}">
-                                <tr>
-                                    <td class="col-3 light-blue">수정일자</td>
-                                    <td class="id">
-                                        <fmt:formatDate value="${seller.chg_tm}" pattern="yyyy-MM-dd" type="date"/>
-                                    </td>
-                                </tr>
-                            </c:if>
+                            <tr>
+                                <td class="col-3 light-blue">승인일자</td>
+                                <td class="id">
+                                    <fmt:formatDate value="${seller.aprv_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-3 light-blue">수정일자</td>
+                                <td class="id">
+                                    <fmt:formatDate value="${seller.chg_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                </td>
+                            </tr>
                         </table>
-                        <div class="col-3 ml-auto">
+                        <div class="d-flex justify-content-center mt-5">
                             <button class="btn btn-light px-md-4 py-md-2 mr-2" id="list_btn">목록으로 가기</button>
                             <c:if test="${seller.state_cd == 99}">
                                 <button class="btn btn-primary px-md-4 py-md-2 mr-2">승인하기</button>
@@ -214,7 +217,7 @@
                     type: 'POST',
                     success: function (msg) {
                         if (msg === "APPROVE_OK") {
-                            alert(report_ok);
+                            alert(approve_ok);
                             location.href = "seller/list/pending";
                             //그냥 대기리스트 메인으로 가지 않을까? 기존 페이지 + 검색 결과를 가지고 있어봤자 더 이상 대기 리스트에 존재하지 않을 것이다.
                         }

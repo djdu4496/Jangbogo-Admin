@@ -6,6 +6,7 @@
     <typeAliases>
         <typeAlias alias="User" type="com.jangbogo.admin.domain.User"/>
         <typeAlias alias="Seller" type="com.jangbogo.admin.domain.Seller"/>
+        <typeAlias alias="SellerDtl" type="com.jangbogo.admin.domain.SellerDtl"/>
         <typeAlias alias="SearchCondition" type="com.jangbogo.admin.domain.SearchCondition"/>
     </typeAliases>
 </configuration>

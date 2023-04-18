@@ -34,6 +34,7 @@ public class SellerController {
     public String readSeller(Integer idx, SearchCondition sc, Model m, RedirectAttributes rattr) throws Exception {
 
         m.addAttribute("seller", service.selectSeller(idx));
+        m.addAttribute("sellerDtl", service.selectSellerDtl(idx));
 //        판매자 선택 정보도 가져와야 한다. sellerDetail
         return "/seller/read";
     }
