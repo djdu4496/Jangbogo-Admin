@@ -155,17 +155,6 @@
 
 <script>
     $(document).ready(function () {
-        let reg_tm = "${user.reg_tm}";
-
-        let reg_date = new Date(reg_tm);
-// [3]. moment 라이브러리 사용해 24시간 형태 날짜 및 시간 확인
-        let now24Date = moment(reg_tm).format("YYYY-MM-DD");
-
-        const date = moment(reg_tm, 'YYYYMMDDHHmmss').format('YYYY-MM-DD HH:mm:ss');
-        const date2 = moment(reg_date, 'YYYYMMDDHHmmss').format('YYYY-MM-DD HH:mm:ss');
-
-        console.log("?????", date, date2);
-
         let redirect_url = "<c:url value='/user/list${searchCondition.queryString}'/>"
 
         $("#list_btn").click(function (e) {

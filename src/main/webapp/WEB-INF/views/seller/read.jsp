@@ -17,10 +17,8 @@
 <div id="wrapper">
     <%@ include file="/WEB-INF/views/include/navBar.jsp" %>
     <div id="content-wrapper" class="d-flex flex-column">
-        <!-- Main Content -->
         <div id="content">
             <%@ include file="/WEB-INF/views/include/topbar.jsp" %>
-
             <div class="container-md">
                 <div class="card shadow mb-4">
                     <div class="card-header py-md-4">
@@ -56,7 +54,14 @@
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">사업 유형</td>
-                                <td class="id">${seller.biz_type}</td>
+                                <td class="id">
+                                    <c:if test="${seller.biz_type == 1}">
+                                        개인사업자
+                                    </c:if>
+                                    <c:if test="${seller.biz_type == 2}">
+                                        법인사업자
+                                    </c:if>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">사업자 번호</td>
@@ -93,7 +98,6 @@
                                 <td class="id">
                                     <img src="display?fileName=${seller.brnd_upload_path}">
                                 </td>
-                                ${pageContext.request.requestURI}
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">팔로워수</td>
@@ -113,28 +117,42 @@
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">비밀번호 변경일자</td>
-                                <td class="id">${seller.pwd_upt_tm}</td>
+                                <td class="id">
+                                    <fmt:formatDate value="${seller.pwd_upt_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                </td>
                             </tr>
                             <c:if test="${not empty seller.last_login_tm}">
                                 <tr>
                                     <td class="col-3 light-blue">최종 로그인일시</td>
-                                    <td class="id">${seller.last_login_tm}</td>
+                                    <td class="id">
+                                        <fmt:formatDate
+                                                value="${seller.last_login_tm}"
+                                                pattern="yyyy-MM-dd"
+                                                type="date"
+                                        />
+                                    </td>
                                 </tr>
                             </c:if>
                             <tr>
                                 <td class="col-3 light-blue">등록일자</td>
-                                <td class="id">${seller.reg_tm}</td>
+                                <td class="id">
+                                    <fmt:formatDate value="${seller.reg_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                </td>
                             </tr>
                             <c:if test="${seller.state_cd == 1}">
                                 <tr>
                                     <td class="col-3 light-blue">승인일자</td>
-                                    <td class="id">${seller.aprv_tm}</td>
+                                    <td class="id">
+                                        <fmt:formatDate value="${seller.aprv_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                    </td>
                                 </tr>
                             </c:if>
                             <c:if test="${not empty seller.chg_tm}">
                                 <tr>
                                     <td class="col-3 light-blue">수정일자</td>
-                                    <td class="id">${seller.chg_tm}</td>
+                                    <td class="id">
+                                        <fmt:formatDate value="${seller.chg_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                    </td>
                                 </tr>
                             </c:if>
                         </table>
@@ -143,7 +161,9 @@
                             <c:if test="${seller.state_cd == 99}">
                                 <button class="btn btn-primary px-md-4 py-md-2 mr-2">승인하기</button>
                             </c:if>
-                            <button class="btn btn-danger px-md-4 py-md-2">신고하기</button>
+                            <c:if test="${seller.state_cd !=2}">
+                                <button class="btn btn-danger px-md-4 py-md-2">신고하기</button>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -154,14 +174,52 @@
 </div>
 <%@ include file="/WEB-INF/views/include/script.jsp" %>
 <script>
-    $("#list_btn").click(function () {
-        window.location.href = "<c:url value='/user/list${searchCondition.queryString}'/>";
+    $(document).ready(function () {
+
+        $("#list_btn").click(function () {
+            window.location.href = "<c:url value='/seller/list${searchCondition.queryString}'/>";
+        });
+
+        $("#report_btn").click(function () {
+            if (confirm(report_confirm)) {
+                $.ajax({
+                    url: '/seller/report',
+                    data: {idx: ${seller.idx}, email: "${seller.email}"},
+                    type: 'POST',
+                    success: function (msg) {
+                        if (msg === "REPORT_OK") {
+                            alert(report_ok);
+                            location.href = redirect_url;
+                        }
+                    },
+                    error: function (err) {
+                        alert(error_msg);
+                    }
+                }); //$.ajax
+            }
+        });
+
+        $("#approve_btn").click(function () {
+            if (confirm(approve_confirm)) {
+                $.ajax({
+                    url: '/seller/approve',
+                    data: {idx: ${seller.idx}, email: "${seller.email}"},
+                    type: 'POST',
+                    success: function (msg) {
+                        if (msg === "APPROVE_OK") {
+                            alert(report_ok);
+                            location.href = "seller/list/pending";
+                            //그냥 대기리스트 메인으로 가지 않을까? 기존 페이지 + 검색 결과를 가지고 있어봤자 더 이상 대기 리스트에 존재하지 않을 것이다.
+                        }
+                    },
+                    error: function (err) {
+                        alert(error_msg);
+                    }
+                }); //$.ajax
+            }
+        });
+
     });
-
-    $().click(function () {
-
-    })
-
 </script>
 </body>
 </html>
