@@ -11,9 +11,7 @@
     <div class="sidebar-heading">
         멤버 관리
     </div>
-    <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-<%--  전체와 대기, 신고만 남기고 남은 상태는 전체에서 검색해서 조회한다. --%>
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
            aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-user"></i>
@@ -22,7 +20,6 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="/user/list">전체</a>
-                <a class="collapse-item" href="/user/list?searchCondition=S&keyword=2">신고 정지</a>
             </div>
         </div>
     </li>
@@ -34,13 +31,29 @@
         </a>
         <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/list/seller">전체</a>
-                <a class="collapse-item" href="/list/seller/pending">승인 대기</a>
-                <a class="collapse-item" href="/list/seller/reported">신고 정지</a>
+                <a class="collapse-item" href="/seller/list/pending">승인 대기</a>
+                <a class="collapse-item" href="/seller/list">전체</a>
             </div>
         </div>
     </li>
 <%--    ---------%>
+    <hr class="sidebar-divider d-none d-md-block">
+    <div class="sidebar-heading">
+        상품 관리
+    </div>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+           aria-expanded="true" aria-controls="collapseThree">
+            <i class="fas fa-fw fa-shopping-bag"></i>
+            <span>상품 관리</span>
+        </a>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/product/list/pending">승인 대기</a>
+                <a class="collapse-item" href="/product/list">전체</a>
+            </div>
+        </div>
+    </li>
     <hr class="sidebar-divider d-none d-md-block">
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

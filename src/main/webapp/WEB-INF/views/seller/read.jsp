@@ -103,6 +103,13 @@
                                 <td class="col-3 light-blue">팔로워수</td>
                                 <td class="id">${seller.subs_cnt}</td>
                             </tr>
+<%--                            판매자 상세 정보.... 있을 경우에만 보여줌--%>
+                            <c:if test="${ not empty sellerDtl.cllr_nm}">
+                                <tr>
+                                    <td class="col-3 light-blue">고객센터 담당자 이름</td>
+                                    <td class="id">${sellerDtl.cllr_nm}</td>
+                                </tr>
+                            </c:if>
                             <tr>
                                 <td class="col-3 light-blue">상태코드</td>
                                 <td class="id">
