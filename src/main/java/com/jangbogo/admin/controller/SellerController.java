@@ -64,12 +64,25 @@ public class SellerController {
     //판매자 승인
     @PostMapping("/seller/approve")
     public ResponseEntity<String> approveSeller(Integer idx, String email) {
-        //세션 안쓰니 직접 idx, email 받기
         try {
             if (service.approveSeller(idx, email) != 1) //실패
                 throw new Exception("approve failed");
 
             return ResponseEntity.ok("APPROVE_OK");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("EXCEPTION_ERR");
+        }
+    }
+
+    //판매자 신고
+    @PostMapping("/seller/report")
+    public ResponseEntity<String> reportSeller(Integer idx, String email) {
+        try {
+            if (service.reportSeller(idx, email) != 1) //실패
+                throw new Exception("report failed");
+
+            return ResponseEntity.ok("REPORT_OK");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("EXCEPTION_ERR");

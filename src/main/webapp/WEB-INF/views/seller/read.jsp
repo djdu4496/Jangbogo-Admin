@@ -169,10 +169,10 @@
                         <div class="d-flex justify-content-center mt-5">
                             <button class="btn btn-light px-md-4 py-md-2 mr-2" id="list_btn">목록으로 가기</button>
                             <c:if test="${seller.state_cd == 99}">
-                                <button class="btn btn-primary px-md-4 py-md-2 mr-2">승인하기</button>
+                                <button class="btn btn-primary px-md-4 py-md-2 mr-2" id="approve_btn">승인하기</button>
                             </c:if>
                             <c:if test="${seller.state_cd !=2}">
-                                <button class="btn btn-danger px-md-4 py-md-2">신고하기</button>
+                                <button class="btn btn-danger px-md-4 py-md-2" id="report_btn">신고하기</button>
                             </c:if>
                         </div>
                     </div>
@@ -186,8 +186,10 @@
 <script>
     $(document).ready(function () {
 
+        let redirect_url = "<c:url value='/seller/list${searchCondition.queryString}'/>";
+
         $("#list_btn").click(function () {
-            window.location.href = "<c:url value='/seller/list${searchCondition.queryString}'/>";
+            window.location.href = redirect_url;
         });
 
         $("#report_btn").click(function () {
