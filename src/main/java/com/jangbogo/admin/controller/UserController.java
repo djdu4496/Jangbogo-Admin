@@ -3,6 +3,7 @@ package com.jangbogo.admin.controller;
 import com.jangbogo.admin.domain.PageHandler;
 import com.jangbogo.admin.domain.SearchCondition;
 import com.jangbogo.admin.domain.User;
+import com.jangbogo.admin.service.AddrService;
 import com.jangbogo.admin.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class UserController {
 
     @Autowired
     UserService service;
+
+    @Autowired
+    AddrService addrService;
 
     //회원 전체 조회
     @GetMapping("/user/list")
@@ -51,8 +55,8 @@ public class UserController {
     @GetMapping("/user/read")
     public String readUser(Integer idx, SearchCondition sc, Model m, RedirectAttributes rattr) {
         try {
-            User user = service.getUserByIdx(idx); //세션 아님
-            m.addAttribute("user", user);
+            m.addAttribute("user", service.getUserByIdx(idx));
+            m.addAttribute("addrList", addrService.getAddrList(idx));
             return "/user/read";
 
         } catch (Exception e) {

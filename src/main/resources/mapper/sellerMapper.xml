@@ -53,6 +53,9 @@
 
     <sql id="searchCondition">
         <choose>
+            <when test='option=="S"'>
+                AND STATE_CD LIKE concat('%', #{keyword}, '%')
+            </when>
             <when test='option=="E"'>
                 AND EMAIL LIKE concat('%', #{keyword}, '%')
             </when>

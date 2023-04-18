@@ -103,7 +103,6 @@
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">최종 로그인일자</td>
-                                <td class="id">${user.last_login_tm}</td>
                                 <td class="id">
                                     <fmt:formatDate value="${user.last_login_tm}" pattern="yyyy-MM-dd" type="date"/>
                                 </td>
@@ -125,8 +124,47 @@
                                 </td>
                             </tr>
                         </table>
+                        <div class="font-weight-bold text-primary py-4">배송지 리스트</div>
+                        <table class="table table-bordered py-md-3" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>번호(idx)</th>
+                                <th>우편번호</th>
+                                <th>기본주소</th>
+                                <th>상세주소</th>
+                                <th>수령자 이름</th>
+                                <th>수령인 전화번호</th>
+                                <th>기본배송지 여부</th>
+                                <th>배송지 등록일자</th>
+                                <th>배송지 수정일자</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <c:forEach var="addr" items="${addrList}">
+                                <tr>
+                                    <td>${addr.idx}</td>
+                                    <td>${addr.zpcd}</td>
+                                    <td class="id">${addr.addr_base}</td>
+                                    <td class="id">${addr.addr_dtl}</td>
+                                    <td class="id">${addr.rcpr_nm}</td>
+                                    <td class="id">${addr.rcpr_mobl_no}</td>
+                                    <td class="id">${addr.is_default_yn}</td>
+                                    <td class="id">
+                                        <fmt:formatDate value="${addr.reg_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                    </td>
+                                    <td class="id">
+                                        <fmt:formatDate value="${addr.chg_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <c:if test="${empty addrList}">
+                            <div class="pb-5 text-center">배송지 정보가 없습니다</div>
+                        </c:if>
                         <div class="d-flex justify-content-center mt-5">
-                            <button class="btn btn-primary px-md-4 py-md-2 mr-2"
+                            <button class="btn btn-light px-md-4 py-md-2 mr-2"
                                     id="list_btn">
                                 목록으로
                             </button>

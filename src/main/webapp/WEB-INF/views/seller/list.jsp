@@ -22,6 +22,7 @@
                             name="option"
                     >
                         <option value="A"  ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>이메일+브랜드명</option>
+                        <option value="S" ${ph.sc.option=='S' ? "selected" : ""}>상태코드</option>
                         <option value="E" ${ph.sc.option=='E' ? "selected" : ""}>이메일</option>
                         <option value="N" ${ph.sc.option=='N' ? "selected" : ""}>브랜드명</option>
                     </select>
@@ -57,6 +58,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
                                 <tr>
                                     <th>번호(idx)</th>
                                     <th>이메일</th>
@@ -94,7 +96,8 @@
                                             </c:choose>
                                         </td>
                                         <td class="id">
-                                            <fmt:formatDate value="${seller.reg_tm}" pattern="yyyy-MM-dd" type="date"/>
+                                            <fmt:formatDate value="${seller.reg_tm}" pattern="yyyy-MM-dd"
+                                                            type="date"/>
                                         </td>
                                     </tr>
                                 </c:forEach>

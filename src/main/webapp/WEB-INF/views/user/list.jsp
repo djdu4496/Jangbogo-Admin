@@ -22,6 +22,7 @@
                             name="option"
                     >
                         <option value="A"  ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>이메일+닉네임</option>
+                        <option value="S" ${ph.sc.option=='S' ? "selected" : ""}>상태코드</option>
                         <option value="E" ${ph.sc.option=='E' ? "selected" : ""}>이메일</option>
                         <option value="N" ${ph.sc.option=='N' ? "selected" : ""}>닉네임</option>
                     </select>

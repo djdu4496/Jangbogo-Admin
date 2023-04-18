@@ -30,6 +30,7 @@ public class SellerController {
         return "/seller/list";
     }
 
+    //판매자 전체 리스트 조회
     @GetMapping("/seller/list")
     public String sellerList(Model m, SearchCondition sc, RedirectAttributes rattr) {
         try {
@@ -41,13 +42,16 @@ public class SellerController {
             List<Seller> list = service.getSearchSelectPage(sc);
             m.addAttribute("list", list);
             m.addAttribute("ph", pageHandler);
+            return "/seller/list";
 
         } catch (Exception e) {
             e.printStackTrace();
+            rattr.addFlashAttribute("msg", "EXCEPTION_ERR");
+            return "redirect:/";
         }
-        return "/seller/list";
     }
 
+    //판매자 상세 조회
     @GetMapping("/seller/read")
     public String readSeller(Integer idx, SearchCondition sc, Model m, RedirectAttributes rattr) {
         try {

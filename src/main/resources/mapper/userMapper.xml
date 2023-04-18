@@ -5,14 +5,12 @@
 <mapper namespace="com.jangbogo.admin.dao.UserMapper">
 
     <select id="getUserByIdx" resultType="User">
-        SELECT *
-        FROM USER
+        <include refid="selectUser"/>
         WHERE IDX = #{idx}
     </select>
 
     <select id="getAdminByEmail" resultType="User">
-        SELECT *
-        FROM USER
+        <include refid="selectUser"/>
         WHERE EMAIL = #{email}
           AND AUTH_IDX = 3;
     </select>
@@ -54,7 +52,7 @@
 
     <update id="reportUser" parameterType="map">
         UPDATE USER SET STATE_CD = 2 WHERE IDX = #{idx} AND EMAIL = #{email}
-        # 회원 신고
+        # 2 = 회원 신고
     </update>
 
 </mapper>
