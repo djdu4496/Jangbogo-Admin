@@ -19,10 +19,10 @@ public interface SellerService {
     //판매자 상세 조회
     SellerDtl selectSellerDtl (Integer idx)  throws Exception;
 
-    int getSearchResultCnt (SearchCondition sc) throws Exception;
+    int getSearchResultCnt (SearchCondition sc, int state_cd) throws Exception;
 
     //회원 리스트 조회
-    List<Seller> getSearchSelectPage (SearchCondition sc) throws Exception;
+    List<Seller> getSearchSelectPage (SearchCondition sc, int state_cd) throws Exception;
 
 
 }

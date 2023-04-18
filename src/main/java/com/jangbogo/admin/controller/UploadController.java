@@ -19,15 +19,7 @@ import java.nio.file.Files;
 @Slf4j
 public class UploadController {
 
-
-//    판매자 상세페이지 이미지가 안뜬다.....
-
-    @GetMapping(value = {
-            "/display",
-//            "/{view}/display",
-//            "/{view}/{view}/display",
-
-    }) // view 폴더 추가
+    @GetMapping("/display")
     @ResponseBody
     public ResponseEntity<byte[]> getFile(String fileName) {
         log.info("fileName: " + fileName); // 받아온 파일 이름 확인

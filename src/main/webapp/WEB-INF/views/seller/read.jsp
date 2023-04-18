@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: namgungjin
-  Date: 2023/02/19
-  Time: 6:08 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
@@ -42,7 +35,7 @@
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">브랜드 대표이름</td>
-                                <td class="id">${seller.cpnm}</td>
+                                <td class="id">${seller.repr_nm}</td>
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">휴대전화</td>
@@ -65,7 +58,7 @@
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">사업자 번호</td>
-                                <td class="id">${seller.sle_biz_no}</td>
+                                <td class="id">${seller.brno}</td>
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">통신판매업 신고번호</td>

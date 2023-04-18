@@ -11,38 +11,38 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SellerServiceImpl implements SellerService{
+public class SellerServiceImpl implements SellerService {
 
     @Autowired
     SellerDao dao;
 
     @Override
-    public int approveSeller (int idx, String email) throws Exception {
+    public int approveSeller(int idx, String email) throws Exception {
         return dao.approveSeller(idx, email);
     }
 
     @Override
-    public int reportSeller (int idx, String email) throws Exception {
+    public int reportSeller(int idx, String email) throws Exception {
         return dao.reportSeller(idx, email);
     }
 
     @Override
-    public Seller selectSeller (int idx) throws Exception {
+    public Seller selectSeller(int idx) throws Exception {
         return dao.selectSeller(idx);
     }
 
     @Override
-    public SellerDtl selectSellerDtl (Integer idx) throws Exception {
+    public SellerDtl selectSellerDtl(Integer idx) throws Exception {
         return dao.selectSellerDtl(idx);
     }
 
     @Override
-    public int getSearchResultCnt (SearchCondition sc) throws Exception {
-        return dao.searchResultCnt(sc);
+    public int getSearchResultCnt(SearchCondition sc, int state_cd) throws Exception {
+        return dao.searchResultCnt(sc, state_cd);
     }
 
     @Override
-    public List<Seller> getSearchSelectPage (SearchCondition sc) throws Exception {
-        return dao.searchSelectPage(sc);
+    public List<Seller> getSearchSelectPage(SearchCondition sc, int state_cd) throws Exception {
+        return dao.searchSelectPage(sc, state_cd);
     }
 }

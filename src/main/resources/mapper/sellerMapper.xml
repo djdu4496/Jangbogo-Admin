@@ -21,7 +21,7 @@
     </update>
 
     <select id="selectSeller" resultType="Seller">
-        <include refid="selectSeller" />
+        <include refid="selectSeller"/>
         WHERE IDX = #{idx};
     </select>
 
@@ -31,19 +31,33 @@
         WHERE SELER_IDX = #{seler_idx}
     </select>
 
-    <select id="searchResultCnt" parameterType="SearchCondition" resultType="int">
+    <select id="searchResultCnt" parameterType="map" resultType="int">
         SELECT COUNT(*)
         FROM SELER
-        WHERE true
+        <choose>
+            <when test="state==99">
+                WHERE STATE_CD = 99
+            </when>
+            <otherwise>
+                WHERE TRUE
+            </otherwise>
+        </choose>
         <include refid="searchCondition"/>
     </select>
 
-    <select id="searchSelectPage" parameterType="SearchCondition" resultType="Seller">
+    <select id="searchSelectPage" parameterType="map" resultType="Seller">
         <include refid="selectSeller"/>
-        WHERE TRUE
+        <choose>
+            <when test="state==99">
+                WHERE STATE_CD = 99
+            </when>
+            <otherwise>
+                WHERE TRUE
+            </otherwise>
+        </choose>
         <include refid="searchCondition"/>
         ORDER BY REG_TM DESC, IDX DESC
-        LIMIT #{offset}, #{pageSize}
+        LIMIT #{sc.offset}, #{sc.pageSize}
     </select>
 
     <sql id="selectSeller">
@@ -54,17 +68,17 @@
     <sql id="searchCondition">
         <choose>
             <when test='option=="S"'>
-                AND STATE_CD LIKE concat('%', #{keyword}, '%')
+                AND STATE_CD LIKE concat('%', #{sc.keyword}, '%')
             </when>
             <when test='option=="E"'>
-                AND EMAIL LIKE concat('%', #{keyword}, '%')
+                AND EMAIL LIKE concat('%', #{sc.keyword}, '%')
             </when>
             <when test='option=="N"'>
-                AND CPNM LIKE concat('%', #{keyword}, '%')
+                AND CPNM LIKE concat('%', #{sc.keyword}, '%')
             </when>
             <otherwise>
-                AND (EMAIL LIKE concat('%', #{keyword}, '%')
-                OR CPNM LIKE concat('%', #{keyword}, '%'))
+                AND (EMAIL LIKE concat('%', #{sc.keyword}, '%')
+                OR CPNM LIKE concat('%', #{sc.keyword}, '%'))
             </otherwise>
         </choose>
     </sql>

@@ -49,14 +49,19 @@ public class SellerDaoImpl implements SellerDao{
     }
 
     @Override
-    public int searchResultCnt (SearchCondition sc) throws Exception {
-        return session.selectOne(nameSpace + "searchResultCnt", sc);
+    public int searchResultCnt (SearchCondition sc, int state_cd) throws Exception {
+        Map map = new HashMap();
+        map.put("sc", sc);
+        map.put("state", state_cd);
+        return session.selectOne(nameSpace + "searchResultCnt", map);
     }
 
     @Override
-    public List<Seller> searchSelectPage (SearchCondition sc) throws Exception {
-        return session.selectList(nameSpace + "searchSelectPage", sc);
+    public List<Seller> searchSelectPage (SearchCondition sc, int state_cd) throws Exception {
+        Map map = new HashMap();
+        map.put("sc", sc);
+        map.put("state", state_cd);
+        return session.selectList(nameSpace + "searchSelectPage", map);
     }
-
 
 }

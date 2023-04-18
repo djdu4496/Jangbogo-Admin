@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,30 +26,16 @@ public class SellerController {
     SellerService service;
 
     @GetMapping("/seller/list/pending")
-    public String sellerPendingList(Model m) {
-        m.addAttribute("seller", "seller"); //대기자 리스트만 출력
-        return "/seller/list";
+    public String sellerPendingList(SearchCondition sc, Model m, RedirectAttributes rattr) {
+        final int PENDING = 99;
+        return showSellerList(sc, PENDING, m, rattr);
     }
 
     //판매자 전체 리스트 조회
     @GetMapping("/seller/list")
     public String sellerList(Model m, SearchCondition sc, RedirectAttributes rattr) {
-        try {
-            int totalCnt = service.getSearchResultCnt(sc);
-            m.addAttribute("totalCnt", totalCnt);
-
-            PageHandler pageHandler = new PageHandler(totalCnt, sc);
-
-            List<Seller> list = service.getSearchSelectPage(sc);
-            m.addAttribute("list", list);
-            m.addAttribute("ph", pageHandler);
-            return "/seller/list";
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            rattr.addFlashAttribute("msg", "EXCEPTION_ERR");
-            return "redirect:/";
-        }
+        final int ALL = 100;
+        return showSellerList(sc, ALL, m, rattr);
     }
 
     //판매자 상세 조회
@@ -90,6 +77,26 @@ public class SellerController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("EXCEPTION_ERR");
+        }
+    }
+
+    //판매자 리스트 조회
+    public String showSellerList(SearchCondition sc, int state_cd, Model m, RedirectAttributes rattr) {
+        try {
+            int totalCnt = service.getSearchResultCnt(sc, state_cd);
+            m.addAttribute("totalCnt", totalCnt);
+
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);
+
+            List<Seller> list = service.getSearchSelectPage(sc, state_cd);
+            m.addAttribute("list", list);
+            m.addAttribute("ph", pageHandler);
+            return "/seller/list";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            rattr.addFlashAttribute("msg", "EXCEPTION_ERR");
+            return "redirect:/";
         }
     }
 

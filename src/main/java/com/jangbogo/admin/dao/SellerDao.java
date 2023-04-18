@@ -22,10 +22,11 @@ public interface SellerDao {
     //판매자 상세 조회
     SellerDtl selectSellerDtl (Integer idx) throws Exception;
 
-    int searchResultCnt (SearchCondition sc) throws Exception;
+    //판매자 수
+    int searchResultCnt (SearchCondition sc, int state_cd) throws Exception;
 
-    //회원 수 10개 단위 페이징 + 검색 조회
-    List<Seller> searchSelectPage (SearchCondition sc) throws Exception;
+    //판매자 수 10개 단위 페이징 + 검색 조회
+    List<Seller> searchSelectPage (SearchCondition sc, int state_cd) throws Exception;
 
 
 }
