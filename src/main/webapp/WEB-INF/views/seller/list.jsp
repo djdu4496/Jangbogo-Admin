@@ -80,13 +80,16 @@
                                         <td class="id">
                                             <c:choose>
                                                 <c:when test="${seller.state_cd == 1}">
-                                                    승인
+                                                    승인(정상)
                                                 </c:when>
                                                 <c:when test="${seller.state_cd == 2}">
                                                     신고 정지
                                                 </c:when>
                                                 <c:when test="${seller.state_cd == 3}">
                                                     탈퇴
+                                                </c:when>
+                                                <c:when test="${seller.state_cd == 99}">
+                                                    승인 대기
                                                 </c:when>
                                             </c:choose>
                                         </td>

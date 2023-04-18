@@ -127,7 +127,7 @@
                                         <c:when test="${seller.state_cd == 2}">신고</c:when>
                                         <c:when test="${seller.state_cd == 3}">탈퇴</c:when>
                                         <c:when test="${seller.state_cd == 4}">휴면</c:when>
-                                        <c:when test="${seller.state_cd == 99}">대기</c:when>
+                                        <c:when test="${seller.state_cd == 99}">승인 대기</c:when>
                                     </c:choose>
                                 </td>
                             </tr>
@@ -220,7 +220,7 @@
                     success: function (msg) {
                         if (msg === "APPROVE_OK") {
                             alert(approve_ok);
-                            location.href = "seller/list/pending";
+                            location.href = "/seller/list/pending";
                             //그냥 대기리스트 메인으로 가지 않을까? 기존 페이지 + 검색 결과를 가지고 있어봤자 더 이상 대기 리스트에 존재하지 않을 것이다.
                         }
                     },
