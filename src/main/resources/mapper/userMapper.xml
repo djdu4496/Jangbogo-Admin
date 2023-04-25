@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jangbogo.admin.dao.UserMapper">
+
+    <select id="getUserByIdx" resultType="User">
+        <include refid="selectUser"/>
+        WHERE IDX = #{idx}
+    </select>
+
+    <select id="getAdminByEmail" resultType="User">
+        <include refid="selectUser"/>
+        WHERE EMAIL = #{email}
+          AND AUTH_IDX = 3;
+    </select>
+
+    <select id="searchResultCnt" parameterType="SearchCondition" resultType="int">
+        SELECT COUNT(*)
+        FROM USER
+        WHERE true
+        <include refid="searchCondition"/>
+    </select>
+
+    <select id="searchSelectPage" parameterType="SearchCondition" resultType="User">
+        <include refid="selectUser"/>
+        WHERE TRUE
+        <include refid="searchCondition"/>
+        ORDER BY REG_TM DESC, IDX DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <sql id="selectUser">
+        SELECT *
+        FROM USER
+    </sql>
+
+    <sql id="searchCondition">
+        <choose>
+            <when test='option=="E"'>
+                AND EMAIL LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="N"'>
+                AND NICK_NM LIKE concat('%', #{keyword}, '%')
+            </when>
+            <otherwise>
+                AND (EMAIL LIKE concat('%', #{keyword}, '%')
+                OR NICK_NM LIKE concat('%', #{keyword}, '%'))
+            </otherwise>
+        </choose>
+    </sql>
+
+    <update id="reportUser" parameterType="map">
+        UPDATE USER SET STATE_CD = 2 WHERE IDX = #{idx} AND EMAIL = #{email}
+        # 2 = 회원 신고
+    </update>
+
+</mapper>

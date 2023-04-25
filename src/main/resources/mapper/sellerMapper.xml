@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jangbogo.admin.dao.SellerMapper">
+
+    <update id="reportSeller" parameterType="map">
+        # 2 = 신고
+        UPDATE SELER
+        SET STATE_CD = 2
+        WHERE IDX = #{idx}
+          AND EMAIL = #{email};
+    </update>
+
+    <update id="approveSeller" parameterType="map">
+        # 1 = 승인
+        UPDATE SELER
+        SET STATE_CD = 1
+        WHERE IDX = #{idx}
+          AND EMAIL = #{email};
+    </update>
+
+    <select id="selectSeller" resultType="Seller">
+        <include refid="selectSeller"/>
+        WHERE IDX = #{idx};
+    </select>
+
+    <select id="selectSellerDtl" resultType="SellerDtl">
+        SELECT *
+        FROM SELER_DTL
+        WHERE SELER_IDX = #{seler_idx}
+    </select>
+
+    <select id="searchResultCnt" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+        FROM SELER
+        <choose>
+            <when test="state==99">
+                WHERE STATE_CD = 99
+            </when>
+            <otherwise>
+                WHERE TRUE
+            </otherwise>
+        </choose>
+        <include refid="searchCondition"/>
+    </select>
+
+    <select id="searchSelectPage" parameterType="map" resultType="Seller">
+        <include refid="selectSeller"/>
+        <choose>
+            <when test="state==99">
+                WHERE STATE_CD = 99
+            </when>
+            <otherwise>
+                WHERE TRUE
+            </otherwise>
+        </choose>
+        <include refid="searchCondition"/>
+        ORDER BY REG_TM DESC, IDX DESC
+        LIMIT #{sc.offset}, #{sc.pageSize}
+    </select>
+
+    <sql id="selectSeller">
+        SELECT *
+        FROM SELER
+    </sql>
+
+    <sql id="searchCondition">
+        <choose>
+            <when test='option=="S"'>
+                AND STATE_CD LIKE concat('%', #{sc.keyword}, '%')
+            </when>
+            <when test='option=="E"'>
+                AND EMAIL LIKE concat('%', #{sc.keyword}, '%')
+            </when>
+            <when test='option=="N"'>
+                AND CPNM LIKE concat('%', #{sc.keyword}, '%')
+            </when>
+            <otherwise>
+                AND (EMAIL LIKE concat('%', #{sc.keyword}, '%')
+                OR CPNM LIKE concat('%', #{sc.keyword}, '%'))
+            </otherwise>
+        </choose>
+    </sql>
+
+</mapper>
