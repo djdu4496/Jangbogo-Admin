@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jangbogo.admin.dao.OrderMapper">
+    <!--
+        태   그 : select
+        기   능 : '주문' 테이블의 전체 데이터 조회
+        아이디명 : selectList
+    -->
+    <select id="selectList">
+        SELECT * FROM ORD;
+    </select>
+</mapper>

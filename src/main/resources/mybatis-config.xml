@@ -9,5 +9,6 @@
         <typeAlias alias="SellerDtl" type="com.jangbogo.admin.domain.SellerDtl"/>
         <typeAlias alias="Address" type="com.jangbogo.admin.domain.Address"/>
         <typeAlias alias="SearchCondition" type="com.jangbogo.admin.domain.SearchCondition"/>
+        <typeAlias alias="OrderDto" type="com.jangbogo.admin.domain.OrderDto"/>
     </typeAliases>
 </configuration>
