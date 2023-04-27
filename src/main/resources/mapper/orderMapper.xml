@@ -8,7 +8,26 @@
         기   능 : '주문' 테이블의 전체 데이터 조회
         아이디명 : selectList
     -->
-    <select id="selectList">
-        SELECT * FROM ORD;
+    <select id="selectList" resultType="hashmap">
+        SELECT DISTINCT A.IDX as idx, A.ORD_TM as ord_tm, A.ORDR_NM as ordr_nm,
+            (CONCAT(
+                (
+                    SELECT PROD_NM
+                    FROM ORD_DTL
+                    WHERE ORD_IDX = A.IDX
+                    LIMIT 1
+                ) , ' 외 ',
+                (
+                    SELECT PLIST_TOT
+                    FROM ORD
+                    WHERE IDX = A.idx
+                ), '건')) as prod_nm,
+            A.TOT_AMT as tot_amt, SETL_MN_CD as setl_mn_cd, STATE_CD as state_cd
+        FROM ORD A
+            JOIN (
+                SELECT *
+                FROM ORD_DTL
+            ) B
+        ON  A.IDX = B.ORD_IDX;
     </select>
 </mapper>

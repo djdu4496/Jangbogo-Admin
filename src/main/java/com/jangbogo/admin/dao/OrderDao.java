@@ -14,7 +14,7 @@ public class OrderDao {
     private static String namespace="com.jangbogo.admin.dao.OrderMapper.";                                              // 대소문자 구분X
 
     public List<OrderDto> getList() {                                                                                   // 메서드명 : getList
-        return session.selectList(namespace + "selectList");                                                            // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 List<OrderDto>를 반환
+        return session.selectList(namespace + "selectList");                                                         // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 List<OrderDto>를 반환
     }                                                                                                                   // 반환타입 : OrderDto<List>
 
 }

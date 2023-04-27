@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: jiwoo
@@ -48,16 +49,9 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex align-items-center">
                         <h6 class="m-0 font-weight-bold text-primary">
-                            <c:choose>
-                                <c:when test="${user.state_cd == 2}">
-                                    신고된 회원 리스트
-                                </c:when>
-                                <c:otherwise>
-                                    주문 리스트
-                                </c:otherwise>
-                            </c:choose>
+                            전체주문조회
                         </h6>
-                        <div class="ml-2">( ${totalCnt} 명 )</div>
+                        <div class="ml-2">( ${totalCnt} 건 )</div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -75,28 +69,13 @@
                                 <tbody>
                                 <c:forEach var="order" items="${list}">
                                     <tr>
+                                        <td class="id">${order.ord_tm}</td>
                                         <td class="id">${order.idx}</td>
-                                        <td class="id"><a
-                                                href="<c:url value="/user/read${ph.sc.queryString}&idx=${user.idx}"/>">${user.email}</a>
-                                        </td>
-                                        <td class="id">${user.nick_nm}</td>
-                                        <td class="id">${user.mpno}</td>
-                                        <td class="id">
-                                            <c:choose>
-                                                <c:when test="${user.state_cd == 1}">
-                                                    승인
-                                                </c:when>
-                                                <c:when test="${user.state_cd == 2}">
-                                                    신고 정지
-                                                </c:when>
-                                                <c:when test="${user.state_cd == 3}">
-                                                    탈퇴
-                                                </c:when>
-                                            </c:choose>
-                                        </td>
-                                        <td class="id">
-                                            <fmt:formatDate value="${user.reg_tm}" pattern="yyyy-MM-dd" type="date"/>
-                                        </td>
+                                        <td class="id">${order.ordr_nm}</td>
+                                        <td class="id">${order.prod_nm}</td>
+                                        <td class="id">${order.tot_amt}</td>
+                                        <td class="id">${order.setl_mn_cd}</td>
+                                        <td class="id">${order.state_cd}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -104,33 +83,6 @@
                         </div>
                     </div>
                     <%--  end of card-body  --%>
-                    <c:choose>
-                        <c:when test="${totalCnt == null || totalCnt == 0}">
-                            <div class="pb-5 text-center">회원이 존재하지 않습니다</div>
-                        </c:when>
-                        <c:otherwise>
-                            <ul class="d-flex justify-content-center pagination">
-                                <c:if test="${ph.showPrev}">
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                           href="<c:url value="/user/list${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
-                                    </li>
-                                </c:if>
-                                <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                                    <li class="page-item ${i==ph.sc.page? "active" : ""}">
-                                        <a class="page-link"
-                                           href="<c:url value="/user/list${ph.sc.getQueryString(i)}"/>">${i}</a>
-                                    </li>
-                                </c:forEach>
-                                <c:if test="${ph.showNext}">
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                           href="<c:url value="/user/list${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>
-                                    </li>
-                                </c:if>
-                            </ul>
-                        </c:otherwise>
-                    </c:choose>
                 </div>
             </div>
         </div>
