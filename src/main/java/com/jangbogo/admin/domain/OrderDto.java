@@ -4,34 +4,31 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 
-@Repository
 public class OrderDto {
     // iv 선언
+    Date ord_tm;                                                                                                        // 주문날짜 ORD_TM
     Integer idx;                                                                                                        // 주문번호  IDX
     String ordr_nm;                                                                                                     // 주문자이름 ORDR_NM
-    String mpno;                                                                                                        // 주문자휴대전화번호 MPNO
-    Integer user_idx;                                                                                                   // 회원번호  USER_IDX
+    String prod_nm;                                                                                                     // 주문상품명 CONCAT(PROD_NM, ' 외 ', PLIST_TOT)
     Integer tot_amt;                                                                                                    // 주문총금액 TOT_AMT
-    Integer gtot;                                                                                                       // 주문총수량 GTOT
-    Integer plist_tot;                                                                                                  // 주문품목총계 PLIST_TOT
-    Date ord_tm;                                                                                                        // 주문날짜 ORD_TM
-    Date state_cd;                                                                                                      // 주문상태코드 STATE_CD
+    Integer setl_mn_cd;                                                                                                 // 결제수단코드 SETL_MN_CD
+    Integer state_cd;                                                                                                   // 주문상태코드 STATE_CD
     Date crt_tm;                                                                                                        // 최초등록일자 CRT_TM
     Integer crt_idx;                                                                                                    // 최초등록자식별번호 CRT_IDX
     Date upt_tm;                                                                                                        // 최종수정일자 UPT_TM
     Integer upt_idx;                                                                                                    // 최종수정자식별번호 UPT_IDX
 
     // Constructor
-    public OrderDto() {}                                                                                                // 기본 생성자
-
-    public OrderDto(String ordr_nm, String mpno, Integer user_idx) {                                                    // 매개변수 있는 생성자
-        this.ordr_nm = ordr_nm;
-        this.mpno = mpno;
-        this.user_idx = user_idx;
-    }
+    public OrderDto(){}                                                                                                 // 기본생성자
 
     // Getter & Setter
+    public Date getOrd_tm() {
+        return ord_tm;
+    }
 
+    public void setOrd_tm(Date ord_tm) {
+        this.ord_tm = ord_tm;
+    }
 
     public Integer getIdx() {
         return idx;
@@ -49,20 +46,12 @@ public class OrderDto {
         this.ordr_nm = ordr_nm;
     }
 
-    public String getMpno() {
-        return mpno;
+    public String getProd_nm() {
+        return prod_nm;
     }
 
-    public void setMpno(String mpno) {
-        this.mpno = mpno;
-    }
-
-    public Integer getUser_idx() {
-        return user_idx;
-    }
-
-    public void setUser_idx(Integer user_idx) {
-        this.user_idx = user_idx;
+    public void setProd_nm(String prod_nm) {
+        this.prod_nm = prod_nm;
     }
 
     public Integer getTot_amt() {
@@ -73,35 +62,19 @@ public class OrderDto {
         this.tot_amt = tot_amt;
     }
 
-    public Integer getGtot() {
-        return gtot;
+    public Integer getSetl_mn_cd() {
+        return setl_mn_cd;
     }
 
-    public void setGtot(Integer gtot) {
-        this.gtot = gtot;
+    public void setSetl_mn_cd(Integer setl_mn_cd) {
+        this.setl_mn_cd = setl_mn_cd;
     }
 
-    public Integer getPlist_tot() {
-        return plist_tot;
-    }
-
-    public void setPlist_tot(Integer plist_tot) {
-        this.plist_tot = plist_tot;
-    }
-
-    public Date getOrd_tm() {
-        return ord_tm;
-    }
-
-    public void setOrd_tm(Date ord_tm) {
-        this.ord_tm = ord_tm;
-    }
-
-    public Date getState_cd() {
+    public Integer getState_cd() {
         return state_cd;
     }
 
-    public void setState_cd(Date state_cd) {
+    public void setState_cd(Integer state_cd) {
         this.state_cd = state_cd;
     }
 
@@ -140,15 +113,13 @@ public class OrderDto {
     // toString()
     @Override
     public String toString() {
-        return "OrderDto{" +
-                "idx=" + idx +
+        return "{" +
+                "ord_tm=" + ord_tm +
+                ", idx=" + idx +
                 ", ordr_nm='" + ordr_nm + '\'' +
-                ", mpno='" + mpno + '\'' +
-                ", user_idx=" + user_idx +
+                ", prod_nm='" + prod_nm + '\'' +
                 ", tot_amt=" + tot_amt +
-                ", gtot=" + gtot +
-                ", plist_tot=" + plist_tot +
-                ", ord_tm=" + ord_tm +
+                ", setl_mn_cd=" + setl_mn_cd +
                 ", state_cd=" + state_cd +
                 ", crt_tm=" + crt_tm +
                 ", crt_idx=" + crt_idx +
