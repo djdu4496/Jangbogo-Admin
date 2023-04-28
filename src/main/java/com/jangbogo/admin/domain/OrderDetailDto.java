@@ -5,7 +5,7 @@ import java.util.Date;
 public class OrderDetailDto {
     // iv
     private Date ord_tm;                                                                                                // 주문날짜 ORD_TM
-    private Integer idx;                                                                                                // 주문번호  IDX
+    private Integer ord_idx;                                                                                            // 주문번호  ORD_IDX
     private String ordr_nm;                                                                                             // 주문자이름 ORDR_NM
     private String prod_nm;                                                                                             // 주문상품명 CONCAT(PROD_NM, ' 외 ', PLIST_TOT)
     private Integer prod_qty;                                                                                           // 주문상품개수 PROD_QTY
@@ -29,12 +29,12 @@ public class OrderDetailDto {
         this.ord_tm = ord_tm;
     }
 
-    public Integer getIdx() {
-        return idx;
+    public Integer getOrd_idx() {
+        return ord_idx;
     }
 
-    public void setIdx(Integer idx) {
-        this.idx = idx;
+    public void setOrd_idx(Integer ord_idx) {
+        this.ord_idx = ord_idx;
     }
 
     public String getOrdr_nm() {
@@ -130,7 +130,7 @@ public class OrderDetailDto {
     public String toString() {
         return "OrderDetailDto{" +
                 "ord_tm=" + ord_tm +
-                ", idx=" + idx +
+                ", ord_idx=" + ord_idx +
                 ", ordr_nm='" + ordr_nm + '\'' +
                 ", prod_nm='" + prod_nm + '\'' +
                 ", prod_qty=" + prod_qty +

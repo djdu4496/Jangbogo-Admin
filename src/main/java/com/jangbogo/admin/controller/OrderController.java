@@ -39,8 +39,8 @@ public class OrderController {
 
     // 메서드명 : getOrder
     // 기   능 : 주문 상세 페이지 이동
-    // 반환타입 :
-    // 매개변수 :
+    // 반환타입 : String
+    // 매개변수 : @PathVariable Integer idx, Model model
     @GetMapping("/order/{idx}")
     public String getOrder(@PathVariable Integer idx, Model model) {
         List<OrderDetailDto> list = null;                                                                                     // 변수명 : list - 저장값 : OrderDto 저장소 List
@@ -54,4 +54,13 @@ public class OrderController {
             return "redirect:/";
         }
     }
+
+    // 메서드명 : getOrderHistory
+    // 기   능 : 주문 이력 페이지 이동
+    // 반환타입 : String
+    // 매개변수 :
+    @GetMapping("/order/{idx}/history")
+    public String getOrderHistory() {
+        return "/order/orderHistory";
+    };
 }
