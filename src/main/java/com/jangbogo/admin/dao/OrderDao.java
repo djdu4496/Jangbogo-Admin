@@ -2,6 +2,7 @@ package com.jangbogo.admin.dao;
 
 import com.jangbogo.admin.domain.OrderDetailDto;
 import com.jangbogo.admin.domain.OrderDto;
+import com.jangbogo.admin.domain.OrderHistoryDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,9 +17,13 @@ public class OrderDao {
 
     public List<OrderDto> getList() {                                                                                   // 메서드명 : getList
         return session.selectList(namespace + "selectList");                                                         // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 List<OrderDto>를 반환
-    }                                                                                                                   // 반환타입 : OrderDto<List>
+    }                                                                                                                   // 반환타입 : List<OrderDto>
 
-    public List<OrderDetailDto> getOrder() {                                                                                        // 메서드명 : getOrder
-        return session.selectList(namespace + "selectOrder");                                                         // 기   능 :
-    }                                                                                                                   // 반환타입 : OrderDto
+    public List<OrderDetailDto> getOrder() {                                                                            // 메서드명 : getOrder
+        return session.selectList(namespace + "selectOrder");                                                        // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 OrderDto 반환
+    }                                                                                                                   // 반환타입 : List<OrderDetailDto>
+
+    public List<OrderHistoryDto> getOrderHistory(Integer idx) {                                                         // 메서드명 : getOrderHistory
+        return session.selectList(namespace + "selectOrderHistory", idx);                                            // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 List<OrderHistoryDto> 반환
+    }                                                                                                                   // 반환타입 : List<OrderHistoryDto>
 }

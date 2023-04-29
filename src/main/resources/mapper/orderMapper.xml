@@ -41,4 +41,16 @@
         JOIN ORD
         ON ORD_DTL.ORD_IDX = ORD.IDX;
     </select>
+
+    <!--
+        태   그 : select
+        기   능 : '주문상세' 테이블과 '주문이력' 테이블의 조인 데이터 조회
+        아이디명 : selectOrderHistory
+    -->
+    <select id="selectOrderHistory" resultType="hashmap">
+        SELECT ORD_HIST.CHG_TM as chg_tm, ORD_HIST.ORD_IDX as ord_idx, ORD_HIST.ORD_DTL_IDX as ord_dtl_idx, ORD_HIST.PROD_NM as prod_nm, ORD_HIST.ORD_STATE_CD as ord_state_cd
+        FROM ORD_HIST
+        JOIN ORD
+        ON ORD_HIST.ORD_IDX = ORD.IDX;
+    </select>
 </mapper>

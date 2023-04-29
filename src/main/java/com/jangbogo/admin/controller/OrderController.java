@@ -2,6 +2,7 @@ package com.jangbogo.admin.controller;
 
 import com.jangbogo.admin.domain.OrderDetailDto;
 import com.jangbogo.admin.domain.OrderDto;
+import com.jangbogo.admin.domain.OrderHistoryDto;
 import com.jangbogo.admin.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,11 +44,11 @@ public class OrderController {
     // 매개변수 : @PathVariable Integer idx, Model model
     @GetMapping("/order/{idx}")
     public String getOrder(@PathVariable Integer idx, Model model) {
-        List<OrderDetailDto> list = null;                                                                                     // 변수명 : list - 저장값 : OrderDto 저장소 List
+        List<OrderDetailDto> list = null;                                                                               // 변수명 : list - 저장값 : OrderDto 저장소 List
         try {
             list = orderService.getOrder();                                                                             // orderService의 getList메서드 호출, 반환값을 list에 저장
             model.addAttribute("list", list);
-            System.out.println("list = " + list);
+            model.addAttribute("idx", idx);
             return "/order/order";
         } catch(Exception e) {
             e.printStackTrace();
@@ -60,7 +61,17 @@ public class OrderController {
     // 반환타입 : String
     // 매개변수 :
     @GetMapping("/order/{idx}/history")
-    public String getOrderHistory() {
-        return "/order/orderHistory";
+    public String getOrderHistory(@PathVariable Integer idx, Model model) {
+        List<OrderHistoryDto> list = null;                                                                              // 변수명 : list - 저장값 : OrderHistoryDto 저장소 List
+        try {
+            list = orderService.getOrderHistory(idx);
+            model.addAttribute("list", list);
+            model.addAttribute("idx", idx);
+            System.out.println("list = " + list);
+            return "/order/orderHistory";
+        } catch(Exception e) {
+            e.printStackTrace();
+            return "redirect:/order/{idx}";
+        }
     };
 }
