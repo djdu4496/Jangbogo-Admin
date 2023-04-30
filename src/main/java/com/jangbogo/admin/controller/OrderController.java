@@ -1,8 +1,6 @@
 package com.jangbogo.admin.controller;
 
-import com.jangbogo.admin.domain.OrderDetailDto;
-import com.jangbogo.admin.domain.OrderDto;
-import com.jangbogo.admin.domain.OrderHistoryDto;
+import com.jangbogo.admin.domain.*;
 import com.jangbogo.admin.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,11 +23,18 @@ public class OrderController {
     // 매개변수 : Model model
     // 반환타입 : String
     @GetMapping("/order/list")
-    public String getList(Model model) {
+    public String getList(Model model, SearchCondition sc) {
         List<OrderDto> list = null;                                                                                     // 변수명 : list - 저장값 : OrderDto 저장소 List
         try {
-            list = orderService.getList();                                                                              // orderService의 getList메서드 호출, 반환값을 list에 저장
+            int totalCnt = orderService.getSearchResultCnt(sc);
+            model.addAttribute("totalCnt", totalCnt);
+
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);
+
+//            list = orderService.getList();                                                                              // orderService의 getList메서드 호출, 반환값을 list에 저장
+            list = orderService.getSearchSelectPage(sc);
             model.addAttribute("list", list);
+            model.addAttribute("ph", pageHandler);
             System.out.println("list = " + list);
             return "/order/orderList";
         } catch (Exception e) {                                                                                         // 에러 발생 시

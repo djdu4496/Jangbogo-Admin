@@ -4,6 +4,7 @@ import com.jangbogo.admin.dao.OrderDao;
 import com.jangbogo.admin.domain.OrderDetailDto;
 import com.jangbogo.admin.domain.OrderDto;
 import com.jangbogo.admin.domain.OrderHistoryDto;
+import com.jangbogo.admin.domain.SearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,4 +35,16 @@ public class OrderService {
     public List<OrderHistoryDto> getOrderHistory(Integer idx) {
         return orderDao.getOrderHistory(idx);
     }
+
+    // 메서드명 : getSearchResultCnt
+    // 기   능 : OrderDao의 getSearchResultCnt메서드 호출
+    // 반환타입 : int
+    // 매개변수 : SearchCondition sc
+    public int getSearchResultCnt(SearchCondition sc) { return orderDao.getSearchResultCnt(sc); }
+
+    // 메서드명 : getSearchSelectPage
+    // 기   능 : orderDao의 getSearchSelectPage메서드 호출
+    // 반환타입 : List<OrderDto>
+    // 매개변수 : SearchCondition sc
+    public List<OrderDto> getSearchSelectPage(SearchCondition sc) { return orderDao.getSearchSelectedPage(sc);}
 }

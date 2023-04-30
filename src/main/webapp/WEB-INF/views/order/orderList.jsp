@@ -10,6 +10,7 @@
 <html>
 <head>
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
+    <script src = "/js/order/format.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -20,14 +21,14 @@
             <div class="container-fluid">
                 <form
                         class="d-none form-inline mr-auto d-flex mb-4 mt-lg-5"
-                        action="<c:url value='/user/list'/>"
+                        action="<c:url value='/order/list'/>"
                         method="get"
                 >
                     <select
                             class="custom-select col-xl-3"
                             name="option"
                     >
-                        <option value="A"  ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>주문자명 + 주문번호</option>
+                        <option value="A"  ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>전체</option>
                         <option value="S" ${ph.sc.option=='S' ? "selected" : ""}>주문자명</option>
                         <option value="E" ${ph.sc.option=='E' ? "selected" : ""}>주문번호</option>
                     </select>
@@ -51,7 +52,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">
                             전체주문조회
                         </h6>
-                        <div class="ml-2">( ${list.size()} 건 )</div>
+                        <div class="ml-2">( ${totalCnt} 건 )</div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -78,7 +79,7 @@
                                             </td>
                                             <td class="id">${order.ordr_nm}</td>
                                             <td class="id">${order.prod_nm}</td>
-                                            <td class="id">${order.tot_amt}</td>
+                                            <td class="id">${order.tot_amt}원</td>
                                             <td class="id">
                                                     ${order.setl_mn_cd == 1 ? "카카오페이" : "네이버페이"}
                                             </td>
@@ -111,6 +112,33 @@
                         </div>
                     </div>
                     <%--  end of card-body  --%>
+                    <c:choose>
+                        <c:when test="${list == null || list.size() == 0}">
+                            <div class="pb-5 text-center">주문내역이 존재하지 않습니다</div>
+                        </c:when>
+                        <c:otherwise>
+                            <ul class="d-flex justify-content-center pagination">
+                                <c:if test="${ph.showPrev}">
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                           href="<c:url value="/order/list${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
+                                    </li>
+                                </c:if>
+                                <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                                    <li class="page-item ${i==ph.sc.page? "active" : ""}">
+                                        <a class="page-link"
+                                           href="<c:url value="/order/list${ph.sc.getQueryString(i)}"/>">${i}</a>
+                                    </li>
+                                </c:forEach>
+                                <c:if test="${ph.showNext}">
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                           href="<c:url value="/order/list${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
