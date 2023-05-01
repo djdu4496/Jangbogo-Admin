@@ -95,14 +95,46 @@
 
     <!--
         태   그 : select
-        기   능 : '주문상세' 테이블과 '주문이력' 테이블의 조인 데이터 조회
-        아이디명 : selectSelectedPage
+        기   능 : '주문상태코드'가 1인 주문 내역 조회
+        아이디명 : selectPaidList
     -->
-<!--    <select id="selectSelectedPage" parameterType="SearchCondition" resultType="OrderDto">-->
-<!--        <include refid="selectList"/>-->
-<!--        WHERE TRUE-->
-<!--        <include refid="searchCondition"/>-->
-<!--        ORDER BY ORD_TM DESC, IDX DESC-->
-<!--        LIMIT #{offset}, #{pageSize}-->
-<!--    </select>-->
+    <select id="selectPaidList" parameterType="SearchCondition" resultType="hashmap">
+        SELECT DISTINCT A.IDX as idx, A.ORD_TM as ord_tm, A.ORDR_NM as ordr_nm,
+        (CONCAT(
+        (
+        SELECT PROD_NM
+        FROM ORD_DTL
+        WHERE ORD_IDX = A.IDX
+        LIMIT 1
+        ) , ' 외 ',
+        (
+        SELECT PLIST_TOT
+        FROM ORD
+        WHERE IDX = A.idx
+        ), '건')) as prod_nm,
+        A.TOT_AMT as tot_amt, SETL_MN_CD as setl_mn_cd, STATE_CD as state_cd
+        FROM ORD A
+        WHERE STATE_CD = 1
+        JOIN (
+        SELECT *
+        FROM ORD_DTL
+        ) B
+        ON  A.IDX = B.ORD_IDX
+        WHERE true
+        <choose>
+            <when test='option=="E"'>
+                AND A.ORDR_NM LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="N"'>
+                AND A.IDX LIKE concat('%', #{keyword}, '%')
+            </when>
+            <otherwise>
+                AND (A.ORDR_NM LIKE concat('%', #{keyword}, '%')
+                OR A.IDX LIKE concat('%', #{keyword}, '%'))
+            </otherwise>
+        </choose>
+        ORDER BY ORD_TM DESC, IDX DESC
+        LIMIT #{offset}, #{pageSize};
+    </select>
+
 </mapper>

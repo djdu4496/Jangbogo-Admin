@@ -26,20 +26,17 @@ public class OrderController {
     public String getList(Model model, SearchCondition sc) {
         List<OrderDto> list = null;                                                                                     // 변수명 : list - 저장값 : OrderDto 저장소 List
         try {
-            int totalCnt = orderService.getSearchResultCnt(sc);
-            model.addAttribute("totalCnt", totalCnt);
+            int totalCnt = orderService.getSearchResultCnt(sc);                                                         // 변수명 : totalCnt - 저장값 : 주문내역 목록 검색 결과 개수
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);                                                    // PageHandler 객체 생성(인자 - totalCnt, sc)
+            list = orderService.getSearchSelectPage(sc);                                                                // orderService의 getSearchSelectPage메서드 호출, 반환값을 list에 저장
 
-            PageHandler pageHandler = new PageHandler(totalCnt, sc);
-
-//            list = orderService.getList();                                                                              // orderService의 getList메서드 호출, 반환값을 list에 저장
-            list = orderService.getSearchSelectPage(sc);
-            model.addAttribute("list", list);
-            model.addAttribute("ph", pageHandler);
-            System.out.println("list = " + list);
+            model.addAttribute("totalCnt", totalCnt);                                                      // Model에 totalCnt를 K/V로 저장
+            model.addAttribute("list", list);                                                              // Model에 list를 K/V로 저장
+            model.addAttribute("ph", pageHandler);                                                         // Model에 PageHandler를 K/V로 저장
             return "/order/orderList";
         } catch (Exception e) {                                                                                         // 에러 발생 시
             e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
-            return "redirect:/";
+            return "redirect:/";                                                                                        // 2) 메인 페이지로 리다이렉트
         }
     }
 
@@ -72,11 +69,32 @@ public class OrderController {
             list = orderService.getOrderHistory(idx);
             model.addAttribute("list", list);
             model.addAttribute("idx", idx);
-            System.out.println("list = " + list);
             return "/order/orderHistory";
         } catch(Exception e) {
             e.printStackTrace();
             return "redirect:/order/{idx}";
         }
-    };
+    }
+
+    // 메서드명 : getOrderPaidList
+    // 기   능 : '결제완료'된 페이지 이동
+    // 반환타입 : String
+    @GetMapping("/order/list/paid")
+    public String getOrderPaidList(Model model, SearchCondition sc) {
+        List<OrderDto> list = null;                                                                                     // 변수명 : list - 저장값 : OrderDto 저장소 List
+        try {
+            int totalCnt = orderService.getSearchResultCnt(sc);                                                         // 변수명 : totalCnt - 저장값 : 주문내역 목록 검색 결과 개수
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);                                                    // PageHandler 객체 생성(인자 - totalCnt, sc)
+            list = orderService.getSearchSelectPage(sc);                                                                // orderService의 getSearchSelectPage메서드 호출, 반환값을 list에 저장
+
+            model.addAttribute("totalCnt", totalCnt);                                                      // Model에 totalCnt를 K/V로 저장
+            model.addAttribute("list", list);                                                              // Model에 list를 K/V로 저장
+            model.addAttribute("ph", pageHandler);                                                         // Model에 PageHandler를 K/V로 저장
+            return "/order/orderPaid";
+        } catch (Exception e) {                                                                                         // 에러 발생 시
+            e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
+            return "redirect:/";                                                                                        // 2) 메인 페이지로 리다이렉트
+        }
+    }
+
 }

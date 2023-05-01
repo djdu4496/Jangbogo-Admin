@@ -36,4 +36,7 @@ public class OrderDao {
         return session.selectList(namespace + "selectSelectedPage", sc);                                             // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 주문내역 목록 조회 결과 반환
     }                                                                                                                   // 반환타입 : List<OrderDto> - 매개변수 : SearchCondition sc
 
+    public List<OrderDto> getPaidList(SearchCondition sc) {                                                             // 메서드명 : getPaidList
+        return session.selectList(namespace + "selectPaidList", sc);                                                 // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 1인 주문내역 목록 조회 결과 반환
+    }                                                                                                                   // 반환타입 : List<OrderDto> - 매개변수 : SearchCondition sc
 }

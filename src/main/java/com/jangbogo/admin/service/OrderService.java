@@ -47,4 +47,10 @@ public class OrderService {
     // 반환타입 : List<OrderDto>
     // 매개변수 : SearchCondition sc
     public List<OrderDto> getSearchSelectPage(SearchCondition sc) { return orderDao.getSearchSelectedPage(sc);}
+
+    // 메서드명 : getOrderPaidList
+    // 기   능 : orderDao의 getOrderPaidList메서드 호출
+    // 반환타입 : List<OrderDto>
+    // 매개변수 : SearchCondition sc
+    public List<OrderDto> getOrderPaidList(SearchCondition sc) { return orderDao.getPaidList(sc); }
 }
