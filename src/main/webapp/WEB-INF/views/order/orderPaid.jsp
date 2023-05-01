@@ -14,7 +14,7 @@
         .card-header {
             position: relative;
         }
-        #deliveryPrepareBtn {
+        #deliveringBtn {
             position: absolute;
             right: 0;
             margin-right: 20px;
@@ -35,7 +35,7 @@
                 <div class="container-fluid">
                     <form
                             class="d-none form-inline mr-auto d-flex mb-4 mt-lg-5"
-                            action="<c:url value='/order/list/paid'/>"
+                            action="<c:url value='/order/list/deliveryPreparing'/>"
                             method="get"
                     >
                         <select
@@ -67,7 +67,7 @@
                                 결제완료주문조회
                             </h6>
                             <div class="ml-2">( ${totalCnt} 건 )</div>
-                            <button type="button" class="btn-danger" id="deliveryPrepareBtn">배송준비중 처리</button>
+                            <button type="button" class="btn-danger" id="deliveringBtn">배송준비중 처리</button>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -151,7 +151,7 @@
     <%@ include file="/WEB-INF/views/include/script.jsp" %>
     <script>
         $(document).ready(() => {
-            $("#deliveryPrepareBtn").click((e) => {
+            $("#deliveringBtn").click((e) => {
                 // 체크된 주문에 대해 '배송준비중' 처리
                 // 1. 변수 선언
                 let length = $("#dataTable tBody").children().length;
@@ -178,7 +178,7 @@
                             let orderIdx = $("#dataTable tBody tr").children()[i * 8 + 2].textContent;                  // 변수명 : orderIdx - 저장값 : 테이블의 i * 8 + 2번째 td에 속한 주문번호
                             $.ajax({                                                                                    // $.ajax() start
                                 type:'PATCH',                                                                           // 요청 메서드
-                                url: '/order/list/paid/'+ orderIdx,                                                     // 요청 URI, 주문번호(order_idx)를 파라미터에 담아 요청
+                                url: '/order/list/deliveryPreparing/'+ orderIdx,                                        // 요청 URI, 주문번호(order_idx)를 파라미터에 담아 요청
                                 success : (result) => {                                                                 // 서버로부터 성공 응답이 도착하면 호출될 함수.
                                     location.reload();
                                 },
@@ -193,7 +193,7 @@
                 // 3. 메서드 호출
                 checkAnyBoxChecked();                                                                                   // 1. 체크된 체크박스가 있는지 확인, 없으면 핸들러 함수 호출 안 함
                 if(isAnyBoxChecked) {                                                                                   // 2. 체크된 체크박스가 하나 이상인 경우
-                    if(!confirm("선택된 주문들을 '배송준비중' 처리하시겠습니까?")) return;                                           // 2.1. 삭제 여부를 다시 확인
+                    if(!confirm("선택된 주문들을 '배송중' 처리하시겠습니까?")) return;                                           // 2.1. 삭제 여부를 다시 확인
                     handleDeliveryPrepareBtn();                                                                         // 2.2. 핸들러 함수 호출 - 체크된 품목들을 장바구니 목록에서 삭제
                 }
 

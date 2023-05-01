@@ -48,6 +48,11 @@ public class OrderService {
     // 매개변수 : SearchCondition sc
     public int getSearchPaidResultCnt(SearchCondition sc) { return orderDao.getSearchPaidResultCnt(sc); }
 
+    // 메서드명 : getSearchDPResultCnt
+    // 기   능 : orderDao의 getSearchDPResultCnt 호출
+    // 반환타입 : int
+    // 매개변수 : SearchCondition sc
+    public int getSearchDPResultCnt(SearchCondition sc) { return orderDao.getSearchDPResultCnt(sc); }
 
     // 메서드명 : getSearchSelectPage
     // 기   능 : orderDao의 getSearchSelectPage메서드 호출
@@ -56,10 +61,16 @@ public class OrderService {
     public List<OrderDto> getSearchSelectPage(SearchCondition sc) { return orderDao.getSearchSelectedPage(sc);}
 
     // 메서드명 : getSearchPaidSelectPage
-    // 기   능 : orderDao의 getOrderPaidList메서드 호출
+    // 기   능 : orderDao의 getPaidList메서드 호출
     // 반환타입 : List<OrderDto>
     // 매개변수 : SearchCondition sc
     public List<OrderDto> getSearchPaidSelectPage(SearchCondition sc) { return orderDao.getPaidList(sc); }
+
+    // 메서드명 : getSearchDPSelectPage
+    // 기   능 : orderDao의 getSearchDPSelectPage메서드 호출
+    // 반환타입 : List<OrderDto>
+    // 매개변수 : SearchCondition sc
+    public List<OrderDto> getSearchDPSelectPage(SearchCondition sc) { return orderDao.getSearchDPSelectPage(sc); }
 
     // 메서드명 : updateOrderState
     // 기   능 : orderDao의 updateOrderState 호출
@@ -86,4 +97,5 @@ public class OrderService {
     public List<OrderDetailDto> getOrderDetail(Integer order_idx) {
         return orderDao.getOrderDetail(order_idx);
     }
+
 }

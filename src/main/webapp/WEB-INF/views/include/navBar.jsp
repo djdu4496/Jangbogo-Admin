@@ -67,6 +67,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="/order/list">전체주문조회</a>
                 <a class="collapse-item" href="/order/list/paid">결제완료관리</a>
+                <a class="collapse-item" href="/order/list/deliveryPreparing">배송준비관리</a>
             </div>
         </div>
     </li>

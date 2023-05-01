@@ -62,7 +62,7 @@ public class OrderController {
     // 메서드명 : getOrderHistory
     // 기   능 : 주문 이력 페이지 이동
     // 반환타입 : String
-    // 매개변수 :
+    // 매개변수 : @PathVariable Integer idx, Model model
     @GetMapping("/order/{idx}/history")
     public String getOrderHistory(@PathVariable Integer idx, Model model) {
         List<OrderHistoryDto> list = null;                                                                              // 변수명 : list - 저장값 : OrderHistoryDto 저장소 List
@@ -79,14 +79,14 @@ public class OrderController {
 
     // 메서드명 : getOrderPaidList
     // 기   능 : '결제완료'된 페이지 이동
-    // 반환타입 : String
+    // 반환타입 : (Model model, SearchCondition sc
     @GetMapping("/order/list/paid")
     public String getOrderPaidList(Model model, SearchCondition sc) {
         List<OrderDto> list = null;                                                                                     // 변수명 : list - 저장값 : OrderDto 저장소 List
         try {
             int totalCnt = orderService.getSearchPaidResultCnt(sc);                                                     // 변수명 : totalCnt - 저장값 : 주문내역 목록 검색 결과 개수
             PageHandler pageHandler = new PageHandler(totalCnt, sc);                                                    // PageHandler 객체 생성(인자 - totalCnt, sc)
-            list = orderService.getSearchPaidSelectPage(sc);                                                                // orderService의 getSearchSelectPage메서드 호출, 반환값을 list에 저장
+            list = orderService.getSearchPaidSelectPage(sc);                                                            // orderService의 getSearchSelectPage메서드 호출, 반환값을 list에 저장
 
             model.addAttribute("totalCnt", totalCnt);                                                      // Model에 totalCnt를 K/V로 저장
             model.addAttribute("list", list);                                                              // Model에 list를 K/V로 저장
@@ -97,6 +97,30 @@ public class OrderController {
             return "redirect:/";                                                                                        // 2) 메인 페이지로 리다이렉트
         }
     }
+
+
+    // 메서드명 : getOrderDeliveryPreparing
+    // 기   능 : 주문 이력 페이지 이동
+    // 반환타입 : String
+    // 매개변수 : Model model, SearchCondition sc
+    @GetMapping("/order/list/deliveryPreparing")
+    public String getOrderDeliveryPreparing(Model model, SearchCondition sc) {
+        List<OrderDto> list = null;
+        try {
+            int totalCnt = orderService.getSearchDPResultCnt(sc);                                                       // 변수명 : totalCnt - 저장값 : orderService의 getSearchDPResultCnt(sc);
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);                                                    // 변수명 : pageHandler - 저장값 : PageHandler 객체(인자 : totalCnt, sc);
+            list = orderService.getSearchDPSelectPage(sc);                                                              // orderService의 getSearchDPSelectPage메서드 호출, 반환값을 list에 저장
+
+            model.addAttribute("totalCnt", totalCnt);                                                      // Model에 totalCnt를 K/V로 저장
+            model.addAttribute("list", list);                                                              // Model에 list를 K/V로 저장
+            model.addAttribute("ph", pageHandler);                                                         // Model에 PageHandler를 K/V로 저장
+            return "/order/orderDeliveryPreparing";
+        } catch(Exception e) {
+            e.printStackTrace();
+            return "redirect:/";
+        }
+    }
+
     // 메서드명 : updateOrderState
     // 기   능 : '결제완료' 상태의 주문을 '배송준비중' 상태로 수정
     // 반환타입 :
