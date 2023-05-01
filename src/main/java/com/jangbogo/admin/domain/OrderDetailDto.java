@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class OrderDetailDto {
     // iv
+    private Integer idx;                                                                                                // 주문상세번호 IDX - PK
     private Date ord_tm;                                                                                                // 주문날짜 ORD_TM
     private Integer ord_idx;                                                                                            // 주문번호  ORD_IDX
     private String ordr_nm;                                                                                             // 주문자이름 ORDR_NM
@@ -21,6 +22,14 @@ public class OrderDetailDto {
     public OrderDetailDto() {};                                                                                         // 기본생성자
 
     // getter & setter
+    public Integer getIdx() {
+        return idx;
+    }
+
+    public void setIdx(Integer idx) {
+        this.idx = idx;
+    }
+
     public Date getOrd_tm() {
         return ord_tm;
     }
@@ -126,10 +135,12 @@ public class OrderDetailDto {
     }
 
     // toString
+
     @Override
     public String toString() {
-        return "OrderDetailDto{" +
-                "ord_tm=" + ord_tm +
+        return "{" +
+                "idx=" + idx +
+                ", ord_tm=" + ord_tm +
                 ", ord_idx=" + ord_idx +
                 ", ordr_nm='" + ordr_nm + '\'' +
                 ", prod_nm='" + prod_nm + '\'' +

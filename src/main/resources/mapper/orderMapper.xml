@@ -95,32 +95,53 @@
 
     <!--
         태   그 : select
+        기   능 : '주문상세' 테이블과 '주문이력' 테이블의 조인 데이터 조회
+        아이디명 : selectPaidResultCnt
+    -->
+    <select id="selectPaidResultCnt" parameterType="SearchCondition" resultType="int">
+        SELECT COUNT(*)
+        FROM ORD
+        WHERE STATE_CD = 1 AND TRUE
+        <choose>
+            <when test='option=="S"'>
+                AND ORDR_NM LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="E"'>
+                AND IDX LIKE concat('%', #{keyword}, '%')
+            </when>
+            <otherwise>
+                AND (ORDR_NM LIKE concat('%', #{keyword}, '%')
+                OR IDX LIKE concat('%', #{keyword}, '%'))
+            </otherwise>
+        </choose>
+    </select>
+    <!--
+        태   그 : select
         기   능 : '주문상태코드'가 1인 주문 내역 조회
         아이디명 : selectPaidList
     -->
     <select id="selectPaidList" parameterType="SearchCondition" resultType="hashmap">
         SELECT DISTINCT A.IDX as idx, A.ORD_TM as ord_tm, A.ORDR_NM as ordr_nm,
-        (CONCAT(
-        (
-        SELECT PROD_NM
-        FROM ORD_DTL
-        WHERE ORD_IDX = A.IDX
-        LIMIT 1
-        ) , ' 외 ',
-        (
-        SELECT PLIST_TOT
-        FROM ORD
-        WHERE IDX = A.idx
-        ), '건')) as prod_nm,
-        A.TOT_AMT as tot_amt, SETL_MN_CD as setl_mn_cd, STATE_CD as state_cd
+                        (CONCAT(
+                                (
+                                    SELECT PROD_NM
+                                    FROM ORD_DTL
+                                    WHERE ORD_IDX = A.IDX
+                                    LIMIT 1
+                            ) , ' 외 ',
+                        (
+                            SELECT PLIST_TOT
+                            FROM ORD
+                            WHERE IDX = A.idx
+                        ), '건')) as prod_nm,
+                        A.TOT_AMT as tot_amt, SETL_MN_CD as setl_mn_cd, STATE_CD as state_cd
         FROM ORD A
-        WHERE STATE_CD = 1
         JOIN (
-        SELECT *
-        FROM ORD_DTL
+            SELECT *
+            FROM ORD_DTL
         ) B
         ON  A.IDX = B.ORD_IDX
-        WHERE true
+        WHERE A.STATE_CD =  B.ORD_STATE_CD AND A.STATE_CD = 1
         <choose>
             <when test='option=="E"'>
                 AND A.ORDR_NM LIKE concat('%', #{keyword}, '%')
@@ -136,5 +157,51 @@
         ORDER BY ORD_TM DESC, IDX DESC
         LIMIT #{offset}, #{pageSize};
     </select>
+    <!--
+        태   그 : update
+        기   능 : '주문상태코드'가 1인 주문의 상태코드를 '2'로 수정
+        아이디명 : updatePaidOrder
+    -->
+    <update id="updatePaidOrder" parameterType="Integer">
+        UPDATE ORD
+        SET STATE_CD = 2, UPT_TM = now()
+        WHERE IDX = #{order_idx}
+    </update>
 
+    <!--
+        태   그 : update
+        기   능 : '주문상태코드'가 1인 주문상세의 상태코드를 '2'로 수정
+        아이디명 : updatePaidOrderDetail
+    -->
+    <update id="updatePaidOrderDetail" parameterType="Integer">
+        UPDATE ORD_DTL
+        SET ORD_STATE_CD = 2, UPT_TM = now()
+        WHERE ORD_IDX = #{order_idx}
+    </update>
+
+    <!--
+        태   그 : insert
+        기   능 : '주문상태코드'가 1인 주문이력의 상태코드를 '2'로 수정
+        아이디명 : insertPaidOrderHistory
+    -->
+    <insert id="insertPaidOrderHistory" parameterType="java.util.List">
+        INSERT INTO ORD_HIST(CHG_TM, ORD_DTL_IDX, ORD_IDX, PROD_NM)
+        VALUES
+        <foreach item="item" index="index" collection="list" separator=" , ">
+            (
+            #{item.ord_tm}, #{item.idx}, #{item.ord_idx}, #{item.prod_nm}
+            )
+        </foreach>
+    </insert>
+
+    <!--
+        태   그 : select
+        기   능 : 특정 주문번호에 해당하는 '주문상세' 데이터 조회
+        아이디명 : selectOrderDetails
+    -->
+    <select id="selectOrderDetails" resultType="OrderDetailDto">
+        SELECT ORD_IDX, PROD_IDX, PROD_NM, PROD_PRC, PROD_QTY, PROD_TOT_AMT, ORD_TM
+        FROM ORD_DTL
+        WHERE ORD_IDX = #{ord_idx};
+    </select>
 </mapper>

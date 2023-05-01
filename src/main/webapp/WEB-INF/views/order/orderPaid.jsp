@@ -91,7 +91,7 @@
                                                 <input type="checkbox" />
                                             </td>
                                             <td class="id">${order.ord_tm}</td>
-                                            <td class="id">${order.idx}</td>
+                                            <td class="id data-oid">${order.idx}</td>
                                             <td class="id">${order.ordr_nm}</td>
                                             <td class="id">${order.prod_nm}</td>
                                             <td class="id">${order.tot_amt}원</td>
@@ -105,18 +105,6 @@
                                                     </c:when>
                                                     <c:when test="${order.state_cd == 2}">
                                                         배송준비중
-                                                    </c:when>
-                                                    <c:when test="${order.state_cd == 3}">
-                                                        배송출발
-                                                    </c:when>
-                                                    <c:when test="${order.state_cd == 4}">
-                                                        배송완료
-                                                    </c:when>
-                                                    <c:when test="${order.state_cd == 5}">
-                                                        취소완료
-                                                    </c:when>
-                                                    <c:when test="${order.state_cd == 6}">
-                                                        환불완료
                                                     </c:when>
                                                 </c:choose>
                                             </td>
@@ -185,12 +173,14 @@
                 const handleDeliveryPrepareBtn = () => {
                     for(let i = 0; i < length; i++) {
                         let isInputChecked = $("#dataTable tBody tr").children()[i * 8].children[0].checked;            // 변수명 : isInputChecked - 저장값 : 테이블의 i * 8 번째 td에 속한 input의 checked속성
+
                         if(isInputChecked) {
+                            let orderIdx = $("#dataTable tBody tr").children()[i * 8 + 2].textContent;                  // 변수명 : orderIdx - 저장값 : 테이블의 i * 8 + 2번째 td에 속한 주문번호
                             $.ajax({                                                                                    // $.ajax() start
-                                type:'PATCH',                                                                          // 요청 메서드
-                                url: '/order/list/paid?prod_idx=' +cartItem.dataset["pid"] + '&user_idx=' + cartItem.dataset["uid"],  // 요청 URI, 상품번호(prod_idx), 회원번호(user_idx) 파라미터에 담아 요청
+                                type:'PATCH',                                                                           // 요청 메서드
+                                url: '/order/list/paid/'+ orderIdx,                                                     // 요청 URI, 주문번호(order_idx)를 파라미터에 담아 요청
                                 success : (result) => {                                                                 // 서버로부터 성공 응답이 도착하면 호출될 함수.
-                                    showList(cartItem.dataset["uid"]);
+                                    location.reload();
                                 },
                                 error : () => {                                                                         // 서버로부터 실패 응답이 도착하면 호출될 함수
                                     alert("error");
@@ -199,6 +189,14 @@
                         }
                     }
                 }
+
+                // 3. 메서드 호출
+                checkAnyBoxChecked();                                                                                   // 1. 체크된 체크박스가 있는지 확인, 없으면 핸들러 함수 호출 안 함
+                if(isAnyBoxChecked) {                                                                                   // 2. 체크된 체크박스가 하나 이상인 경우
+                    if(!confirm("선택된 주문들을 '배송준비중' 처리하시겠습니까?")) return;                                           // 2.1. 삭제 여부를 다시 확인
+                    handleDeliveryPrepareBtn();                                                                         // 2.2. 핸들러 함수 호출 - 체크된 품목들을 장바구니 목록에서 삭제
+                }
+
             })
         })
     </script>
