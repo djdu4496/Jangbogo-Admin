@@ -4,10 +4,11 @@ import java.util.Date;
 
 public class OrderDetailDto {
     // iv
-    private Integer idx;                                                                                                // 주문상세번호 IDX - PK
     private Date ord_tm;                                                                                                // 주문날짜 ORD_TM
+    private Integer idx;                                                                                                // 주문상세번호 IDX - PK
     private Integer ord_idx;                                                                                            // 주문번호  ORD_IDX
     private String ordr_nm;                                                                                             // 주문자이름 ORDR_NM
+    private Integer prod_idx;                                                                                           // 상품번호 PROD_IDX
     private String prod_nm;                                                                                             // 주문상품명 CONCAT(PROD_NM, ' 외 ', PLIST_TOT)
     private Integer prod_qty;                                                                                           // 주문상품개수 PROD_QTY
     private Integer prod_prc;                                                                                           // 주문상품가격 PROD_PRC
@@ -18,6 +19,7 @@ public class OrderDetailDto {
     private Integer crt_idx;                                                                                            // 최초등록자식별번호 CRT_IDX
     private Date upt_tm;                                                                                                // 최종수정일자 UPT_TM
     private Integer upt_idx;                                                                                            // 최종수정자식별번호 UPT_IDX
+
     // constructor
     public OrderDetailDto() {};                                                                                         // 기본생성자
 
@@ -52,6 +54,14 @@ public class OrderDetailDto {
 
     public void setOrdr_nm(String ordr_nm) {
         this.ordr_nm = ordr_nm;
+    }
+
+    public Integer getProd_idx() {
+        return prod_idx;
+    }
+
+    public void setProd_idx(Integer prod_idx) {
+        this.prod_idx = prod_idx;
     }
 
     public String getProd_nm() {
@@ -134,6 +144,7 @@ public class OrderDetailDto {
         this.upt_idx = upt_idx;
     }
 
+
     // toString
 
     @Override
@@ -143,6 +154,7 @@ public class OrderDetailDto {
                 ", ord_tm=" + ord_tm +
                 ", ord_idx=" + ord_idx +
                 ", ordr_nm='" + ordr_nm + '\'' +
+                ", prod_idx=" + prod_idx +
                 ", prod_nm='" + prod_nm + '\'' +
                 ", prod_qty=" + prod_qty +
                 ", prod_prc=" + prod_prc +
