@@ -78,17 +78,42 @@ public class OrderService {
     // 기   능 : orderDao의 updateOrderState 호출 - '결제완료 상태인 주문'을 '배송준비중 상태인 주문'으로 수정 요청
     // 반환타입 : int
     // 매개변수 : Integer order_idx
-    public int updateOrderState(Integer order_idx) {return orderDao.updateOrderState(order_idx);}
+    public int updateOrderState(Integer order_idx) { return orderDao.updateOrderState(order_idx);}
 
     // 메서드명 : updateOrderDetailState
     // 기   능 : orderDao의 updateOrderDetailState 호출 -  '결제완료 상태인 주문상세'을 '배송준비중 상태인 주문상세'로 수정 요청
     // 반환타입 : int
     // 매개변수 : Integer order_idx
-    public int updateOrderDetailState(Integer order_idx) {return orderDao.updateOrderDetailState(order_idx);}
+    public int updateOrderDetailState(Integer order_idx) { return orderDao.updateOrderDetailState(order_idx);}
 
     // 메서드명 : insertOrderHistoryState
     // 기   능 : orderDao의 insertOrderHistoryState 호출 -  '결제완료 상태인 주문이력'을 '배송준비중 상태인 주문이력'로 수정 요청
     // 반환타입 : int
     // 매개변수 : List<OrderDetailDto>
-    public int insertOrderHistoryState(List<OrderDetailDto> orderDetails) {return orderDao.insertOrderHistoryState(orderDetails);}
+    public int insertOrderHistoryState(List<OrderDetailDto> orderDetails) { return orderDao.insertOrderHistoryState(orderDetails);}
+
+    // 메서드명 : updateOrderStateDelivering
+    // 기   능 : orderDao의 updateOrderStateDelivering 호출 - '배송준비중 상태인 주문'을 '배송중 상태인 주문'으로 수정 요청
+    // 반환타입 : int
+    // 매개변수 : Integer order_idx
+    public int updateOrderStateDelivering(int order_idx) { return orderDao.updateOrderStateDelivering(order_idx);}
+
+    // 메서드명 : updateOrderDetailStateDelivering
+    // 기   능 : orderDao의 updateOrderDetailStateDelivering 호출 - '배송준비중 상태인 주문'을 '배송중 상태인 주문'으로 수정 요청
+    // 반환타입 : int
+    // 매개변수 : Integer order_idx
+    public int updateOrderDetailStateDelivering(int order_idx) { return orderDao.updateOrderDetailStateDelivering(order_idx);}
+
+    // 메서드명 : insertOrderHistoryStateDelivering
+    // 기   능 : orderDao의 insertOrderHistoryStateDelivering 호출 - '배송준비중 상태인 주문'을 '배송중 상태인 주문'으로 수정 요청
+    // 반환타입 : int
+    // 매개변수 : Integer order_idx
+    public int insertOrderHistoryStateDelivering(List<OrderDetailDto> orderDetails) { return orderDao.insertOrderHistoryStateDelivering(orderDetails);}
+
+    // 메서드명 : updateWaybillNumber
+    // 기   능 : orderDao의 updateWaybillNumber 호출 -  운송장번호 #{waybill_number}를 '배송'테이블 데이터에 삽입
+    // 반환타입 : int
+    // 매개변수 : String waybill_number, String order_idx
+    public int updateWaybillNumber(String waybill_number, String order_idx) { return orderDao.updateWaybillNumber(waybill_number, order_idx);}
+
 }

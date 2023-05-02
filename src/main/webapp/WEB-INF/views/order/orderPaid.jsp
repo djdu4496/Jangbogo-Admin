@@ -67,7 +67,7 @@
                                 결제완료주문조회
                             </h6>
                             <div class="ml-2">( ${totalCnt} 건 )</div>
-                            <button type="button" class="btn-danger" id="deliveringBtn">배송준비중 처리</button>
+                            <button type="button" class="btn-danger" id="deliveryPrepareBtn">배송준비중 처리</button>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -148,7 +148,7 @@
     <%@ include file="/WEB-INF/views/include/script.jsp" %>
     <script>
         $(document).ready(() => {
-            $("#deliveringBtn").click((e) => {                                                                          // 체크된 주문에 대해 '배송준비중' 처리
+            $("#deliveryPrepareBtn").click((e) => {                                                                          // 체크된 주문에 대해 '배송준비중' 처리
                                                                                                                         // 1. 변수 선언
                 let length = $("#dataTable tBody").children().length;                                                   // 변수명 : length - 저정값 : 테이블 행 개수
                 let isAnyBoxChecked = false;                                                                            // 변수명 : isAnyBoxChecked - 저장값 : 전체 체크박스 중 하나라도 체크드 상태인지 여부
@@ -169,7 +169,7 @@
                             let orderIdx = $("#dataTable tBody tr").children()[i * 8 + 2].textContent;                  // 변수명 : orderIdx - 저장값 : 테이블의 i * 8 + 2번째 td에 속한 주문번호
                             $.ajax({                                                                                    // $.ajax() start
                                 type:'PATCH',                                                                           // 요청 메서드
-                                url: '/order/list/deliveryPreparing/'+ orderIdx,                                        // 요청 URI, 주문번호(order_idx)를 파라미터에 담아 요청
+                                url: '/order/list/paid/'+ orderIdx,                                                     // 요청 URI, 주문번호(order_idx)를 파라미터에 담아 요청
                                 success : (result) => {                                                                 // 서버로부터 성공 응답이 도착하면 호출될 함수.
                                     location.reload();
                                 },

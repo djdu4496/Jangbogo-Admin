@@ -8,7 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class OrderDao {
@@ -61,6 +63,25 @@ public class OrderDao {
     }                                                                                                                   // 반환타입 : int - 매개변수 : Integer order_idx
 
     public int insertOrderHistoryState(List<OrderDetailDto> orderDetails) {                                             // 메서드명 : insertOrderHistoryState
-        return session.insert(namespace + "insertPaidOrderHistory", orderDetails);                                   // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 1인 주문이력에 대해 상태코드 2로 수정
+        return session.insert(namespace + "insertPaidOrderHistory", orderDetails);                                   // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 1인 주문이력에 대해 상태코드 2로 수정한 이력 삽입
+    }                                                                                                                   // 반환타입 : int - 매개변수 : List<OrderDetailDto> orderDetails
+
+    public int updateWaybillNumber(String waybill_number, String order_idx) {                                           // 메서드명 : insertWaybillNumber
+        Map map = new HashMap();                                                                                        // 변수명 : map - 저장값 : HashMap 객체(K/V 저장소)
+        map.put("waybill", waybill_number);                                                                             // map에 waybill_number를 K/V로 저장
+        map.put("order_idx", order_idx);                                                                                // map에 idx를 K/V로 저장
+        return session.insert(namespace + "updateWaybill", map);                                                     // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 운송장번호가 #{waybill_number} 삽입
+    }                                                                                                                   // 반환타입 : int - 매개변수 : Integer waybill_number, Integer idx
+
+    public int updateOrderStateDelivering(int order_idx) {                                                              // 메서드명 : updateOrderStateDelivering
+        return session.update(namespace + "updatePaidOrderDelivering", order_idx);                                   // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 2인 주문에 대해 상태코드 3로 수정
+    }                                                                                                                   // 반환타입 : int - 매개변수 : Integer order_idx
+
+    public int updateOrderDetailStateDelivering(int order_idx) {                                                        // 메서드명 : updateOrderDetailStateDelivering
+        return session.update(namespace + "updatePaidOrderDetailDelivering", order_idx);                             // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 2인 주문상세에 대해 상태코드 3로 수정
+    }                                                                                                                   // 반환타입 : int - 매개변수 : Integer order_idx
+
+    public int insertOrderHistoryStateDelivering(List<OrderDetailDto> orderDetails) {                                   // 메서드명 : insertOrderHistoryStateDelivering
+        return session.insert(namespace + "insertPaidOrderHistoryDelivering", orderDetails);                         // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 2인 주문이력에 대해 상태코드 3로 수정한 이력 삽입
     }                                                                                                                   // 반환타입 : int - 매개변수 : List<OrderDetailDto> orderDetails
 }

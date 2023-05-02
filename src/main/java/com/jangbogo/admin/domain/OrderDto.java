@@ -6,17 +6,18 @@ import java.util.Date;
 
 public class OrderDto {
     // iv 선언
-    Date ord_tm;                                                                                                        // 주문날짜 ORD_TM
-    Integer idx;                                                                                                        // 주문번호  IDX
-    String ordr_nm;                                                                                                     // 주문자이름 ORDR_NM
-    String prod_nm;                                                                                                     // 주문상품명 CONCAT(PROD_NM, ' 외 ', PLIST_TOT)
-    Integer tot_amt;                                                                                                    // 주문총금액 TOT_AMT
-    Integer setl_mn_cd;                                                                                                 // 결제수단코드 SETL_MN_CD
-    Integer state_cd;                                                                                                   // 주문상태코드 STATE_CD
-    Date crt_tm;                                                                                                        // 최초등록일자 CRT_TM
-    Integer crt_idx;                                                                                                    // 최초등록자식별번호 CRT_IDX
-    Date upt_tm;                                                                                                        // 최종수정일자 UPT_TM
-    Integer upt_idx;                                                                                                    // 최종수정자식별번호 UPT_IDX
+    private Date ord_tm;                                                                                                        // 주문날짜 ORD_TM
+    private Integer idx;                                                                                                        // 주문번호  IDX
+    private String ordr_nm;                                                                                                     // 주문자이름 ORDR_NM
+    private String prod_nm;                                                                                                     // 주문상품명 CONCAT(PROD_NM, ' 외 ', PLIST_TOT)
+    private Integer tot_amt;                                                                                                    // 주문총금액 TOT_AMT
+    private Integer setl_mn_cd;                                                                                                 // 결제수단코드 SETL_MN_CD
+    private Integer state_cd;                                                                                                   // 주문상태코드 STATE_CD
+    private Date crt_tm;                                                                                                        // 최초등록일자 CRT_TM
+    private Integer crt_idx;                                                                                                    // 최초등록자식별번호 CRT_IDX
+    private Date upt_tm;                                                                                                        // 최종수정일자 UPT_TM
+    private Integer upt_idx;                                                                                                    // 최종수정자식별번호 UPT_IDX
+    private String wybl;                                                                                                        // 운송장번호 WYBL
 
     // Constructor
     public OrderDto(){}                                                                                                 // 기본생성자
@@ -110,10 +111,18 @@ public class OrderDto {
         this.upt_idx = upt_idx;
     }
 
+    public String getWybl() {
+        return wybl;
+    }
+
+    public void setWybl(String wybl) {
+        this.wybl = wybl;
+    }
+
     // toString()
     @Override
     public String toString() {
-        return "{" +
+        return "OrderDto{" +
                 "ord_tm=" + ord_tm +
                 ", idx=" + idx +
                 ", ordr_nm='" + ordr_nm + '\'' +
@@ -125,6 +134,7 @@ public class OrderDto {
                 ", crt_idx=" + crt_idx +
                 ", upt_tm=" + upt_tm +
                 ", upt_idx=" + upt_idx +
+                ", wybl='" + wybl + '\'' +
                 '}';
     }
 }
