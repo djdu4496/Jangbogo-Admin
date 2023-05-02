@@ -16,86 +16,79 @@ public class OrderService {
     @Autowired OrderDao orderDao;
 
     // 메서드명 : getList
-    // 기   능 : OrderDao의 getList메서드 호출
+    // 기   능 : OrderDao의 getList메서드 호출 - 전체주문조회
     // 반환타입 : List<OrderDto>
-    // 매개변수 :
     public List<OrderDto> getList() {
         return orderDao.getList();
     }
 
-    // 메서드명 : getOrder
-    // 기   능 : OrderDao의 getOrder메서드 호출
-    // 반환타입 : List<OrderDto>
-    public List<OrderDetailDto> getOrder() { return orderDao.getOrder();}
-
-    // 메서드명 : getOrderHistory
-    // 기   능 : OrderDao의 getOrder메서드 호출
-    // 반환타입 : List<OrderDto>
-    // 매개변수 : Integer idx
-    public List<OrderHistoryDto> getOrderHistory(Integer idx) {
-        return orderDao.getOrderHistory(idx);
-    }
-
-    // 메서드명 : getSearchResultCnt
-    // 기   능 : OrderDao의 getSearchResultCnt메서드 호출
-    // 반환타입 : int
-    // 매개변수 : SearchCondition sc
-    public int getSearchResultCnt(SearchCondition sc) { return orderDao.getSearchResultCnt(sc); }
-
-    // 메서드명 : getSearchPaidResultCnt
-    // 기   능 : OrderDao의 getSearchResultCnt메서드 호출
-    // 반환타입 : int
-    // 매개변수 : SearchCondition sc
-    public int getSearchPaidResultCnt(SearchCondition sc) { return orderDao.getSearchPaidResultCnt(sc); }
-
-    // 메서드명 : getSearchDPResultCnt
-    // 기   능 : orderDao의 getSearchDPResultCnt 호출
-    // 반환타입 : int
-    // 매개변수 : SearchCondition sc
-    public int getSearchDPResultCnt(SearchCondition sc) { return orderDao.getSearchDPResultCnt(sc); }
-
-    // 메서드명 : getSearchSelectPage
-    // 기   능 : orderDao의 getSearchSelectPage메서드 호출
-    // 반환타입 : List<OrderDto>
-    // 매개변수 : SearchCondition sc
-    public List<OrderDto> getSearchSelectPage(SearchCondition sc) { return orderDao.getSearchSelectedPage(sc);}
-
-    // 메서드명 : getSearchPaidSelectPage
-    // 기   능 : orderDao의 getPaidList메서드 호출
-    // 반환타입 : List<OrderDto>
-    // 매개변수 : SearchCondition sc
-    public List<OrderDto> getSearchPaidSelectPage(SearchCondition sc) { return orderDao.getPaidList(sc); }
-
-    // 메서드명 : getSearchDPSelectPage
-    // 기   능 : orderDao의 getSearchDPSelectPage메서드 호출
-    // 반환타입 : List<OrderDto>
-    // 매개변수 : SearchCondition sc
-    public List<OrderDto> getSearchDPSelectPage(SearchCondition sc) { return orderDao.getSearchDPSelectPage(sc); }
-
-    // 메서드명 : updateOrderState
-    // 기   능 : orderDao의 updateOrderState 호출
-    // 반환타입 : int
-    // 매개변수 : Integer order_idx
-    public int updateOrderState(Integer order_idx) {return orderDao.updateOrderState(order_idx);}
-
-    // 메서드명 : updateOrderDetailState
-    // 기   능 : orderDao의 updateOrderDetailState 호출
-    // 반환타입 : int
-    // 매개변수 : Integer order_idx
-    public int updateOrderDetailState(Integer order_idx) {return orderDao.updateOrderDetailState(order_idx);}
-
-    // 메서드명 : insertOrderHistoryState
-    // 기   능 : orderDao의 insertOrderHistoryState 호출
-    // 반환타입 : int
-    // 매개변수 : List<OrderDetailDto>
-    public int insertOrderHistoryState(List<OrderDetailDto> orderDetails) {return orderDao.insertOrderHistoryState(orderDetails);}
-
     // 메서드명 : getOrderDetail
-    // 기   능 : orderDao의 getOrderDetail 호출
+    // 기   능 : orderDao의 getOrderDetail 호출 - 주문상세조회
     // 반환타입 : List<OrderDetailDto>
     // 매개변수 : Integer order_idx
     public List<OrderDetailDto> getOrderDetail(Integer order_idx) {
         return orderDao.getOrderDetail(order_idx);
     }
 
+    // 메서드명 : getOrderHistory
+    // 기   능 : OrderDao의 getOrder메서드 호출 - 주문이력조회
+    // 반환타입 : List<OrderHistoryDto>
+    // 매개변수 : Integer idx
+    public List<OrderHistoryDto> getOrderHistory(Integer idx) {
+        return orderDao.getOrderHistory(idx);
+    }
+
+    // 메서드명 : getSearchResultCnt
+    // 기   능 : OrderDao의 getSearchResultCnt메서드 호출 - '전체주문' 검색결과목록 수 조회
+    // 반환타입 : int
+    // 매개변수 : SearchCondition sc
+    public int getSearchResultCnt(SearchCondition sc) { return orderDao.getSearchResultCnt(sc); }
+
+    // 메서드명 : getSearchPaidResultCnt
+    // 기   능 : OrderDao의 getSearchResultCnt메서드 호출 - '결제완료 상태인 주문' 검색결과목록 수 조회
+    // 반환타입 : int
+    // 매개변수 : SearchCondition sc
+    public int getSearchPaidResultCnt(SearchCondition sc) { return orderDao.getSearchPaidResultCnt(sc); }
+
+    // 메서드명 : getSearchDPResultCnt
+    // 기   능 : orderDao의 getSearchDPResultCnt 호출 - '배송준비중 상태인 주문' 검색결과목록 수 조회
+    // 반환타입 : int
+    // 매개변수 : SearchCondition sc
+    public int getSearchDPResultCnt(SearchCondition sc) { return orderDao.getSearchDPResultCnt(sc); }
+
+    // 메서드명 : getSearchSelectPage
+    // 기   능 : orderDao의 getSearchSelectPage메서드 호출 - '전체주문' 검색결과목록 조회
+    // 반환타입 : List<OrderDto>
+    // 매개변수 : SearchCondition sc
+    public List<OrderDto> getSearchSelectPage(SearchCondition sc) { return orderDao.getSearchSelectedPage(sc);}
+
+    // 메서드명 : getSearchPaidSelectPage
+    // 기   능 : orderDao의 getPaidList메서드 호출 - '결제완료 상태인 주문' 검색결과목록 조회
+    // 반환타입 : List<OrderDto>
+    // 매개변수 : SearchCondition sc
+    public List<OrderDto> getSearchPaidSelectPage(SearchCondition sc) { return orderDao.getPaidList(sc); }
+
+    // 메서드명 : getSearchDPSelectPage
+    // 기   능 : orderDao의 getSearchDPSelectPage메서드 호출 - '배송준비중 상태인 주문' 검색결과목록 조회
+    // 반환타입 : List<OrderDto>
+    // 매개변수 : SearchCondition sc
+    public List<OrderDto> getSearchDPSelectPage(SearchCondition sc) { return orderDao.getSearchDPSelectPage(sc); }
+
+    // 메서드명 : updateOrderState
+    // 기   능 : orderDao의 updateOrderState 호출 - '결제완료 상태인 주문'을 '배송준비중 상태인 주문'으로 수정 요청
+    // 반환타입 : int
+    // 매개변수 : Integer order_idx
+    public int updateOrderState(Integer order_idx) {return orderDao.updateOrderState(order_idx);}
+
+    // 메서드명 : updateOrderDetailState
+    // 기   능 : orderDao의 updateOrderDetailState 호출 -  '결제완료 상태인 주문상세'을 '배송준비중 상태인 주문상세'로 수정 요청
+    // 반환타입 : int
+    // 매개변수 : Integer order_idx
+    public int updateOrderDetailState(Integer order_idx) {return orderDao.updateOrderDetailState(order_idx);}
+
+    // 메서드명 : insertOrderHistoryState
+    // 기   능 : orderDao의 insertOrderHistoryState 호출 -  '결제완료 상태인 주문이력'을 '배송준비중 상태인 주문이력'로 수정 요청
+    // 반환타입 : int
+    // 매개변수 : List<OrderDetailDto>
+    public int insertOrderHistoryState(List<OrderDetailDto> orderDetails) {return orderDao.insertOrderHistoryState(orderDetails);}
 }

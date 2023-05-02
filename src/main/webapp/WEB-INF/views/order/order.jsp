@@ -25,7 +25,7 @@
                         <div class="card shadow mb-4">
                             <div class="card-header py-md-4">
                                 <h5 class="m-0 font-weight-bold text-primary">
-                                    주문 상세 - 주문번호 : <span id="orderIdx">${idx}</span> | 주문총금액 <span id="orderTotalAmt"> ${list[idx].tot_amt}</span>원
+                                    주문 상세 - 주문번호 : <span id="orderIdx">${idx}</span> | 주문총금액 <span id="orderTotalAmt"> ${list[0].tot_amt}</span>원
                                 </h5>
                             </div>
                             <div class="card-body py-5 px-5">
@@ -44,7 +44,6 @@
                                     </thead>
                                     <tbody>
                                         <c:forEach var="order" items="${list}">
-                                            <c:if test="${order.ord_idx eq idx}">
                                                 <tr>
                                                     <td class="id">${order.ord_tm}</td>
                                                     <td class="id">${order.ordr_nm}</td>
@@ -78,7 +77,6 @@
                                                         </c:choose>
                                                     </td>
                                                 </tr>
-                                            </c:if>
                                         </c:forEach>
                                     </tbody>
                                 </table>

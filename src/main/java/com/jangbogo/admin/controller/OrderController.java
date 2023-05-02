@@ -49,7 +49,7 @@ public class OrderController {
     public String getOrder(@PathVariable Integer idx, Model model) {
         List<OrderDetailDto> list = null;                                                                               // 변수명 : list - 저장값 : OrderDetailDto 저장소 List
         try {
-            list = orderService.getOrder();                                                                             // orderService의 getList메서드 호출, 반환값을 list에 저장
+            list = orderService.getOrderDetail(idx);                                                                    // orderService의 getList메서드 호출, 반환값을 list에 저장
             model.addAttribute("list", list);                                                              // Model에 list를 K/V로 저장
             model.addAttribute("idx", idx);                                                                // Model에 idx를 K/V로 저장
             return "/order/order";                                                                                      // "/order/order.jsp" 뷰 이름 반환 - 뷰 렌더링

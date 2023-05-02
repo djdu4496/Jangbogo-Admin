@@ -20,9 +20,9 @@ public class OrderDao {
         return session.selectList(namespace + "selectList");                                                         // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 List<OrderDto>를 반환
     }                                                                                                                   // 반환타입 : List<OrderDto>
 
-    public List<OrderDetailDto> getOrder() {                                                                            // 메서드명 : getOrder
-        return session.selectList(namespace + "selectOrder");                                                        // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 OrderDto 반환
-    }                                                                                                                   // 반환타입 : List<OrderDetailDto>
+    public List<OrderDetailDto> getOrderDetail(Integer order_idx) {                                                     // 메서드명 : getOrderDetail
+        return session.selectList(namespace + "selectOrderDetails", order_idx);                                      // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 주문번호가 #{order_idx}인 주문상세 리스트 조회
+    }                                                                                                                   // 반환타입 : List<OrderDetailDto> - 매개변수 : Integer idx(주문번호)
 
     public List<OrderHistoryDto> getOrderHistory(Integer idx) {                                                         // 메서드명 : getOrderHistory
         return session.selectList(namespace + "selectOrderHistory", idx);                                            // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 List<OrderHistoryDto> 반환
@@ -33,12 +33,12 @@ public class OrderDao {
     }                                                                                                                   // 반환타입 : int - 매개변수 : SearchCondition sc
 
     public int getSearchPaidResultCnt(SearchCondition sc) {                                                             // 메서드명 : getSearchPaidResultCnt
-        return session.selectOne(namespace + "selectPaidResultCnt", sc);                                             // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 2인 주문내역 수 조회 결과 반환
+        return session.selectOne(namespace + "selectPaidResultCnt", sc);                                             // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 1인 주문내역 수 조회 결과 반환
     }                                                                                                                   // 반환타입 : int - 매개변수 : SearchCondition sc
 
-    public int getSearchDPResultCnt(SearchCondition sc) {
-        return session.selectOne(namespace + "selectDPResultCnt", sc);
-    }
+    public int getSearchDPResultCnt(SearchCondition sc) {                                                               // 메서드명 : getSearchDPResultCnt
+        return session.selectOne(namespace + "selectDPResultCnt", sc);                                               // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 2인 주문내역 수 조회 결과 반환
+    }                                                                                                                   // 반환타입 : int  - 매개변수 : SearchCondition sc
 
     public List<OrderDto> getSearchSelectedPage(SearchCondition sc) {                                                   // 메서드명 : getSearchSelectedPage
         return session.selectList(namespace + "selectSelectedPage", sc);                                             // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 주문내역 목록 조회 결과 반환
@@ -63,9 +63,4 @@ public class OrderDao {
     public int insertOrderHistoryState(List<OrderDetailDto> orderDetails) {                                             // 메서드명 : insertOrderHistoryState
         return session.insert(namespace + "insertPaidOrderHistory", orderDetails);                                   // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 1인 주문이력에 대해 상태코드 2로 수정
     }                                                                                                                   // 반환타입 : int - 매개변수 : List<OrderDetailDto> orderDetails
-
-    public List<OrderDetailDto> getOrderDetail(Integer order_idx) {                                                     // 메서드명 : getOrderDetail
-        return session.selectList(namespace + "selectOrderDetails", order_idx);                                      // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 주문번호가 #{order_idx}인 주문상세 리스트 조회
-    }
-
 }

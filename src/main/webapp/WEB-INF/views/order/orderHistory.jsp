@@ -40,7 +40,6 @@
                   </thead>
                   <tbody>
                   <c:forEach var="order" items="${list}">
-                    <c:if test="${order.ord_idx eq idx}">
                       <tr>
                         <td class="id">${order.chg_tm}</td>
                         <td class="id">${order.ord_dtl_idx}</td>
@@ -68,7 +67,6 @@
                           </c:choose>
                         </td>
                       </tr>
-                    </c:if>
                   </c:forEach>
                   </tbody>
                 </table>
