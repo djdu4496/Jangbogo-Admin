@@ -57,7 +57,7 @@
                                                     <td class="id">
                                                         <c:choose>
                                                             <c:when test="${order.state_cd== 1}">
-                                                                주문완료
+                                                                결제완료
                                                             </c:when>
                                                             <c:when test="${order.state_cd == 2}">
                                                                 배송준비중

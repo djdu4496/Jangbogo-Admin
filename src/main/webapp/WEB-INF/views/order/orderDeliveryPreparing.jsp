@@ -35,7 +35,7 @@
             <div class="container-fluid">
                 <form
                         class="d-none form-inline mr-auto d-flex mb-4 mt-lg-5"
-                        action="<c:url value='/order/list/paid'/>"
+                        action="<c:url value='/order/list/deliveryPreparing'/>"
                         method="get"
                 >
                     <select
@@ -100,9 +100,6 @@
                                         </td>
                                         <td class="id">
                                             <c:choose>
-                                                <c:when test="${order.state_cd== 1}">
-                                                    결제완료
-                                                </c:when>
                                                 <c:when test="${order.state_cd == 2}">
                                                     배송준비중
                                                 </c:when>

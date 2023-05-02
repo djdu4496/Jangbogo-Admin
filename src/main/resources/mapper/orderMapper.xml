@@ -38,7 +38,7 @@
                     LIMIT 1
                 ) , ' 외 ',
                 (
-                    SELECT PLIST_TOT
+                    SELECT PLIST_TOT - 1
                     FROM ORD
                     WHERE IDX = A.idx
                 ), '건')) as prod_nm,
@@ -70,7 +70,7 @@
         LIMIT 1
         ) , ' 외 ',
         (
-        SELECT PLIST_TOT
+        SELECT PLIST_TOT - 1
         FROM ORD
         WHERE IDX = A.idx
         ), '건')) as prod_nm,
@@ -102,7 +102,7 @@
         LIMIT 1
         ) , ' 외 ',
         (
-        SELECT PLIST_TOT
+        SELECT PLIST_TOT - 1
         FROM ORD
         WHERE IDX = A.idx
         ), '건')) as prod_nm,
