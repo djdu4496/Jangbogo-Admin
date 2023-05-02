@@ -151,30 +151,24 @@
     <%@ include file="/WEB-INF/views/include/script.jsp" %>
     <script>
         $(document).ready(() => {
-            $("#deliveringBtn").click((e) => {
-                // 체크된 주문에 대해 '배송준비중' 처리
-                // 1. 변수 선언
-                let length = $("#dataTable tBody").children().length;
+            $("#deliveringBtn").click((e) => {                                                                          // 체크된 주문에 대해 '배송준비중' 처리
+                                                                                                                        // 1. 변수 선언
+                let length = $("#dataTable tBody").children().length;                                                   // 변수명 : length - 저정값 : 테이블 행 개수
                 let isAnyBoxChecked = false;                                                                            // 변수명 : isAnyBoxChecked - 저장값 : 전체 체크박스 중 하나라도 체크드 상태인지 여부
-
-                // 2. 메서드 정의
-                // 메서드명 : checkAnyBoxChecked
-                // 기   능 : (1) 각 자식 요소들의 체크드 여부를 확인 (2) 하나라도 체크드 상태면 isAnyBoxChecked에 true 저장
-                const checkAnyBoxChecked = () => {
-                    for(let i = 0; i < length; i++) {
+                                                                                                                        // 2. 메서드 정의
+                const checkAnyBoxChecked = () => {                                                                      // 메서드명 : checkAnyBoxChecked
+                    for(let i = 0; i < length; i++) {                                                                   // 기   능 : (1) 각 자식 요소들의 체크드 여부를 확인 (2) 하나라도 체크드 상태면 isAnyBoxChecked에 true 저장
                         let isInputChecked = $("#dataTable tBody tr").children()[i * 8].children[0].checked;            // 변수명 : isInputChecked - 저장값 : 테이블의 i * 8 번째 td에 속한 input의 checked속성
-                        if(isInputChecked) {
-                            isAnyBoxChecked = true
+                        if(isInputChecked) {                                                                            // isInputChecked이 참인 경우
+                            isAnyBoxChecked = true                                                                      // isAnyBoxChecked에 true를 저장
                         }
-
                     }
                 }
 
-                const handleDeliveryPrepareBtn = () => {
-                    for(let i = 0; i < length; i++) {
+                const handleDeliveryPrepareBtn = () => {                                                                // 메서드명 : handleDeliveryPrepareBtn
+                    for(let i = 0; i < length; i++) {                                                                   // 기   능 : 버튼 '클릭' 이벤트 발생 시, 주문 관련 테이블의 데이터들이 갖고 있는 '주문상태코드'를 1에서 2로 수정
                         let isInputChecked = $("#dataTable tBody tr").children()[i * 8].children[0].checked;            // 변수명 : isInputChecked - 저장값 : 테이블의 i * 8 번째 td에 속한 input의 checked속성
-
-                        if(isInputChecked) {
+                        if(isInputChecked) {                                                                            // isInputChecked이 참인 경우
                             let orderIdx = $("#dataTable tBody tr").children()[i * 8 + 2].textContent;                  // 변수명 : orderIdx - 저장값 : 테이블의 i * 8 + 2번째 td에 속한 주문번호
                             $.ajax({                                                                                    // $.ajax() start
                                 type:'PATCH',                                                                           // 요청 메서드
@@ -189,14 +183,12 @@
                         }
                     }
                 }
-
-                // 3. 메서드 호출
-                checkAnyBoxChecked();                                                                                   // 1. 체크된 체크박스가 있는지 확인, 없으면 핸들러 함수 호출 안 함
-                if(isAnyBoxChecked) {                                                                                   // 2. 체크된 체크박스가 하나 이상인 경우
-                    if(!confirm("선택된 주문들을 '배송중' 처리하시겠습니까?")) return;                                           // 2.1. 삭제 여부를 다시 확인
-                    handleDeliveryPrepareBtn();                                                                         // 2.2. 핸들러 함수 호출 - 체크된 품목들을 장바구니 목록에서 삭제
+                                                                                                                        // 3. 메서드 호출
+                checkAnyBoxChecked();                                                                                   // 3.1    체크된 체크박스가 있는지 확인, 없으면 핸들러 함수 호출 안 함
+                if(isAnyBoxChecked) {                                                                                   // 3.2    체크된 체크박스가 하나 이상인 경우
+                    if(!confirm("선택된 주문들의 상태를 '배송중' 처리하시겠습니까?")) return;                                        // 3.2.1 '배송중'처리 의사를 재확인
+                    handleDeliveryPrepareBtn();                                                                         // 3.2.2  핸들러 함수 호출 - 체크된 주문들의 상태코드를 1에서 2로 수정
                 }
-
             })
         })
     </script>
