@@ -125,7 +125,7 @@
         아이디명 : selectOrder
     -->
     <select id="selectOrderDetails" resultType="hashmap">
-        SELECT ORD.ORD_TM as ord_tm, ORD.IDX as ord_idx ,ORD.ORDR_NM as ordr_nm, ORD_DTL.PROD_NM as prod_nm, ORD_DTL.PROD_PRC  as prod_prc, ORD_DTL.PROD_QTY as prod_qty, ORD.TOT_AMT as tot_amt, ORD_DTL.SETL_MN_CD as setl_mn_cd, ORD.STATE_CD as state_cd
+        SELECT ORD_DTL.IDX as idx, ORD.ORD_TM as ord_tm, ORD.IDX as ord_idx ,ORD.ORDR_NM as ordr_nm, ORD_DTL.PROD_NM as prod_nm, ORD_DTL.PROD_PRC  as prod_prc, ORD_DTL.PROD_QTY as prod_qty, ORD.TOT_AMT as tot_amt, ORD_DTL.SETL_MN_CD as setl_mn_cd, ORD.STATE_CD as state_cd
         FROM ORD_DTL
         JOIN ORD
         ON ORD_DTL.ORD_IDX = ORD.IDX AND ORD.IDX = #{idx};
