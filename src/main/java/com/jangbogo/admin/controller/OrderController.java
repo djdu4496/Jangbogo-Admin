@@ -220,7 +220,7 @@ public class OrderController {
         int updateOrderDetailRowCnt = 0;                                                                                // 변수명 : updateOrderDetailRowCnt - 저장값 : '주문상세' 테이블 데이터의 주문상태코드 수정 결과
         int insertOrderHistoryRowCnt = 0;                                                                               // 변수명 : insertOrderHistoryRowCnt - 저장값 : '주문이력' 테이블 데이터의 주문상태코드 수정 결과
 
-        List<OrderDetailDto> orderDetails = null;
+        List<OrderDetailDto> orderDetails = null;                                                                       // 변수명 : orderDetails - 저장값 : '주문상세' 테이블의 데이터 목록
 
         try {
             updateOrderRowCnt = orderService.updateOrderStateDelivering(order_idx);                                     // 주문번호가 #{order_idx}에 해당하는 주문의 주문상태코드 수정 결과를 변수 updateOrderRowCnt에 저장
@@ -236,6 +236,42 @@ public class OrderController {
 
             return new ResponseEntity<>("STATE_MOD_OK", HttpStatus.OK);                                                 // 모든 update 요청 결과가 성공인 경우, 상태코드와 함께 메시지 반환
         } catch(Exception e) {                                                                                          // 에러 발생 시
+            e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
+            return new ResponseEntity<>("STATE_MOD_ERR", HttpStatus.BAD_REQUEST);                                       // 2) update 요청 결과가 실패인 경우, 상태코드와 함께 메시지 반환
+        }
+    }
+
+    // 메서드명 : updateOrderStateDeliveryCompleted
+    // 기   능 : '배송준비중' 상태의 주문을 '배송중' 상태로 수정
+    // 반환타입 : ResponseEntity<String>
+    // 매개변수 : Integer order_idx
+    // 요청URL : /order/deliveryCompleted/{order_idx} PATCH
+    @PatchMapping("/order/deliveryCompleted/{order_idx}")
+    public ResponseEntity<String> updateOrderStateDeliveryCompleted(@PathVariable int order_idx) {
+        int updateOrderRowCnt = 0;                                                                                      // 변수명 : updateOrderRowCnt - 저장값 : '주문' 테이블 데이터의 주문상태코드 수정 결과
+        int updateOrderDetailRowCnt = 0;                                                                                // 변수명 : updateOrderDetailRowCnt - 저장값 : '주문상세' 테이블 데이터의 주문상태코드 수정 결과
+        int insertOrderHistoryRowCnt = 0;                                                                               // 변수명 : insertOrderHistoryRowCnt - 저장값 : '주문이력' 테이블 데이터의 주문상태코드 수정 결과
+
+        List<OrderDetailDto> orderDetails = null;                                                                       // 변수명 : orderDetails - 저장값 : '주문상세' 테이블의 데이터 목록
+
+        try {
+            updateOrderRowCnt = orderService.updateOrderStateDeliveryCompleted(order_idx);                              // 주문번호가 #{order_idx}에 해당하는 주문의 주문상태코드 수정 결과를 변수 updateOrderRowCnt에 저장
+            if (updateOrderRowCnt == 0)
+                throw new Exception("updateOrderState failed(ORD)");                                                    // 변경된 행의 개수가 0인 경우 예외를 발생시킨다.
+
+            updateOrderDetailRowCnt = orderService.updateOrderDetailStateDeliveryCompleted(order_idx);                  // 주문번호가 #{order_idx}에 해당하는 주문상세의 주문상태코드 수정 결과를 변수 updateOrderRowCnt에 저장
+            if (updateOrderDetailRowCnt == 0)
+                throw new Exception("updateOrderState failed(ORD_DTL)");                                                // 변경된 행의 개수가 0인 경우 예외를 발생시킨다.
+
+            orderDetails = orderService.getOrderDetail(order_idx);                                                      // 주문번호가 #{order_idx}에 해당하는 주문의 '주문상세' 데이터를 변수 orderDetails에 저장
+
+            insertOrderHistoryRowCnt = orderService.insertOrderHistoryStateDeliveryCompleted(orderDetails);             // 주문번호가 #{order_idx}에 해당하는 주문이력의 주문상태코드 수정 결과를 변수 updateOrderRowCnt에 저장
+            if (insertOrderHistoryRowCnt == 0)
+                throw new Exception("insertOrderState failed(ORD_HIST)");                                               // 변경된 행의 개수가 0인 경우 예외를 발생시킨다.
+
+            return new ResponseEntity<>("STATE_MOD_OK", HttpStatus.OK);                                                 // 모든 update 요청 결과가 성공인 경우, 상태코드와 함께 메시지 반환
+        } catch (
+                Exception e) {                                                                                          // 에러 발생 시
             e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
             return new ResponseEntity<>("STATE_MOD_ERR", HttpStatus.BAD_REQUEST);                                       // 2) update 요청 결과가 실패인 경우, 상태코드와 함께 메시지 반환
         }

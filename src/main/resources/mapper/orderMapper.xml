@@ -273,10 +273,10 @@
     </update>
 
     <!--
-     태   그 : update
-     기   능 : '주문상태코드'가 2인 주문의 상태코드를 '3'로 수정
-     아이디명 : updatePaidOrderDelivering
- -->
+        태   그 : update
+        기   능 : '주문상태코드'가 2인 주문의 상태코드를 '3'로 수정
+        아이디명 : updatePaidOrderDelivering
+    -->
     <update id="updatePaidOrderDelivering" parameterType="Integer">
         UPDATE ORD
         SET STATE_CD = 3, UPT_TM = now()
@@ -305,6 +305,43 @@
         <foreach item="item" index="index" collection="list" separator=" , ">
             (
             #{item.ord_tm}, now(), now(), #{item.idx}, #{item.ord_idx}, #{item.prod_idx}, #{item.prod_nm}, 3
+            )
+        </foreach>
+    </insert>
+
+    <!--
+     태   그 : update
+     기   능 : '주문상태코드'가 3인 주문의 상태코드를 '4'로 수정
+     아이디명 : updateOrderStateDeliveryCompleted
+ -->
+    <update id="updateOrderStateDeliveryCompleted" parameterType="Integer">
+        UPDATE ORD
+        SET STATE_CD = 4, UPT_TM = now()
+        WHERE IDX = #{order_idx}
+    </update>
+
+    <!--
+        태   그 : update
+        기   능 : '주문상태코드'가 3인 주문상세의 상태코드를 '4'로 수정
+        아이디명 : updateOrderDetailStateDeliveryCompleted
+    -->
+    <update id="updateOrderDetailStateDeliveryCompleted" parameterType="Integer">
+        UPDATE ORD_DTL
+        SET ORD_STATE_CD = 4, UPT_TM = now()
+        WHERE ORD_IDX = #{order_idx}
+    </update>
+
+    <!--
+        태   그 : insert
+        기   능 : '주문상태코드'가 3인 주문이력의 상태코드를 '4'로 수정
+        아이디명 : insertOrderHistoryStateDeliveryCompleted
+    -->
+    <insert id="insertOrderHistoryStateDeliveryCompleted" parameterType="java.util.List">
+        INSERT INTO ORD_HIST(CRT_TM, CHG_TM, UPT_TM, ORD_DTL_IDX, ORD_IDX, PROD_IDX, PROD_NM, ORD_STATE_CD)
+        VALUES
+        <foreach item="item" index="index" collection="list" separator=" , ">
+            (
+            #{item.ord_tm}, now(), now(), #{item.idx}, #{item.ord_idx}, #{item.prod_idx}, #{item.prod_nm}, 4
             )
         </foreach>
     </insert>

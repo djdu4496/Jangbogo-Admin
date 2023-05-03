@@ -192,7 +192,7 @@
                         let orderIdx = $("#dataTable tBody tr").children()[i * 9 + 3].textContent;                      // 변수명 : orderIdx - 저장값 : 테이블의 i * 9 + 3번째 td에 속한 주문번호
                         $.ajax({                                                                                        // $.ajax() start
                             type:'PATCH',                                                                               // 요청 메서드
-                            url: '/order/delivering/'+ orderIdx,                                                        // 요청 URI, 주문번호(order_idx)를 파라미터에 담아 요청
+                            url: '/order/deliveryCompleted/'+ orderIdx,                                                 // 요청 URI, 주문번호(order_idx)를 파라미터에 담아 요청
                             success : (result) => {                                                                     // 서버로부터 성공 응답이 도착하면 호출될 함수.
                                 location.reload();                                                                      // 새로고침
                             },

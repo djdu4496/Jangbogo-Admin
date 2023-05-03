@@ -94,4 +94,15 @@ public class OrderDao {
         return session.insert(namespace + "insertPaidOrderHistoryDelivering", orderDetails);                            // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 2인 주문이력에 대해 상태코드 3로 수정한 이력 삽입
     }                                                                                                                   // 반환타입 : int - 매개변수 : List<OrderDetailDto> orderDetails
 
+    public int updateOrderStateDeliveryCompleted(int order_idx) {                                                       // 메서드명 : updateOrderStateDeliveryCompleted
+        return session.update(namespace + "updateOrderStateDeliveryCompleted", order_idx);                              // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 3인 주문에 대해 상태코드 4로 수정
+    }                                                                                                                   // 반환타입 : int - 매개변수 : Integer order_idx
+
+    public int updateOrderDetailStateDeliveryCompleted(int order_idx) {                                                 // 메서드명 : updateOrderDetailStateDeliveryCompleted
+        return session.update(namespace + "updateOrderDetailStateDeliveryCompleted", order_idx);                        // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 3인 주문에 대해 상태코드 4로 수정
+    }                                                                                                                   // 반환타입 : int - 매개변수 : Integer order_idx
+
+    public int insertOrderHistoryStateDeliveryCompleted(List<OrderDetailDto> orderDetails) {                            // 메서드명 : insertOrderHistoryStateDeliveryCompleted
+        return session.insert(namespace + "insertOrderHistoryStateDeliveryCompleted", orderDetails);                    // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 2인 주문이력에 대해 상태코드 3로 수정한 이력 삽입
+    }                                                                                                                   // 반환타입 : int - 매개변수 : List<OrderDetailDto> orderDetails
 }
