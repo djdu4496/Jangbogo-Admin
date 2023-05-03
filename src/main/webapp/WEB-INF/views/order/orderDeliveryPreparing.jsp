@@ -64,7 +64,7 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex align-items-center">
                         <h6 class="m-0 font-weight-bold text-primary">
-                            배송준비중주문조회
+                            '배송준비중' 주문내역
                         </h6>
                         <div class="ml-2">( ${totalCnt} 건 )</div>
                         <button type="button" class="btn-danger" id="deliveringBtn">배송중 처리</button>

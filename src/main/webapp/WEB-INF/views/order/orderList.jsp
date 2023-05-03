@@ -50,7 +50,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex align-items-center">
                             <h6 class="m-0 font-weight-bold text-primary">
-                                전체주문조회
+                                '전체' 주문내역
                             </h6>
                             <div class="ml-2">( ${totalCnt} 건 )</div>
                         </div>
