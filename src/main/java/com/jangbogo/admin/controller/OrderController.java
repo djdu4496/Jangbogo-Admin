@@ -34,9 +34,9 @@ public class OrderController {
             PageHandler pageHandler = new PageHandler(totalCnt, sc);                                                    // PageHandler 객체 생성(인자 - totalCnt, sc)
             list = orderService.getSearchSelectPage(sc);                                                                // orderService의 getSearchSelectPage메서드 호출, 반환값을 list에 저장
 
-            model.addAttribute("totalCnt", totalCnt);                                                      // Model에 totalCnt를 K/V로 저장
-            model.addAttribute("list", list);                                                              // Model에 list를 K/V로 저장
-            model.addAttribute("ph", pageHandler);                                                         // Model에 PageHandler를 K/V로 저장
+            model.addAttribute("totalCnt", totalCnt);                                                                   // Model에 totalCnt를 K/V로 저장
+            model.addAttribute("list", list);                                                                           // Model에 list를 K/V로 저장
+            model.addAttribute("ph", pageHandler);                                                                      // Model에 PageHandler를 K/V로 저장
             return "/order/orderList";
         } catch (Exception e) {                                                                                         // 에러 발생 시
             e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
@@ -53,8 +53,8 @@ public class OrderController {
         List<OrderDetailDto> list = null;                                                                               // 변수명 : list - 저장값 : OrderDetailDto 저장소 List
         try {
             list = orderService.getOrderDetail(idx);                                                                    // orderService의 getList메서드 호출, 반환값을 list에 저장
-            model.addAttribute("list", list);                                                              // Model에 list를 K/V로 저장
-            model.addAttribute("idx", idx);                                                                // Model에 idx를 K/V로 저장
+            model.addAttribute("list", list);                                                                           // Model에 list를 K/V로 저장
+            model.addAttribute("idx", idx);                                                                             // Model에 idx를 K/V로 저장
             return "/order/order";                                                                                      // "/order/order.jsp" 뷰 이름 반환 - 뷰 렌더링
         } catch(Exception e) {                                                                                          // 에러 발생 시
             e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
@@ -71,8 +71,8 @@ public class OrderController {
         List<OrderHistoryDto> list = null;                                                                              // 변수명 : list - 저장값 : OrderHistoryDto 저장소 List
         try {
             list = orderService.getOrderHistory(idx);                                                                   // orderService의 getOrderHistory메서드 호출, 반환값을 list에 저장
-            model.addAttribute("list", list);                                                              // Model에 list를 K/V로 저장
-            model.addAttribute("idx", idx);                                                                // Model에 idx를 K/V로 저장
+            model.addAttribute("list", list);                                                                           // Model에 list를 K/V로 저장
+            model.addAttribute("idx", idx);                                                                             // Model에 idx를 K/V로 저장
             return "/order/orderHistory";                                                                               // "/order/orderHistory.jsp" 뷰 이름 반환 - 뷰 렌더링
         } catch(Exception e) {                                                                                          // 에러 발생 시
             e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
@@ -91,9 +91,9 @@ public class OrderController {
             PageHandler pageHandler = new PageHandler(totalCnt, sc);                                                    // PageHandler 객체 생성(인자 - totalCnt, sc)
             list = orderService.getSearchPaidSelectPage(sc);                                                            // orderService의 getSearchSelectPage메서드 호출, 반환값을 list에 저장
 
-            model.addAttribute("totalCnt", totalCnt);                                                      // Model에 totalCnt를 K/V로 저장
-            model.addAttribute("list", list);                                                              // Model에 list를 K/V로 저장
-            model.addAttribute("ph", pageHandler);                                                         // Model에 PageHandler를 K/V로 저장
+            model.addAttribute("totalCnt", totalCnt);                                                                   // Model에 totalCnt를 K/V로 저장
+            model.addAttribute("list", list);                                                                           // Model에 list를 K/V로 저장
+            model.addAttribute("ph", pageHandler);                                                                      // Model에 PageHandler를 K/V로 저장
             return "/order/orderPaid";                                                                                  // "/order/orderPaid.jsp" 뷰 이름 반환 - 뷰 렌더링
         } catch (Exception e) {                                                                                         // 에러 발생 시
             e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
@@ -110,14 +110,36 @@ public class OrderController {
     public String getOrderDeliveryPreparing(Model model, SearchCondition sc) {
         List<OrderDto> list = null;                                                                                     // 변수명 : list - 저장값 : OrderDto 저장소 List
         try {
-            int totalCnt = orderService.getSearchDPResultCnt(sc);                                                       // 변수명 : totalCnt - 저장값 : orderService의 getSearchDPResultCnt(sc);
-            PageHandler pageHandler = new PageHandler(totalCnt, sc);                                                    // 변수명 : pageHandler - 저장값 : PageHandler 객체(인자 : totalCnt, sc);
+            int totalCnt = orderService.getSearchDPResultCnt(sc);                                                       // 변수명 : totalCnt - 저장값 : orderService의 getSearchDPResultCnt(sc)
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);                                                    // 변수명 : pageHandler - 저장값 : PageHandler 객체(인자 : totalCnt, sc)
             list = orderService.getSearchDPSelectPage(sc);                                                              // orderService의 getSearchDPSelectPage메서드 호출, 반환값을 list에 저장
 
-            model.addAttribute("totalCnt", totalCnt);                                                      // Model에 totalCnt를 K/V로 저장
-            model.addAttribute("list", list);                                                              // Model에 list를 K/V로 저장
-            model.addAttribute("ph", pageHandler);                                                         // Model에 PageHandler를 K/V로 저장
+            model.addAttribute("totalCnt", totalCnt);                                                                   // Model에 totalCnt를 K/V로 저장
+            model.addAttribute("list", list);                                                                           // Model에 list를 K/V로 저장
+            model.addAttribute("ph", pageHandler);                                                                      // Model에 PageHandler를 K/V로 저장
             return "/order/orderDeliveryPreparing";                                                                     // "/order/orderDeliveryPreparing.jsp" 뷰 이름 반환 - 뷰 렌더링
+        } catch(Exception e) {                                                                                          // 에러 발생 시
+            e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
+            return "redirect:/";                                                                                        // 2) 메인 페이지로 리다이렉트
+        }
+    }
+
+    // 메서드명 : getOrderDelivering
+    // 기   능 : '배송중'인 주문 목록 페이지로 이동
+    // 반환타입 : String
+    // 매개변수 : Model model, SearchCondition sc
+    @GetMapping("/order/list/delivering")
+    public String getOrderDelivering(Model model, SearchCondition sc) {
+        List<OrderDto> list = null;                                                                                     // 변수명 : list - 저장값 : OrderDto 저장소 List
+        try {
+            int totalCnt = orderService.getSearchDeliveringResultCnt(sc);                                               // 변수명 : totalCnt - 저장값 : orderService의 getSearchDeliveringResultCnt(sc)
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);                                                    // 변수명 : pageHandler - 저장값 : PageHandler 객체(인자 : totalCnt, sc)
+            list = orderService.getSearchDeliveringSelectPage(sc);                                                      // orderService의 getSearchDeliveringSelectPage메서드 호출, 반환값을 list에 저장
+
+            model.addAttribute("totalCnt", totalCnt);                                                                   // Model에 totalCnt를 K/V로 저장
+            model.addAttribute("list", list);                                                                           // Model에 list를 K/V로 저장
+            model.addAttribute("ph", pageHandler);                                                                      // Model에 PageHandler를 K/V로 저장
+            return "/order/orderDelivering";                                                                            // "/order/orderDelivering.jsp" 뷰 이름 반환 - 뷰 렌더링
         } catch(Exception e) {                                                                                          // 에러 발생 시
             e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
             return "redirect:/";                                                                                        // 2) 메인 페이지로 리다이렉트
@@ -149,10 +171,10 @@ public class OrderController {
             insertOrderHistoryRowCnt = orderService.insertOrderHistoryState(orderDetails);                              // 주문번호가 #{order_idx}에 해당하는 주문이력의 주문상태코드 수정 결과를 변수 updateOrderRowCnt에 저장
             if(insertOrderHistoryRowCnt == 0) throw new Exception("insertOrderState failed(ORD_HIST)");                 // 변경된 행의 개수가 0인 경우 예외를 발생시킨다.
 
-            return new ResponseEntity<>("STATE_MOD_OK", HttpStatus.OK);                                           // 모든 update 요청 결과가 성공인 경우, 상태코드와 함께 메시지 반환
+            return new ResponseEntity<>("STATE_MOD_OK", HttpStatus.OK);                                                 // 모든 update 요청 결과가 성공인 경우, 상태코드와 함께 메시지 반환
         } catch(Exception e) {                                                                                          // 에러 발생 시
             e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
-            return new ResponseEntity<>("STATE_MOD_ERR", HttpStatus.BAD_REQUEST);                                 // 2) update 요청 결과가 실패인 경우, 상태코드와 함께 메시지 반환
+            return new ResponseEntity<>("STATE_MOD_ERR", HttpStatus.BAD_REQUEST);                                       // 2) update 요청 결과가 실패인 경우, 상태코드와 함께 메시지 반환
         }
     }
 
@@ -179,10 +201,10 @@ public class OrderController {
         try {
             rowCnt = orderService.updateWaybillNumber(waybill_number, order_idx);                                       // 주문번호가 #{idx}에 해당하는 주문의 '배송' 데이터에 운송장번호 삽입 결과를 변수 rowCnt 저장
             if(rowCnt == 0) throw new Exception("updateWaybillNumber failed(DLVRY)");                                   // 변경된 행의 개수가 0인 경우 예외를 발생시킨다.
-            return new ResponseEntity<>("WYBL_ADD_OK", HttpStatus.OK);                                            // update 요청 결과가 성공인 경우, 상태코드와 함께 메시지 반환
+            return new ResponseEntity<>("WYBL_ADD_OK", HttpStatus.OK);                                                  // update 요청 결과가 성공인 경우, 상태코드와 함께 메시지 반환
         } catch (Exception e) {                                                                                         // 에러 발생 시
             e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
-            return new ResponseEntity<>("WYBL_ADD_ERR", HttpStatus.BAD_REQUEST);                                  // 2) update 요청 결과가 실패인 경우, 상태코드와 함께 메시지 반환
+            return new ResponseEntity<>("WYBL_ADD_ERR", HttpStatus.BAD_REQUEST);                                        // 2) update 요청 결과가 실패인 경우, 상태코드와 함께 메시지 반환
         }
 
     }
@@ -212,10 +234,10 @@ public class OrderController {
             insertOrderHistoryRowCnt = orderService.insertOrderHistoryStateDelivering(orderDetails);                    // 주문번호가 #{order_idx}에 해당하는 주문이력의 주문상태코드 수정 결과를 변수 updateOrderRowCnt에 저장
             if(insertOrderHistoryRowCnt == 0) throw new Exception("insertOrderState failed(ORD_HIST)");                 // 변경된 행의 개수가 0인 경우 예외를 발생시킨다.
 
-            return new ResponseEntity<>("STATE_MOD_OK", HttpStatus.OK);                                           // 모든 update 요청 결과가 성공인 경우, 상태코드와 함께 메시지 반환
+            return new ResponseEntity<>("STATE_MOD_OK", HttpStatus.OK);                                                 // 모든 update 요청 결과가 성공인 경우, 상태코드와 함께 메시지 반환
         } catch(Exception e) {                                                                                          // 에러 발생 시
             e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
-            return new ResponseEntity<>("STATE_MOD_ERR", HttpStatus.BAD_REQUEST);                                 // 2) update 요청 결과가 실패인 경우, 상태코드와 함께 메시지 반환
+            return new ResponseEntity<>("STATE_MOD_ERR", HttpStatus.BAD_REQUEST);                                       // 2) update 요청 결과가 실패인 경우, 상태코드와 함께 메시지 반환
         }
     }
 }

@@ -26,9 +26,7 @@ public class OrderService {
     // 기   능 : orderDao의 getOrderDetail 호출 - 주문상세조회
     // 반환타입 : List<OrderDetailDto>
     // 매개변수 : Integer order_idx
-    public List<OrderDetailDto> getOrderDetail(Integer order_idx) {
-        return orderDao.getOrderDetail(order_idx);
-    }
+    public List<OrderDetailDto> getOrderDetail(Integer order_idx) { return orderDao.getOrderDetail(order_idx); }
 
     // 메서드명 : getOrderHistory
     // 기   능 : OrderDao의 getOrder메서드 호출 - 주문이력조회
@@ -56,6 +54,12 @@ public class OrderService {
     // 매개변수 : SearchCondition sc
     public int getSearchDPResultCnt(SearchCondition sc) { return orderDao.getSearchDPResultCnt(sc); }
 
+    // 메서드명 : getSearchDeliveringResultCnt
+    // 기   능 : orderDao의 getSearchDeliveringResultCnt 호출 - '배송중 상태인 주문' 검색결과목록 수 조회
+    // 반환타입 : int
+    // 매개변수 : SearchCondition sc
+    public int getSearchDeliveringResultCnt(SearchCondition sc) { return orderDao.getSearchDeliveringResultCnt(sc); }
+
     // 메서드명 : getSearchSelectPage
     // 기   능 : orderDao의 getSearchSelectPage메서드 호출 - '전체주문' 검색결과목록 조회
     // 반환타입 : List<OrderDto>
@@ -73,6 +77,12 @@ public class OrderService {
     // 반환타입 : List<OrderDto>
     // 매개변수 : SearchCondition sc
     public List<OrderDto> getSearchDPSelectPage(SearchCondition sc) { return orderDao.getSearchDPSelectPage(sc); }
+
+    // 메서드명 : getSearchDeliveringSelectPage
+    // 기   능 : orderDao의 getSearchDeliveringSelectPage메서드 호출 - '배송중 상태인 주문' 검색결과목록 조회
+    // 반환타입 : List<OrderDto>
+    // 매개변수 : SearchCondition sc
+    public List<OrderDto> getSearchDeliveringSelectPage(SearchCondition sc) { return orderDao.getSearchDeliveringSelectPage(sc); }
 
     // 메서드명 : updateOrderState
     // 기   능 : orderDao의 updateOrderState 호출 - '결제완료 상태인 주문'을 '배송준비중 상태인 주문'으로 수정 요청
@@ -115,5 +125,4 @@ public class OrderService {
     // 반환타입 : int
     // 매개변수 : String waybill_number, String order_idx
     public int updateWaybillNumber(String waybill_number, String order_idx) { return orderDao.updateWaybillNumber(waybill_number, order_idx);}
-
 }

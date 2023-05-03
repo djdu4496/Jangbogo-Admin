@@ -68,6 +68,7 @@
                 <a class="collapse-item" href="/order/list">전체주문조회</a>
                 <a class="collapse-item" href="/order/list/paid">결제완료관리</a>
                 <a class="collapse-item" href="/order/list/deliveryPreparing">배송준비관리</a>
+                <a class="collapse-item" href="/order/list/delivering">배송중관리</a>
             </div>
         </div>
     </li>
