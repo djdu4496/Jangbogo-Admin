@@ -14,7 +14,7 @@
         .card-header {
             position: relative;
         }
-        #deliveringBtn {
+        #deliveryPrepareBtn {
             position: absolute;
             right: 0;
             margin-right: 20px;
