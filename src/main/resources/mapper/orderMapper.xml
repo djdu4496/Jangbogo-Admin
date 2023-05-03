@@ -225,7 +225,7 @@
     -->
     <update id="updatePaidOrderDetail" parameterType="Integer">
         UPDATE ORD_DTL
-        SET ORD_STATE_CD = 2, , PROD_LATE_STATE_CD = 2, UPT_TM = now()                                                  -- (1) 주문상태코드 '배송준비중'으로 (2) 주문취소가능상태코드 '주문취소불가능'으로 수정
+        SET ORD_STATE_CD = 2, , CNCL_POSBL_STATE_CD = 2, UPT_TM = now()                                                  -- (1) 주문상태코드 '배송준비중'으로 (2) 주문취소가능상태코드 '주문취소불가능'으로 수정
         WHERE ORD_IDX = #{order_idx}
     </update>
 

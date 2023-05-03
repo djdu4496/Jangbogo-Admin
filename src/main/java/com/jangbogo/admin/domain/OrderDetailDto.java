@@ -15,6 +15,7 @@ public class OrderDetailDto {
     private Integer tot_amt;                                                                                            // 주문총금액 TOT_AMT
     private Integer setl_mn_cd;                                                                                         // 결제수단코드 SETL_MN_CD
     private Integer state_cd;                                                                                           // 주문상태코드 STATE_CD
+    private Integer prod_late_state_cd;                                                                                 //  PROD_LATE_STATE_CD
     private Date crt_tm;                                                                                                // 최초등록일자 CRT_TM
     private Integer crt_idx;                                                                                            // 최초등록자식별번호 CRT_IDX
     private Date upt_tm;                                                                                                // 최종수정일자 UPT_TM
