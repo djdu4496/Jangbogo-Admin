@@ -63,7 +63,7 @@
                                                                 배송준비중
                                                             </c:when>
                                                             <c:when test="${order.state_cd == 3}">
-                                                                배송출발
+                                                                배송중
                                                             </c:when>
                                                             <c:when test="${order.state_cd == 4}">
                                                                 배송완료

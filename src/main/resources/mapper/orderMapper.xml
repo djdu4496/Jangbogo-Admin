@@ -214,7 +214,7 @@
     -->
     <update id="updatePaidOrder" parameterType="Integer">
         UPDATE ORD
-        SET STATE_CD = 2, UPT_TM = now()
+        SET STATE_CD = 2, UPT_TM = now()                                                                                -- 주문상태코드 '배송준비중'으로 수정
         WHERE IDX = #{order_idx}
     </update>
 
@@ -225,7 +225,7 @@
     -->
     <update id="updatePaidOrderDetail" parameterType="Integer">
         UPDATE ORD_DTL
-        SET ORD_STATE_CD = 2, UPT_TM = now()
+        SET ORD_STATE_CD = 2, , PROD_LATE_STATE_CD = 2, UPT_TM = now()                                                  -- (1) 주문상태코드 '배송준비중'으로 (2) 주문취소가능상태코드 '주문취소불가능'으로 수정
         WHERE ORD_IDX = #{order_idx}
     </update>
 
@@ -239,7 +239,7 @@
         VALUES
         <foreach item="item" index="index" collection="list" separator=" , ">
             (
-                #{item.ord_tm}, now(), now(), #{item.idx}, #{item.ord_idx}, #{item.prod_idx}, #{item.prod_nm}, 2
+                #{item.ord_tm}, now(), now(), #{item.idx}, #{item.ord_idx}, #{item.prod_idx}, #{item.prod_nm}, 2        -- 주문상태코드 '배송준비중'으로 수정
             )
         </foreach>
     </insert>
@@ -261,7 +261,7 @@
     -->
     <update id="updatePaidOrderDelivering" parameterType="Integer">
         UPDATE ORD
-        SET STATE_CD = 3, UPT_TM = now()
+        SET STATE_CD = 3, UPT_TM = now()                                                                                -- 주문상태코드 '배송중'으로 수정
         WHERE IDX = #{order_idx}
     </update>
 
@@ -272,7 +272,7 @@
     -->
     <update id="updatePaidOrderDetailDelivering" parameterType="Integer">
         UPDATE ORD_DTL
-        SET ORD_STATE_CD = 3, UPT_TM = now()
+        SET ORD_STATE_CD = 3, UPT_TM = now()                                                                            -- 주문상태코드 '배송중'으로 수정
         WHERE ORD_IDX = #{order_idx}
     </update>
 
@@ -286,7 +286,7 @@
         VALUES
         <foreach item="item" index="index" collection="list" separator=" , ">
             (
-            #{item.ord_tm}, now(), now(), #{item.idx}, #{item.ord_idx}, #{item.prod_idx}, #{item.prod_nm}, 3
+            #{item.ord_tm}, now(), now(), #{item.idx}, #{item.ord_idx}, #{item.prod_idx}, #{item.prod_nm}, 3            -- 주문상태코드 '배송중'으로 수정
             )
         </foreach>
     </insert>
@@ -298,7 +298,7 @@
  -->
     <update id="updateOrderStateDeliveryCompleted" parameterType="Integer">
         UPDATE ORD
-        SET STATE_CD = 4, UPT_TM = now()
+        SET STATE_CD = 4, UPT_TM = now()                                                                                -- 주문상태코드 '배송완료'로 수정
         WHERE IDX = #{order_idx}
     </update>
 
@@ -309,7 +309,7 @@
     -->
     <update id="updateOrderDetailStateDeliveryCompleted" parameterType="Integer">
         UPDATE ORD_DTL
-        SET ORD_STATE_CD = 4, UPT_TM = now()
+        SET ORD_STATE_CD = 4, UPT_TM = now(), PROD_LATE_STATE_CD = 2                                                    -- (1) 주문상태코드 '배송완료'로 (2) 후기작성상태코드 '후기작성가능'으로 수정
         WHERE ORD_IDX = #{order_idx}
     </update>
 
@@ -323,7 +323,7 @@
         VALUES
         <foreach item="item" index="index" collection="list" separator=" , ">
             (
-            #{item.ord_tm}, now(), now(), #{item.idx}, #{item.ord_idx}, #{item.prod_idx}, #{item.prod_nm}, 4
+            #{item.ord_tm}, now(), now(), #{item.idx}, #{item.ord_idx}, #{item.prod_idx}, #{item.prod_nm}, 4            -- 주문상태코드 '배송완료'로 수정
             )
         </foreach>
     </insert>
