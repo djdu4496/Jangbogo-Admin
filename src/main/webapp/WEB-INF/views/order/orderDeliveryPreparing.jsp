@@ -96,7 +96,12 @@
                                         </td>
                                         <td class="id">${order.ord_tm}</td>
                                         <td class="id data-oid">
-                                            <a href="<c:url value='/order/${order.idx}/deliveryForm'/>">${order.idx}</a>
+                                            <c:if test="${empty order.wybl}">                                           <!-- 운송장번호가 등록되지 않은 주문의 경우 -->
+                                                <a href="<c:url value='/order/${order.idx}/deliveryForm'/>">            <!-- '주문번호'를 클릭하면, 운송장번호 입력 페이지로 이동-->
+                                                        ${order.idx}
+                                                </a>
+                                            </c:if>
+                                            <c:if test="${not empty order.wybl}">${order.idx}</c:if>                    <!-- 운송장번호가 등록된 주문의 경우, a 태그 제거 -->
                                         </td>
                                         <td class="id">${order.ordr_nm}</td>
                                         <td class="id">${order.prod_nm}</td>
