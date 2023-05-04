@@ -1,0 +1,38 @@
+package com.jangbogo.admin.service;
+
+import com.jangbogo.admin.dao.ProductDao;
+import com.jangbogo.admin.domain.ProductDetailDto;
+import com.jangbogo.admin.domain.ProductDto;
+import com.jangbogo.admin.domain.SearchCondition;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ProductService {
+    @Autowired
+    ProductDao productDao;
+
+    // 메서드명 : getSearchSelectPage
+    // 기   능 : ProductDao의 getSearchSelectPage메서드 호출 - 전체상품조회
+    // 반환타입 : List<ProductDto>
+    // 매개변수 : SearchCondition sc
+    public List<ProductDto> getSearchSelectPage(SearchCondition sc) {
+        return productDao.getSearchSelectPage(sc);
+    }
+
+    // 메서드명 : getSearchResultCnt
+    // 기   능 : ProductDao의 getSearchResultCnt메서드 호출 - '전체상품' 검색결과목록 수 조회
+    // 반환타입 : int
+    // 매개변수 : SearchCondition sc
+    public int getSearchResultCnt(SearchCondition sc) { return productDao.getSearchResultCnt(sc);}
+
+    // 메서드명 : getProductRead
+    // 기   능 : ProductDao의 getProductRead메서드 호출 - '상품'상세 조회
+    // 반환타입 : ProductDetailDto
+    // 매개변수 : Integer prod_idx - 상품번호
+    public ProductDetailDto getProductRead(Integer prod_idx) {
+        return productDao.getProductDto(prod_idx);
+    }
+}
