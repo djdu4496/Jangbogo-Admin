@@ -163,7 +163,6 @@
             // 1. 변수 선언
             let length = $("#dataTable tBody").children().length;                                                       // 변수명 : length - 저정값 : 테이블 행 개수
             let isAnyBoxChecked = false;                                                                                // 변수명 : isAnyBoxChecked - 저장값 : 전체 체크박스 중 하나라도 체크드 상태인지 여부// 2. 메서드 정의
-            let isWaybillFilled = false;
             const checkAnyBoxChecked = () => {                                                                          // 메서드명 : checkAnyBoxChecked
                 for(let i = 0; i < length; i++) {                                                                       // 기   능 : (1) 각 자식 요소들의 체크드 여부를 확인 (2) 하나라도 체크드 상태면 isAnyBoxChecked에 true 저장
                     let isInputChecked = $("#dataTable tBody tr").children()[i * 9].children[0].checked;                // 변수명 : isInputChecked - 저장값 : 테이블의 i * 8 번째 td에 속한 input의 checked속성
@@ -171,18 +170,6 @@
                         isAnyBoxChecked = true                                                                          // isAnyBoxChecked에 true를 저장
                     }
                 }
-            }
-            const checkWaybillFilled = () => {                                                                          // 메서드명 : checkWaybillFilled
-                for(let i = 0; i < length; i++) {                                                                       // 기   능 : (1) 각 자식 요소들의 운송장번호 값의 작성 여부를 확인 (2) 하나라도 미작성 상태면 isAnyBoxChecked에 false 저장
-                    let isInputChecked = $("#dataTable tBody tr").children()[i * 9].children[0].checked;                // 변수명 : isInputChecked - 저장값 : 테이블의 i * 9 번째 td에 속한 input의 checked속성
-                    if(isInputChecked) {
-                        let waybill = $("#dataTable tBody tr").children()[i * 9 + 1].innerText;                         // 변수명 : waybill - 저장값 : 운송장번호
-                        if(waybill === "" || waybill === null) {                                                        // 특정 행의 waybill의 길이가 0이거나, null인 경우
-                            return isWaybillFilled = false;                                                             // isWaybillFilled에 false 저장 후 반환
-                        }
-                    }
-                }
-                return isWaybillFilled = true;                                                                          // 선택된 모든 행의 운송장번호가 작성된 경우, isWaybillFilled에 true 저장 후 반환
             }
 
             const handleDeliveringBtn = () => {                                                                         // 메서드명 : handleDeliveringBtn
@@ -205,17 +192,12 @@
             }
             // 3. 메서드 호출
             checkAnyBoxChecked();                                                                                       // 3.1    체크된 체크박스가 있는지 확인, 없으면 핸들러 함수 호출 안 함
-            checkWaybillFilled();                                                                                       // 3.2    체크된 주문의 운송장번호가 적혀 있는지 확인, 적혀 있지 않으면 핸들러 함수 호출 안 함
             if(!isAnyBoxChecked) {                                                                                      // 3.3    체크된 체크박스가 하나도 없는 경우, 경고창 띄우며 리턴
                 alert("주문을 하나 이상 선택해주세요.");
                 return;
             }
-            if(!isWaybillFilled) {                                                                                      // 3.3    운송장번호가 누락된 경우, 경고창 띄우며 리턴
-                alert("'배송중' 처리를 하려면, 운송장 번호가 작성되어 있어야 합니다.");
-                return
-            }
                                                                                                                         // 3.3    체크된 체크박스가 하나 이상인 경우
-            if(!confirm("선택된 주문들의 상태를 '배송중' 처리하시겠습니까?")) return;                                                // 3.3.1 '배송중'처리 의사를 재확인
+            if(!confirm("선택된 주문들의 상태를 '배송완료' 처리하시겠습니까?")) return;                                                // 3.3.1 '배송중'처리 의사를 재확인
             handleDeliveringBtn();                                                                                      // 3.3.2  핸들러 함수 호출 - 체크된 주문들의 상태코드를 1에서 2로 수정
         })
     })
