@@ -31,13 +31,13 @@
 
     <beans:bean id="AdminInterceptor" class="com.jangbogo.admin.interceptor.LoginInterceptor"/>
 
-<!--    <mvc:interceptors>-->
-<!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/"/>-->
-<!--&lt;!&ndash;            /** => redirected too much&ndash;&gt;-->
-<!--            <mvc:mapping path="/seller/**"/>-->
-<!--            <mvc:mapping path="/user/**"/>-->
-<!--            <beans:ref bean="AdminInterceptor"/>-->
-<!--        </mvc:interceptor>-->
-<!--    </mvc:interceptors>-->
+    <!--    <mvc:interceptors>-->
+    <!--        <mvc:interceptor>-->
+    <!--            <mvc:mapping path="/"/>-->
+    <!--&lt;!&ndash;            /** => redirected too much&ndash;&gt;-->
+    <!--            <mvc:mapping path="/seller/**"/>-->
+    <!--            <mvc:mapping path="/user/**"/>-->
+    <!--            <beans:ref bean="AdminInterceptor"/>-->
+    <!--        </mvc:interceptor>-->
+    <!--    </mvc:interceptors>-->
 </beans:beans>
