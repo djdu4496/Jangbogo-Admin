@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jangbogo.admin.dao.BoardMapper">
+
+    <!--
+        태   그 : sql
+        아이디명 : searchCondition
+        기   능 : 반복 할 내용을 간단히 저장 후 재사용 - 상품 후기 리스트 검색 조건 쿼리
+    -->
+    <sql id="ReviewSearchCondition">
+        <choose>
+            <when test='option=="W"'>
+                AND PROD_LATE.WRITER LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="P"'>
+                AND PRODUCT.NAME LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="PW"'>
+                AND (PROD_LATE.WRITER LIKE concat('%', #{keyword}, '%')
+                OR PRODUCT.NAME LIKE concat('%', #{keyword}, '%'))
+            </when>
+            <otherwise>
+                AND (PROD_LATE.IDX LIKE concat('%', #{keyword}, '%')
+                OR PROD_LATE.WRITER LIKE concat('%', #{keyword}, '%') OR PROD_LATE.PROD_IDX LIKE concat('%', #{keyword}, '%') OR PRODUCT.NAME LIKE concat('%', #{keyword}, '%') OR PROD_LATE.CTENT LIKE concat('%', #{keyword}, '%'))
+            </otherwise>
+        </choose>
+    </sql>
+
+    <!--
+        태   그 : select
+        기   능 : '상품 후기' 테이블의 전체 데이터 조회
+        아이디명 : ReviewSelectedPage
+    -->
+    <select id="ReviewSelectedPage" parameterType="SearchCondition" resultType="ProdReviewDto">
+        select PROD_LATE.*,PRODUCT.NAME,USER.EMAIL,USER.NICK_NM,USER.MPNO
+        from PROD_LATE, PRODUCT, USER
+        WHERE PROD_LATE.PROD_IDX = PRODUCT.IDX AND PROD_LATE.USER_IDX = USER.IDX
+        <include refid="ReviewSearchCondition"/>
+        ORDER BY REG_TM DESC, IDX DESC
+        LIMIT #{offset}, #{pageSize};
+    </select>
+
+
+    <!--
+        태   그 : select
+        기   능 : '상품후기' 테이블과 '상품', '회원' 테이블의 조인 데이터 수(Count) 조회
+        아이디명 : ReviewSearchResultCnt
+    -->
+    <select id="ReviewSearchResultCnt" parameterType="SearchCondition" resultType="int">
+        SELECT COUNT(*)
+        FROM PROD_LATE, PRODUCT, USER
+        WHERE PROD_LATE.PROD_IDX = PRODUCT.IDX AND PROD_LATE.USER_IDX = USER.IDX
+        <include refid="ReviewSearchCondition"/>
+    </select>
+
+    <!--
+        태   그 : select
+        기   능 : '상품', '회원' 테이블과 '상품후기' 테이블의 조인 데이터 조회
+        아이디명 : selectReviewDetail
+    -->
+    <select id="selectReviewDetail" parameterType="int" resultType="ProdReviewDto">
+        SELECT PROD_LATE.*,PRODUCT.NAME,USER.EMAIL,USER.NICK_NM,USER.MPNO
+        FROM PRODUCT,USER,(SELECT *
+                           FROM PROD_LATE
+                           WHERE IDX = #{idx}) AS PROD_LATE
+        WHERE PRODUCT.IDX = PROD_LATE.PROD_IDX AND USER.IDX = PROD_LATE.USER_IDX;
+    </select>
+
+
+
+
+</mapper>
