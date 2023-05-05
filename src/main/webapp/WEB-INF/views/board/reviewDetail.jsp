@@ -69,7 +69,7 @@
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">작성일자</td>
-                                <td class="id">${list.reg_tm}</td>
+                                <td class="id"><fmt:formatDate value="${list.reg_tm}" pattern="yyyy-MM-dd hh:mm" type="date"/></td>
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">수정일자</td>
@@ -83,11 +83,8 @@
                                 <td class="col-3 light-blue">상태코드</td>
                                 <td class="id">
                                     <c:choose>
-                                        <c:when test="${user.state_cd == 1}">승인(정상)</c:when>
-                                        <c:when test="${user.state_cd == 2}">신고</c:when>
-                                        <c:when test="${user.state_cd == 3}">탈퇴</c:when>
-                                        <c:when test="${user.state_cd == 4}">휴면</c:when>
-                                        <c:when test="${user.state_cd == 99}">대기</c:when>
+                                        <c:when test="${list.state_cd == 1}">등록</c:when>
+                                        <c:when test="${list.state_cd == 2}">삭제</c:when>
                                     </c:choose>
                                 </td>
                             </tr>
@@ -98,9 +95,17 @@
                                     id="list_btn">
                                 목록으로
                             </button>
-                            <c:if test="${user.state_cd != 2}">
-                                <button class="btn btn-danger px-md-4 py-md-2" id="report_btn">신고하기</button>
-                            </c:if>
+<%--                            <c:if test="${list.state_cd != 2}">--%>
+<%--                                <button class="btn btn-danger px-md-4 py-md-2" id="report_btn">삭제하기</button>--%>
+<%--                            </c:if>--%>
+                            <c:choose>
+                                <c:when test="${list.state_cd == 1}">
+                                    <button class="btn btn-danger px-md-4 py-md-2" id="delete_btn">삭제</button>
+                                </c:when>
+                                <c:when test="${list.state_cd == 2}">
+                                    <button type="button" class="btn btn-primary" id="re-register_btn">재등록</button>
+                                </c:when>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
@@ -114,23 +119,26 @@
 
 <script>
     $(document).ready(function () {
-        let redirect_url = <c:url value='/board/review/list'/>
+        let redirect_url = "<c:url value='/board/review/list'/>"
 
+        // '목록으로' 버튼 클릭 시 후기 목록 창으로 되돌아간다
         $("#list_btn").click(function (e) {
             location.href = redirect_url;
         });
 
-        $("#report_btn").click(function (e) {
+        // '삭제' 버튼 클릭 시
+        $("#delete_btn").click(function (e) {
             e.preventDefault();
+            let idx = ${list.idx};              // 상품후기일련번호 변수 선언
 
-            if (confirm(report_confirm)) {
+            if (confirm("정말로 삭제하시겠습니까?")) { // (delete_confirm) -> '정말로 삭제하시겠습니까?'
                 $.ajax({
-                    url: '/user/report',
-                    data: {idx: ${user.idx}, email: "${user.email}"},
-                    type: 'POST',
+                    url: '/board/review/list/' + idx,
+                    <%--data: {idx: ${user.idx}, email: "${user.email}"},--%>
+                    type: 'PATCH',
                     success: function (msg) {
-                        if (msg === "REPORT_OK") {
-                            alert(report_ok);
+                        if (msg === "DELETE_OK") {
+                            alert("삭제에 성공했습니다");
                             location.href = redirect_url;
                         }
                     },
@@ -140,6 +148,30 @@
                 }); //$.ajax
             }
         });
+
+        // '재등록' 버튼 클릭 시
+        $("#re-register_btn").click(function (e) {
+            e.preventDefault();
+            let idx = ${list.idx};              // 상품후기일련번호 변수 선언
+
+            if (confirm("재등록하시겠습니까?")) { // (delete_confirm) -> '정말로 삭제하시겠습니까?'
+                $.ajax({
+                    url: '/board/review/list/' + idx,
+                    <%--data: {idx: ${user.idx}, email: "${user.email}"},--%>
+                    type: 'PATCH',
+                    success: function (msg) {
+                        if (msg === "REGISTER_OK") {
+                            alert("재등록에 성공했습니다");
+                            location.href = redirect_url;
+                        }
+                    },
+                    error: function (err) {
+                        alert(error_msg);
+                    }
+                }); //$.ajax
+            }
+        });
+
     });
 </script>
 </body>

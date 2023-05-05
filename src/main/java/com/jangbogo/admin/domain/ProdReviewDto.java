@@ -25,6 +25,7 @@ public class ProdReviewDto {
     private Integer rnk_cd; // 상품후기등급코드
     private String opub_yn; // 상품후기공개여부
     private Integer decl_cnt; // 상품후기신고개수
+    private Integer state_cd; // 상품후기상태코드 (등록,삭제)
     private Date crt_tm; // 최초등록일자
     private Integer crt_idx; // 최초등록자식별번호
     private Date upt_tm; // 최종수정일자
@@ -42,6 +43,7 @@ public class ProdReviewDto {
     public ProdReviewDto() {}
 
     // Getter and Setter
+
 
     public Integer getIdx() {
         return idx;
@@ -147,6 +149,14 @@ public class ProdReviewDto {
         this.decl_cnt = decl_cnt;
     }
 
+    public Integer getState_cd() {
+        return state_cd;
+    }
+
+    public void setState_cd(Integer state_cd) {
+        this.state_cd = state_cd;
+    }
+
     public Date getCrt_tm() {
         return crt_tm;
     }
@@ -212,7 +222,6 @@ public class ProdReviewDto {
     }
 
     // toString()
-
     @Override
     public String toString() {
         return "ProdReviewDto{" +
@@ -229,6 +238,7 @@ public class ProdReviewDto {
                 ", rnk_cd=" + rnk_cd +
                 ", opub_yn='" + opub_yn + '\'' +
                 ", decl_cnt=" + decl_cnt +
+                ", state_cd=" + state_cd +
                 ", crt_tm=" + crt_tm +
                 ", crt_idx=" + crt_idx +
                 ", upt_tm=" + upt_tm +

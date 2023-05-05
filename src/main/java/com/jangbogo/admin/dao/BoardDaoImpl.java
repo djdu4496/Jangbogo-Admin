@@ -31,5 +31,20 @@ public class BoardDaoImpl implements BoardDao {
         return session.selectOne( nameSpace + "selectReviewDetail", idx);
     }
 
+    @Override
+    public Integer toDeleteState(Integer idx) throws Exception {
+        return session.update( nameSpace + "toDeleteState", idx);
+    }
+
+    @Override
+    public Integer toRegisterState(Integer idx) throws Exception {
+        return session.update( nameSpace + "toRegisterState", idx);
+    }
+
+    @Override
+    public Integer checkState(Integer idx) throws Exception {
+        return session.selectOne( nameSpace + "checkState", idx);
+    }
+
 
 }
