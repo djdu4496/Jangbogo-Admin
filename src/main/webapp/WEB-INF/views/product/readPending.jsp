@@ -279,7 +279,8 @@
                         type:'PATCH',                                                                                   // 요청 메서드
                         url: '/product/approve/'+ prodIdx + "/2",                                                              // 요청 URI, 상품번호(prod_idx)를 파라미터에 담아 요청
                         success : (result) => {                                                                         // 서버로부터 성공 응답이 도착하면 호출될 함수.
-                                location.reload();                                                                      // 새로고침
+                                alert("승인 처리가 완료되었습니다.");
+                            location.href = redirect_url;                                                               // 승인대기목록으로 이동
                         },
                         error : () => {                                                                                 // 서버로부터 실패 응답이 도착하면 호출될 함수
                             alert("error");
@@ -294,7 +295,8 @@
                         type:'PATCH',                                                                                   // 요청 메서드
                         url: '/product/reject/'+ prodIdx + "/3",                                                               // 요청 URI, 상품번호(prod_idx)를 파라미터에 담아 요청
                         success : (result) => {                                                                         // 서버로부터 성공 응답이 도착하면 호출될 함수.
-                            location.reload();                                                                          // 새로고침
+                            alert("반려 처리가 완료되었습니다.");
+                            location.href = redirect_url;                                                               // 승인대기목록으로 이동
                         },
                         error : () => {                                                                                 // 서버로부터 실패 응답이 도착하면 호출될 함수
                             alert("error");
