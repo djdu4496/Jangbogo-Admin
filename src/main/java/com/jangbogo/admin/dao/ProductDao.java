@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ProductDao {
@@ -38,4 +39,8 @@ public class ProductDao {
     public List<ProductDto> getPendingSearchSelectPage(SearchCondition sc) {                                            // 메서드명 : getPendingSearchSelectPage
         return session.selectList(namespace + "selectPendingAll", sc);                                               // 기   능 : productMapper.xml에 있는 SQL문을 실행하여 '승인대기' 상태인 List<ProductDto>를 반환
     }                                                                                                                   // 반환타입 : ProductDetailDto - 매개변수 : SearchCondition sc
+
+    public int updateProductRegState(Map<Integer, Integer> pathVarsMap) {                                               // 메서드명 : updateProductRegState
+        return session.update(namespace + "updateProductRegState", pathVarsMap);                                     // 기   능 : productMapper.xml에 있는 SQL문을 실행하여 '승인대기' 상태인 상품을 특정 상태로를 수정
+    }                                                                                                                   // 반환타입 : int - 매개변수 : Map<Integer, Integer> pathVarsMap
 }

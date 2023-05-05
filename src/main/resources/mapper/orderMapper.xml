@@ -292,10 +292,10 @@
     </insert>
 
     <!--
-     태   그 : update
-     기   능 : '주문상태코드'가 3인 주문의 상태코드를 '4'로 수정
-     아이디명 : updateOrderStateDeliveryCompleted
- -->
+         태   그 : update
+         기   능 : '주문상태코드'가 3인 주문의 상태코드를 '4'로 수정
+         아이디명 : updateOrderStateDeliveryCompleted
+    -->
     <update id="updateOrderStateDeliveryCompleted" parameterType="Integer">
         UPDATE ORD
         SET STATE_CD = 4, UPT_TM = now()                                                                                -- 주문상태코드 '배송완료'로 수정

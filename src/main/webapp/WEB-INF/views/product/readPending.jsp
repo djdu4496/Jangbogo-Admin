@@ -265,10 +265,41 @@
 
         <script>
             $(document).ready(function () {
-                let redirect_url = "<c:url value='/product/list${searchCondition.queryString}'/>"
+                let redirect_url = "<c:url value='/product/list/pending${searchCondition.queryString}'/>"
 
                 $("#listBtn").click(function (e) {
                     location.href = redirect_url;
+                });
+
+                $("#approveBtn").click(function (e) {
+                    console.log("approveBtn Clicked!");
+                    // 1. ajax요청으로 상품상태값이 들어있는 모든 테이블의 데이터를 UPDATE
+                    let prodIdx = ${prod_idx};                                                                          // 변수명 : prodIdx - 저장값 :  model에 저장된 "prod_idx" K/V값
+                    $.ajax({                                                                                            // $.ajax() start
+                        type:'PATCH',                                                                                   // 요청 메서드
+                        url: '/product/approve/'+ prodIdx + "/2",                                                              // 요청 URI, 상품번호(prod_idx)를 파라미터에 담아 요청
+                        success : (result) => {                                                                         // 서버로부터 성공 응답이 도착하면 호출될 함수.
+                                location.reload();                                                                      // 새로고침
+                        },
+                        error : () => {                                                                                 // 서버로부터 실패 응답이 도착하면 호출될 함수
+                            alert("error");
+                        }
+                    });                                                                                                 // $.ajax() end
+                });
+
+                $("#rejectBtn").click(function (e) {
+                    console.log("rejectBtn Clicked!");
+                    let prodIdx = ${prod_idx};                                                                          // 변수명 : prodIdx - 저장값 :  model에 저장된 "prod_idx" K/V값
+                    $.ajax({                                                                                            // $.ajax() start
+                        type:'PATCH',                                                                                   // 요청 메서드
+                        url: '/product/reject/'+ prodIdx + "/3",                                                               // 요청 URI, 상품번호(prod_idx)를 파라미터에 담아 요청
+                        success : (result) => {                                                                         // 서버로부터 성공 응답이 도착하면 호출될 함수.
+                            location.reload();                                                                          // 새로고침
+                        },
+                        error : () => {                                                                                 // 서버로부터 실패 응답이 도착하면 호출될 함수
+                            alert("error");
+                        }
+                    });                                                                                                 // $.ajax() end
                 });
             });
         </script>

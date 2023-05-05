@@ -4,14 +4,18 @@ package com.jangbogo.admin.controller;
 import com.jangbogo.admin.domain.*;
 import com.jangbogo.admin.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ProductController {
@@ -96,13 +100,30 @@ public class ProductController {
         try {
             productDetailDto = productService.getProductRead(prod_idx);
             if(productDetailDto == null) throw new Exception("getProductRead failed");
-            model.addAttribute("product", productDetailDto);                                               // Model에 idx를 K/V로 저장
-
-            return "/product/readPending";                                                                                      // "/order/order.jsp" 뷰 이름 반환 - 뷰 렌더링
+            model.addAttribute("product", productDetailDto);                                               // Model에 '상품상세' 객체를 K/V로 저장
+            model.addAttribute("prod_idx", prod_idx);                                                      // Model에 '상품번호'를 K/V로 저장
+            return "/product/readPending";                                                                              // "/order/order.jsp" 뷰 이름 반환 - 뷰 렌더링
         } catch(Exception e) {                                                                                          // 에러 발생 시
             e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
             return "redirect:/";                                                                                        // 2) 메인 페이지로 리다이렉트
         }
     }
 
+    // 메서드명 : approveProductPending
+    // 기   능 : '승인대기(1)' 상태인 상품의 상태를 '승인완료(2)' 상태로 수정
+    // 반환타입 : ResponseEntity<String>
+    // 매개변수 : Map<Integer, Integer> pathVarsMap - Integer prod_idx (상품번호), reg_stae_cd (상품상태)
+    // 요청URL : /product/approve/{prod_idx} PATCH
+    @PatchMapping("/product/approve/{prod_idx}/{reg_state_cd}")
+    public ResponseEntity<String> approveProductPending(@PathVariable Map<Integer, Integer> pathVarsMap) {
+        int rowCnt = 0;
+        try {
+            rowCnt = productService.updateProductRegState(pathVarsMap);                                                 // 상품번호 #{prod_idx}에 해당하는 상품의 상품상태코드를 #{reg_state_cd}로 변경 후 변경 있는 행의 수를 rowCnt에 저
+            if(rowCnt == 0) throw new Exception("updateProductRegState failed(PROD_DTL)");                              // 변경된 행의 개수가 0인 경우 예외를 발생시킨다.
+            return new ResponseEntity<>("MOD_REG_STATE_CD_OK", HttpStatus.OK);                                    // update 요청 결과가 성공인 경우, 상태코드와 함께 메시지 반환
+        } catch(Exception e) {
+            e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
+            return new ResponseEntity<>("MOD_REG_STATE_CD_ERR", HttpStatus.BAD_REQUEST);                          // 2) update 요청 결과가 실패인 경우, 상태코드와 함께 메시지 반환
+        }
+    }
 }

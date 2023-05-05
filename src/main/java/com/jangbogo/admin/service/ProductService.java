@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductService {
@@ -44,4 +45,9 @@ public class ProductService {
     // 매개변수 : Integer prod_idx - 상품번호
     public ProductDetailDto getProductRead(Integer prod_idx) { return productDao.getProductDto(prod_idx);}
 
+    // 메서드명 : updateProductRegState
+    // 기   능 : ProductDao의 updateProductRegState 호출 -  상품번호 #{prod_idx}에 해당하는 상품의 상품상태코드를 #{reg_state_cd}로 변경
+    // 반환타입 : int
+    // 매개변수 : Map<Integer, Integer> pathVarsMap - Integer prod_idx (상품번호), reg_state_cd (상품상태코드)
+    public int updateProductRegState(Map<Integer, Integer> pathVarsMap) { return productDao.updateProductRegState(pathVarsMap);}
 }
