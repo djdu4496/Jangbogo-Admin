@@ -132,7 +132,7 @@
     -->
     <update id="updateProductRegState" parameterType="map">
         UPDATE PROD_DTL
-        SET REG_STATE_CD = #{reg_state_cd}
+        SET REG_STATE_CD = #{reg_state_cd}, UPT_TM = now()
         WHERE PROD_IDX = ${prod_idx}
     </update>
 </mapper>
