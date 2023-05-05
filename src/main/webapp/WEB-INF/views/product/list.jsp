@@ -63,12 +63,12 @@
                                             <th>판매자상품코드</th>
                                             <th>상품이름</th>
                                             <th>상품가격</th>
-                                            <th>상품할인상태코드</th>
+                                            <th>상품할인상태</th>
                                             <th>상품할인율</th>
-                                            <th>상품등록상태코드</th>
-                                            <th>상품상태코드</th>
+                                            <th>상품등록상태</th>
                                             <th>상품판매시작일</th>
                                             <th>상품판매종료일</th>
+                                            <th>상품상태</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -96,19 +96,6 @@
                                                 <td class="id">${product.dc_rate}%</td>
                                                 <td class="id">
                                                     <c:choose>
-                                                        <c:when test="${product.reg_state_cd== 1}">
-                                                            대기
-                                                        </c:when>
-                                                        <c:when test="${product.reg_state_cd== 2}">
-                                                            승인
-                                                        </c:when>
-                                                        <c:when test="${product.reg_state_cd== 3}">
-                                                            거부
-                                                        </c:when>
-                                                    </c:choose>
-                                                </td>
-                                                <td class="id">
-                                                    <c:choose>
                                                         <c:when test="${product.state_cd== 1}">
                                                             재고있음
                                                         </c:when>
@@ -125,6 +112,19 @@
                                                 </td>
                                                 <td class="id">${product.sle_start_tm}</td>
                                                 <td class="id">${product.sle_end_tm}</td>
+                                                <td class="id">
+                                                    <c:choose>
+                                                        <c:when test="${product.reg_state_cd== 1}">
+                                                            승인대기
+                                                        </c:when>
+                                                        <c:when test="${product.reg_state_cd== 2}">
+                                                            승인완료
+                                                        </c:when>
+                                                        <c:when test="${product.reg_state_cd== 3}">
+                                                            승려반려
+                                                        </c:when>
+                                                    </c:choose>
+                                                </td>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
