@@ -76,7 +76,8 @@
         JOIN CATEGORY D
         ON A.CATE_IDX = D.ID
         JOIN DLVRY_MTHD E
-        ON E.IDX = D.DLVRY_EDI_IDX;
+        ON E.IDX = D.DLVRY_EDI_IDX
+        WHERE B.PROD_IDX = ${prod_idx};
     </select>
 
     <!--

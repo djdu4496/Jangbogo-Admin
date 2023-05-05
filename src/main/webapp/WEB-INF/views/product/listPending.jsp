@@ -115,13 +115,13 @@
                                                 <td class="id">
                                                     <c:choose>
                                                         <c:when test="${product.reg_state_cd== 1}">
-                                                            승인대기
+                                                            대기
                                                         </c:when>
                                                         <c:when test="${product.reg_state_cd== 2}">
-                                                            승인완료
+                                                            승인
                                                         </c:when>
                                                         <c:when test="${product.reg_state_cd== 3}">
-                                                            승인반려
+                                                            반려
                                                         </c:when>
                                                     </c:choose>
                                                 </td>

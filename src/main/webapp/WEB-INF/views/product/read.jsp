@@ -127,7 +127,7 @@
                                             <c:choose>
                                                 <c:when test="${product.reg_state_cd == 1}">대기</c:when>
                                                 <c:when test="${product.reg_state_cd == 2}">승인</c:when>
-                                                <c:when test="${product.reg_state_cd == 3}">거부</c:when>
+                                                <c:when test="${product.reg_state_cd == 3}">반려</c:when>
                                             </c:choose>
                                         </td>
                                     </tr>
