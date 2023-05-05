@@ -11,5 +11,6 @@
         <typeAlias alias="SearchCondition" type="com.jangbogo.admin.domain.SearchCondition"/>
         <typeAlias alias="OrderDto" type="com.jangbogo.admin.domain.OrderDto"/>
         <typeAlias alias="OrderDetailDto" type="com.jangbogo.admin.domain.OrderDetailDto"/>
+        <typeAlias alias="ProdReviewDto" type="com.jangbogo.admin.domain.ProdReviewDto"/>
     </typeAliases>
 </configuration>
