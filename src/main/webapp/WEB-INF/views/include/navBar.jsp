@@ -85,8 +85,10 @@
         <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="/board/review/list">상품 후기 조회</a>
+                <a class="collapse-item" href="/board/inqry/list">상품 문의 조회</a>
             </div>
         </div>
+
     </li>
     <hr class="sidebar-divider d-none d-md-block">
     <div class="text-center d-none d-md-inline">

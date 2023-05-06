@@ -1,5 +1,7 @@
 package com.jangbogo.admin.service;
 
+import com.jangbogo.admin.domain.ProdInqryAnsDto;
+import com.jangbogo.admin.domain.ProdInqryDto;
 import com.jangbogo.admin.domain.ProdReviewDto;
 import com.jangbogo.admin.domain.SearchCondition;
 
@@ -10,4 +12,10 @@ public interface BoardService {
     Integer ReviewSearchResultCnt(SearchCondition sc) throws Exception;
     ProdReviewDto selectReviewDetail(Integer idx) throws Exception;
 
+//    상품문의
+    List<ProdInqryDto> showProdInqryList() throws Exception;
+    Integer cntWaitingAnswer() throws Exception;
+    ProdInqryDto showOneInqry(ProdInqryDto prodInqryDto) throws Exception;
+    Integer insertInqry(ProdInqryAnsDto prodInqryAnsDto) throws Exception;
+    Integer changeAnsState(ProdInqryDto prodInqryDto) throws Exception;
 }

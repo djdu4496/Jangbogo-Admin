@@ -78,7 +78,18 @@ public class BoardController {
 //        }
 //    }
 
+    @GetMapping("/board/inqry/list")
+    public String showInqryList(Model m) {
 
+        try {
+            List<ProdInqryDto> list = boardService.showProdInqryList();
+            m.addAttribute("list", list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "/board/inqryList";
+    }
 
 
 }
