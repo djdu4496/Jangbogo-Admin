@@ -13,6 +13,16 @@
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
     <link rel="stylesheet" href="/css/color.css">
     <link rel="stylesheet" href="/css/display.css">
+    <style>
+        textarea {
+            overflow: auto;
+            resize: none;
+            width: 750px;
+            height: 200px;
+            box-sizing: border-box;
+
+        }
+    </style>
 </head>
 <body id="page-top">
 <div id="wrapper">
@@ -117,8 +127,8 @@
     </div>
 </div>
 <%@ include file="/WEB-INF/views/include/script.jsp" %>
-<%--<script src="https://code.jquery.com/jquery-1.11.3.js"></script>--%>
-<%--<script src="https://code.jquery.com/jquery-latest.min.js"></script>--%>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>--%>
 
 <script>
@@ -149,11 +159,22 @@
             console.log(ctent);
             console.log(idx);
 
+            // $.ajax({
+            //     type: 'POST',       // 요청 메서드
+            //     url: '/board/inqry/register?idx='+ idx+ '&ctent='+ctent+'&writer='+writer,
+            //     headers : { "content-type": "application/json"}, // 요청 헤더
+            //     data : JSON.stringify({idx: idx, ctent: ctent, writer: writer}),  // 서버로 전송할 데이터. stringify()로 직렬화 필요.
+            //
+            //     success : function(){
+            //         alert("문의가 등록되었습니다.");
+            //     },
+            //     error   : function(){ alert("insert error") } // 에러가 발생했을 때, 호출될 함수
+            // });
             $.ajax({
                 type:'POST',       // 요청 메서드
                 url: '/board/inqry/register/answer',
-                headers : { "content-type": "application/json"}, // 요청 헤더
-                data : JSON.stringify({idx: idx, ctent: ctent, writer: writer}),  // 서버로 전송할 데이터. stringify()로 직렬화 필요.
+                // headers : { "content-type": "application/json"}, // 요청 헤더
+                data : {idx: idx, ctent: ctent, writer: writer},  // 서버로 전송할 데이터. stringify()로 직렬화 필요.
 
                 success : function(){
                     alert("문의가 등록되었습니다.");
@@ -163,12 +184,13 @@
 
 
 
+
         })
 
         // $("#removeBtn").click(function(e) {
         //     $.ajax({
         //         type: 'PATCH',
-        //         url: '/board/inqry/register/update',
+        //         url: '/board/inqry/register/{}',
         //         headers : { "content-type": "application/json"}, // 요청 헤더
         //         data: JSON.stringify({idx: idx, ctent: ctent, writer:writer}),
         //         success: function(msg) {

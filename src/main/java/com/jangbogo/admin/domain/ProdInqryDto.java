@@ -21,10 +21,10 @@ public class ProdInqryDto {
     private String ctent;
     private String writer;
     private Integer res_state_cd; //문의 답변 상태코드 1: 답변대기 2: 답변완료
-    private Integer state_cd;
+    private Integer state_cd; //등록(1) 상태인지, 삭제(3) 상태인지
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date wrt_tm;
-//    상품문의답변 테이블
+//    상품문의답변 테이블 pia
     private String ans_ctent;
     private String ans_writer;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

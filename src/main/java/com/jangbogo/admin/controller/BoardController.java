@@ -127,14 +127,40 @@ public class BoardController {
         return "/board/inqryAnsOk";
     }
 
+//    @PostMapping("/board/inqry/register/{idx}/{ctent}/{writer}")
+//    public ResponseEntity<String> regAns(@PathVariable Integer idx, @PathVariable String ctent, @PathVariable String writer, ProdInqryAnsDto prodInqryAnsDto){
+//        try {
+//            System.out.println("idx"+idx);
+//            prodInqryAnsDto.setIdx(idx);
+//            prodInqryAnsDto.setCtent(ctent);
+//            prodInqryAnsDto.setWriter(writer);
+////            if(boardService.insertInqry(prodInqryAnsDto) != 1) {
+////                throw new Exception("insert fail");
+////            }
+////            Integer idx = prodInqryAnsDto.getIdx();
+//            if(boardService.insertInqry(prodInqryAnsDto) != 1) {
+//                throw new Exception("insert failed");
+//            }
+//            boardService.changeAnsState(idx);  // 답변상태코드 2로 변경
+//            return new ResponseEntity<String>("insert ok", HttpStatus.OK);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return new ResponseEntity<String>("insert error", HttpStatus.BAD_REQUEST);
+//        }
+//    }
+
     @PostMapping("/board/inqry/register/answer")
-    public ResponseEntity<String> regAns(@RequestBody ProdInqryAnsDto prodInqryAnsDto) {
+    public ResponseEntity<String> regAns(Integer idx, String ctent, String writer) {
+        ProdInqryAnsDto prodInqryAnsDto = new ProdInqryAnsDto();
+        prodInqryAnsDto.setIdx(idx);
+        prodInqryAnsDto.setCtent(ctent);
+        prodInqryAnsDto.setWriter(writer);
         try {
             if(boardService.insertInqry(prodInqryAnsDto) != 1) {
                 return new ResponseEntity<String>("insert error", HttpStatus.BAD_REQUEST);
             }
-            Integer idx = prodInqryAnsDto.getIdx();
-            boardService.changeAnsState(idx);
+            Integer idx2 = prodInqryAnsDto.getIdx();
+            boardService.changeAnsState(idx2);
             return new ResponseEntity<String>("insert ok", HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -143,23 +169,23 @@ public class BoardController {
     }
 
 //    @PostMapping("/board/inqry/register/answer")
-    public ResponseEntity<String> regAnswer(@RequestBody ProdInqryAnsDto prodInqryAnsDto) {
-        System.out.println("???");
-        try {
-            if(boardService.insertInqry(prodInqryAnsDto) != 1) {
-                throw new Exception("insert failed");
-            }
-                Integer idx = prodInqryAnsDto.getIdx();
-            System.out.println("idx = " + idx);
-                boardService.changeAnsState(idx);
-            return new ResponseEntity<String>("insert_ok", HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<String>("insert_err", HttpStatus.BAD_REQUEST);
-        }
+//    public ResponseEntity<String> regAnswer(@RequestBody ProdInqryAnsDto prodInqryAnsDto) {
+//        System.out.println("???");
+//        try {
+//            if(boardService.insertInqry(prodInqryAnsDto) != 1) {
+//                throw new Exception("insert failed");
+//            }
+//                Integer idx = prodInqryAnsDto.getIdx();
+//            System.out.println("idx = " + idx);
+//                boardService.changeAnsState(idx);
+//            return new ResponseEntity<String>("insert_ok", HttpStatus.OK);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return new ResponseEntity<String>("insert_err", HttpStatus.BAD_REQUEST);
+//        }
+//
+//    }
 
-    }
-
-//    @PatchMapping()
+//    @PatchMapping("/board/inqry/register/{}")
 
 }
