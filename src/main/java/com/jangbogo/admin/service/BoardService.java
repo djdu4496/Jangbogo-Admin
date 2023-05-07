@@ -15,7 +15,8 @@ public interface BoardService {
 //    상품문의
     List<ProdInqryDto> showProdInqryList() throws Exception;
     Integer cntWaitingAnswer() throws Exception;
-    ProdInqryDto showOneInqry(ProdInqryDto prodInqryDto) throws Exception;
+    ProdInqryDto showOneInqry(Integer idx) throws Exception;
+    ProdInqryDto showAnsOKInqry(Integer idx) throws Exception;
     Integer insertInqry(ProdInqryAnsDto prodInqryAnsDto) throws Exception;
-    Integer changeAnsState(ProdInqryDto prodInqryDto) throws Exception;
+    Integer changeAnsState(Integer idx) throws Exception;
 }

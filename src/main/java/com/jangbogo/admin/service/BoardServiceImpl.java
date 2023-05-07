@@ -40,13 +40,16 @@ public class BoardServiceImpl implements BoardService {
     public Integer cntWaitingAnswer() throws Exception {
         return boardDao.cntWaitingAnswer();
     }
-    public ProdInqryDto showOneInqry(ProdInqryDto prodInqryDto) throws Exception{
-        return boardDao.showOneInqry(prodInqryDto);
+    public ProdInqryDto showOneInqry(Integer idx) throws Exception{
+        return boardDao.showOneInqry(idx);
+    }
+    public ProdInqryDto showAnsOKInqry(Integer idx) throws Exception {
+        return boardDao.showAnsOKInqry(idx);
     }
     public Integer insertInqry(ProdInqryAnsDto prodInqryAnsDto) throws Exception {
         return boardDao.insertInqry(prodInqryAnsDto);
     }
-    public Integer changeAnsState(ProdInqryDto prodInqryDto) throws Exception {
-        return boardDao.changeAnsState(prodInqryDto);
+    public Integer changeAnsState(Integer idx) throws Exception {
+        return boardDao.changeAnsState(idx);
     }
 }

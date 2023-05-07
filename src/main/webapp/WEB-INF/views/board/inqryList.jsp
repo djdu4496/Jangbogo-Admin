@@ -70,8 +70,8 @@
                                     <th>상품이름</th>
                                     <th>작성자</th>
                                     <th>제목</th>
-                                    <th>내용</th>
                                     <th>작성일자</th>
+                                    <th>상품상태</th>
                                     <th>문의등록상태</th>
                                     <th>답변상태</th>
                                 </tr>
@@ -80,13 +80,35 @@
                                 <c:forEach var="inqry" items="${list}">
                                     <tr>
                                         <td class="id">${inqry.name}</td>
-<%--                                        <td class="id"><a--%>
-<%--                                                href="<c:url value="/seller/read${ph.sc.queryString}&idx=${seller.idx}"/>">${seller.email}</a>--%>
-<%--                                        </td>--%>
                                         <td class="id">${inqry.writer}</td>
-                                        <td class="id">${inqry.title}</td>
-                                        <td class="id"><a href="<c:url value="/board/inqryListDetail"/>">${inqry.ctent}</a></td>
+                                        <c:choose>
+                                            <c:when test="${inqry.res_state_cd == 1}">
+                                                <td class="id"><a href="<c:url value="/board/inqry/ans/yet/${inqry.idx}"/>">${inqry.title}</a></td>
+                                            </c:when>
+                                            <c:when test="${inqry.res_state_cd == 2}">
+                                                <td class="id"><a href="<c:url value="/board/inqry/ans/ok/${inqry.idx}"/>">${inqry.title}</a></td>
+                                            </c:when>
+                                            <c:when test="${inqry.state_cd == 3}">
+                                                <a href="<c:url value="/board/inqry/ans/ok/${inqry.idx}"/>">${inqry.title}</a>
+                                            </c:when>
+                                        </c:choose>
                                         <td class="id"><fmt:formatDate value="${inqry.wrt_tm}" pattern="yyyy-MM-dd" type="date"/></td>
+                                        <td class="id">
+                                            <c:choose>
+                                                <c:when test="${inqry.prodDetail_state_cd == 1}">
+                                                    재고있음
+                                                </c:when>
+                                                <c:when test="${inqry.prodDetail_state_cd == 2}">
+                                                    절판
+                                                </c:when>
+                                                <c:when test="${inqry.prodDetail_state_cd == 3}">
+                                                    판매중지
+                                                </c:when>
+                                                <c:when test="${inqry.prodDetail_state_cd == 4}">
+                                                    품절
+                                                </c:when>
+                                            </c:choose>
+                                        </td>
                                         <td class="id">
                                             <c:choose>
                                                 <c:when test="${inqry.state_cd == 1}">

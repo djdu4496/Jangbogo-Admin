@@ -3,10 +3,12 @@ package com.jangbogo.admin.controller;
 import com.jangbogo.admin.domain.*;
 import com.jangbogo.admin.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -78,12 +80,15 @@ public class BoardController {
 //        }
 //    }
 
+//    상품문의
     @GetMapping("/board/inqry/list")
     public String showInqryList(Model m) {
 
         try {
             List<ProdInqryDto> list = boardService.showProdInqryList();
+            Integer totalCnt = boardService.cntWaitingAnswer();
             m.addAttribute("list", list);
+            m.addAttribute("totalCnt", totalCnt);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,5 +96,62 @@ public class BoardController {
         return "/board/inqryList";
     }
 
+    @GetMapping("/board/inqry/ans/yet/{idx}")
+    public String showInqryAnsYet(@PathVariable Integer idx, Model m) {
+//        System.out.println("idx???"+idx);
+        try {
+            ProdInqryDto inqry = boardService.showOneInqry(idx);
+            m.addAttribute("inqry", inqry);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "/board/inqryAnsYet";
+    }
+
+    @GetMapping("/board/inqry/ans/ok/{idx}")
+    public String showInqryAnsOk(@PathVariable Integer idx, Model m) {
+        try {
+            ProdInqryDto inqry = boardService.showAnsOKInqry(idx);
+            m.addAttribute("inqry", inqry);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "/board/inqryAnsOk";
+    }
+
+    @PostMapping("/board/inqry/register/answer")
+    public ResponseEntity<String> regAns(@RequestBody ProdInqryAnsDto prodInqryAnsDto) {
+        try {
+            if(boardService.insertInqry(prodInqryAnsDto) != 1) {
+                return new ResponseEntity<String>("insert error", HttpStatus.BAD_REQUEST);
+            }
+            Integer idx = prodInqryAnsDto.getIdx();
+            boardService.changeAnsState(idx);
+            return new ResponseEntity<String>("insert ok", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>("insert error", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+//    @PostMapping("/board/inqry/register/answer")
+    public ResponseEntity<String> regAnswer(@RequestBody ProdInqryAnsDto prodInqryAnsDto) {
+        System.out.println("???");
+        try {
+            if(boardService.insertInqry(prodInqryAnsDto) != 1) {
+                throw new Exception("insert failed");
+            }
+                Integer idx = prodInqryAnsDto.getIdx();
+            System.out.println("idx = " + idx);
+                boardService.changeAnsState(idx);
+            return new ResponseEntity<String>("insert_ok", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>("insert_err", HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+//    @PatchMapping()
 
 }

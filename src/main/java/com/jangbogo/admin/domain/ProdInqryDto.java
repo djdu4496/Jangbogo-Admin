@@ -11,8 +11,10 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class ProdInqryDto {
+//    상품테이블 p
     private String name;
-    private Integer idx;
+//    상품문의테이블 pi
+    private Integer idx;  //상품문의번호
     private Integer prod_idx;
     private Integer user_idx;
     private String title;
@@ -22,6 +24,17 @@ public class ProdInqryDto {
     private Integer state_cd;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date wrt_tm;
+//    상품문의답변 테이블
+    private String ans_ctent;
+    private String ans_writer;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date ans_resps_tm;
+    private Integer ans_crt_idx;
+    private Integer ans_upt_idx;
+    private Integer ans_state_cd;
+
+//    상품상세테이블 pd
+    private Integer prodDetail_state_cd;
 
     public ProdInqryDto() {}
 }

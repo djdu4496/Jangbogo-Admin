@@ -42,15 +42,19 @@ public class BoardDaoImpl implements BoardDao {
         return session.selectOne(nameSpace + "cntWaitingAnswer");
     }
 
-    public ProdInqryDto showOneInqry(ProdInqryDto prodInqryDto) throws Exception {
-        return session.selectOne(nameSpace + "showOneInqry", prodInqryDto);
+    public ProdInqryDto showOneInqry(Integer idx) throws Exception {
+        return session.selectOne(nameSpace + "showOneInqry", idx);
+    }
+
+    public ProdInqryDto showAnsOKInqry(Integer idx) throws Exception {
+        return session.selectOne(nameSpace + "showAnsOKInqry", idx);
     }
 
     public Integer insertInqry(ProdInqryAnsDto prodInqryAnsDto) throws Exception {
         return session.insert(nameSpace + "insertInqry", prodInqryAnsDto);
     }
 
-    public Integer changeAnsState(ProdInqryDto prodInqryDto) throws Exception {
-        return session.update(nameSpace + "changeAnsState", prodInqryDto);
+    public Integer changeAnsState(Integer idx) throws Exception {
+        return session.update(nameSpace + "changeAnsState", idx);
     }
 }
