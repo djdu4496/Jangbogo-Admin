@@ -119,7 +119,7 @@
 
 <script>
     $(document).ready(function () {
-        let redirect_url = "<c:url value='/board/review/list'/>"
+        let redirect_url = "<c:url value='/board/review/list${searchCondition.queryString}'/>"
 
         // '목록으로' 버튼 클릭 시 후기 목록 창으로 되돌아간다
         $("#list_btn").click(function (e) {

@@ -69,7 +69,7 @@
                                 <c:forEach var="review" items="${list}">
                                     <tr>
                                         <td class="id">
-                                            <a href="<c:url value='/board/review/list/${review.idx}'/>">
+                                            <a href="<c:url value='/board/review/list/${review.idx}${ph.sc.queryString}'/>">
                                                     ${review.idx}
                                             </a>
                                         </td>

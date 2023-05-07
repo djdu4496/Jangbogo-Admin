@@ -39,6 +39,10 @@ public class ProdReviewDto {
     private String nick_nm; // 닉네임
     private String mpno; // 휴대전화번호
 
+
+    // 상품상세(PROD_DTL)
+    private Integer prod_dtl_state_cd; // 상품상태코드
+
     // 생성자(Constructor)
     public ProdReviewDto() {}
 
@@ -221,7 +225,16 @@ public class ProdReviewDto {
         this.mpno = mpno;
     }
 
+    public Integer getProd_dtl_state_cd() {
+        return prod_dtl_state_cd;
+    }
+
+    public void setProd_dtl_state_cd(Integer prod_dtl_state_cd) {
+        this.prod_dtl_state_cd = prod_dtl_state_cd;
+    }
+
     // toString()
+
     @Override
     public String toString() {
         return "ProdReviewDto{" +
@@ -247,6 +260,7 @@ public class ProdReviewDto {
                 ", email='" + email + '\'' +
                 ", nick_nm='" + nick_nm + '\'' +
                 ", mpno='" + mpno + '\'' +
+                ", prod_dtl_state_cd=" + prod_dtl_state_cd +
                 '}';
     }
 }

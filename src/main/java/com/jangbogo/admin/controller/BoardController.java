@@ -28,11 +28,8 @@ public class BoardController {
         List<ProdReviewDto> list = null;                                // 변수명 : list - 저장값 : ProdReviewDto 저장소 List
         try {
             int totalCnt = boardService.ReviewSearchResultCnt(sc);      // 변수명 : totalCnt - 저장값 : 주문내역 목록 검색 결과 개수
-            System.out.println("totalCnt = " + totalCnt);
             PageHandler pageHandler = new PageHandler(totalCnt, sc);    // PageHandler 객체 생성(인자 - totalCnt, sc)
-//            System.out.println("pageHandler = " + pageHandler);
             list = boardService.ReviewSelectedPage(sc);                 // boardService 의 ReviewSelectedPage 메서드 호출, 반환값을 list 에 저장
-            System.out.println("list = " + list);
 
             model.addAttribute("totalCnt", totalCnt);       // Model 에 totalCnt 를 K/V로 저장
             model.addAttribute("list", list);               // Model 에 list 를 K/V로 저장
@@ -50,7 +47,7 @@ public class BoardController {
     // 반환타입 : String
     // 매개변수 : @PathVariable Integer idx(상품후기일련번호), Model model
     @GetMapping("/board/review/list/{idx}")
-    public String getReviewDetail(@PathVariable Integer idx, Model m) {
+    public String getReviewDetail(@PathVariable Integer idx,SearchCondition sc, Model m) {
         ProdReviewDto list = null;                                            // 변수명 : list - 저장값 : OrderDetailDto 저장소 List
         try {
             list = boardService.selectReviewDetail(idx);                      // orderService의 getList메서드 호출, 반환값을 list에 저장
