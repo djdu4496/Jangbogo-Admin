@@ -67,4 +67,13 @@ public class BoardServiceImpl implements BoardService {
     public Integer changeAnsState(Integer idx) throws Exception {
         return boardDao.changeAnsState(idx);
     }
+    public Integer updateAnswer(ProdInqryAnsDto prodInqryAnsDto) throws Exception {
+        return boardDao.updateAnswer(prodInqryAnsDto);
+    }
+    public Integer updateAnsTbCode(Integer idx) throws Exception {
+        return boardDao.updateAnsTbCode(idx);
+    }
+    public Integer updateInqryTbCode(Integer idx) throws Exception {
+        return boardDao.updateInqryTbCode(idx);
+    }
 }

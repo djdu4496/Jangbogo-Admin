@@ -27,10 +27,10 @@
                             문의 내용
                         </h5>
                     </div>
-                    <div class="card-body py-5 px-5" ">
+                    <div class="card-body py-5 px-5">
                         <table class="table table-bordered py-md-3" id="dataTable" width="100%" cellspacing="0">
                             <tr>
-                                <td class="col-3 light-blue">상품문의번호</td>
+                                <td class="col-3 light-blue idx" data-idx="${inqry.idx}">상품문의번호</td>
                                 <td>${inqry.idx}</td>
                             </tr>
                             <tr>
@@ -50,7 +50,7 @@
                                 <td class="id">${inqry.ctent}</td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">작성자</td>
+                                <td class="col-3 light-blue">문의 작성자</td>
                                 <td class="id">${inqry.writer}</td>
                             </tr>
                             <tr>
@@ -65,27 +65,23 @@
                                 </c:choose>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">작성일자</td>
+                                <td class="col-3 light-blue">문의 작성일자</td>
                                 <td class="id">
                                     <fmt:formatDate value="${inqry.wrt_tm}" pattern="yyyy-MM-dd" type="date"/>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">문의 작성자</td>
-                                <td class="id">
-                                    ${inqry.ans_writer}
-                                </td>
+                                <td class="col-3 light-blue">문의답변 작성자</td>
+                                <td class="id" id="ans_writer">${inqry.ans_writer}</td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">문의 작성내용</td>
-                                <td class="id">
-                                    ${inqry.ans_ctent}
-                                </td>
+                                <td class="col-3 light-blue">문의답변 작성내용</td>
+                                <td class="id" id="ans_ctent">${inqry.ans_ctent}</td>
                             </tr>
                             <tr>
-                                <td class="col-3 light-blue">문의 작성 날짜</td>
+                                <td class="col-3 light-blue">문의 답변작성 날짜</td>
                                 <td class="id">
-                                    ${inqry.ans_resps_tm}
+                                    <fmt:formatDate value="${inqry.ans_resps_tm}" pattern="yyyy-MM-dd" type="date"/>
                                 </td>
                             </tr>
                         </table>
@@ -93,6 +89,10 @@
                             <button class="btn btn-light px-md-4 py-md-2 mr-2"
                                     id="listBtn">
                                 목록으로
+                            </button>
+                            <button class="btn btn-facebook px-md-4 py-md-2 mr-2"
+                                    id="updateBtn">
+                                수정
                             </button>
                             <button class="btn btn-facebook px-md-4 py-md-2 mr-2"
                                     id="removeBtn">
@@ -112,10 +112,37 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <script>
+
+
+
     $(document).ready(function() {
 
         $("#listBtn").click(function(e) {
             location.href = "/board/inqry/list";
+        })
+
+        $("#updateBtn").click(function(e) {
+            e.preventDefault();
+            let writer = $("#ans_writer").text();
+            let ctent = $("#ans_ctent").text();
+            // let inqry_idx = $(".idx").data("idx");
+            console.log(writer);
+            console.log(ctent);
+            // $.ajax({
+            //     type: 'GET',
+            //     url: '/board/inqry/ans/yet/'+inqry_idx,
+            //     // headers : { "content-type": "application/json"},
+            //     data:{ctent: ctent, writer:writer},
+            //     success: function(msg) {
+            //
+            //     },
+            //     error: function() {
+            //
+            //     }
+            // })
+
+            let idx = $(".idx").data("idx");
+            location.href="<c:url value='/board/inqry/updatePage/"+ idx +"/"+ ctent +"/"+ writer +"'/>"
         })
 
 

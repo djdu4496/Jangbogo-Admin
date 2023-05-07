@@ -23,4 +23,7 @@ public interface BoardService {
     ProdInqryDto showAnsOKInqry(Integer idx) throws Exception;
     Integer insertInqry(ProdInqryAnsDto prodInqryAnsDto) throws Exception;
     Integer changeAnsState(Integer idx) throws Exception;
+    Integer updateAnswer(ProdInqryAnsDto prodInqryAnsDto) throws Exception;
+    Integer updateAnsTbCode(Integer idx) throws Exception;
+    Integer updateInqryTbCode(Integer idx) throws Exception;
 }

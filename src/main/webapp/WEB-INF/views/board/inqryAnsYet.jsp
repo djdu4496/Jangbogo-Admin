@@ -34,7 +34,8 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-md-4">
                         <h5 class="m-0 font-weight-bold text-primary">
-                            문의 답변 작성
+
+                            문의 ${mode == "update" ? "답변수정" : "답변작성"}
                         </h5>
                     </div>
                     <div class="card-body py-5 px-5" data-idx="${inqry.idx}">
@@ -90,6 +91,7 @@
                                                         name="writer"
                                                         id="writer"
                                                         type="text"
+                                                        value="${writer}"
                                                 />
                                             </div>
                                             <div class="error-msg nick"></div>
@@ -100,8 +102,7 @@
                             <tr>
                                 <td class="col-3 light-blue">답변작성</td>
                                 <td class="id">
-                                    <textarea name="answer">
-                                    </textarea>
+                                    <textarea name="answer">${ctent}</textarea>
                                 </td>
                             </tr>
                         </table>
@@ -110,10 +111,18 @@
                                     id="listBtn">
                                 목록으로
                             </button>
+                            <c:if test="${mode eq 'update'}">
+                                <button class="btn btn-danger px-md-4 py-md-2 mr-2"
+                                        id="updateBtn">
+                                    수정
+                                </button>
+                            </c:if>
+                            <c:if test="${mode eq ''}">
                             <button class="btn btn-danger px-md-4 py-md-2 mr-2"
                                     id="registerBtn">
                                 등록
                             </button>
+                            </c:if>
                             <button class="btn btn-facebook px-md-4 py-md-2 mr-2"
                                     id="removeBtn">
                                 삭제
@@ -133,6 +142,9 @@
 
 <script>
     $(document).ready(function() {
+        <%--let title = "문의"+"${mode}"--%>
+        <%--console.log("title"+title);--%>
+        // $("h5").append()
 
         $("#listBtn").click(function(e) {
             location.href = "/board/inqry/list";
@@ -153,23 +165,7 @@
                 alert("내용을 입력해주세요");
                 return;
             }
-            // console.log(prod_idx);
-            alert("!");
-            console.log(writer);
-            console.log(ctent);
-            console.log(idx);
 
-            // $.ajax({
-            //     type: 'POST',       // 요청 메서드
-            //     url: '/board/inqry/register?idx='+ idx+ '&ctent='+ctent+'&writer='+writer,
-            //     headers : { "content-type": "application/json"}, // 요청 헤더
-            //     data : JSON.stringify({idx: idx, ctent: ctent, writer: writer}),  // 서버로 전송할 데이터. stringify()로 직렬화 필요.
-            //
-            //     success : function(){
-            //         alert("문의가 등록되었습니다.");
-            //     },
-            //     error   : function(){ alert("insert error") } // 에러가 발생했을 때, 호출될 함수
-            // });
             $.ajax({
                 type:'POST',       // 요청 메서드
                 url: '/board/inqry/register/answer',
@@ -178,13 +174,38 @@
 
                 success : function(){
                     alert("문의가 등록되었습니다.");
+                    location.href="<c:url value='/board/inqry/list'/>"
                 },
                 error   : function(){ alert("insert error") } // 에러가 발생했을 때, 호출될 함수
             });
+        })
+
+        $('#updateBtn').click(function(){
+            let writer = $("input[name=writer]").val();
+            let ctent = $("textarea[name=answer]").val();
+            let idx = $("#idx").data("idx");
+            console.log("writer"+writer);
+            console.log("ctent" + ctent)
+            console.log("idx" +idx);
 
 
-
-
+            $.ajax({
+                type:'PATCH',
+                url:'/board/inqry/'+idx+'/'+ctent+'/'+writer,
+                success : (msg) => {
+                    if(msg === "UPDATE_ERR") {
+                        alert("수정중 오류가 발생했습니다.")
+                    } else if(msg = "UPDATE_OK") {
+                        alert("수정되었습니다.")
+                        location.href = "/board/inqry/list";
+                    }
+                },
+                error : (msg) => {
+                    if(msg === "EXCEPTION_ERR"){
+                        alert("수정중 오류가 발생했습니다.");
+                    }
+                }
+            })
         })
 
         // $("#removeBtn").click(function(e) {

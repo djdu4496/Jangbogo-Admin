@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -104,12 +105,39 @@ public class BoardController {
         return "/board/inqryList";
     }
 
+//    문의 수정 페이지로 이동
+    @GetMapping("/board/inqry/updatePage/{idx}/{ctent}/{writer}")
+    public String showUpdatePage(@PathVariable Integer idx, @PathVariable String ctent, @PathVariable String writer, Model m) {
+        System.out.println("????");
+        m.addAttribute("mode", "update");
+        m.addAttribute("ctent", ctent);
+        m.addAttribute("writer", writer);
+        System.out.println("ctent="+ctent);
+        System.out.println("writer = " + writer);
+
+        return "redirect:/board/inqry/ans/yet/"+idx;
+    }
+
+    @PostMapping("/board/inqry/register/update")
+    public void getInfo(Integer idx, String ctent, String writer, ProdInqryAnsDto prodInqryAnsDto) {
+        prodInqryAnsDto.setIdx(idx);
+        prodInqryAnsDto.setCtent(ctent);
+        prodInqryAnsDto.setWriter(writer);
+    }
+
+//    문의 수정과 작성 같은 페이지에서 실행
     @GetMapping("/board/inqry/ans/yet/{idx}")
-    public String showInqryAnsYet(@PathVariable Integer idx, Model m) {
-//        System.out.println("idx???"+idx);
+    public String showInqryAnsYet(@PathVariable Integer idx, Model m, HttpServletRequest request, ProdInqryAnsDto prodInqryAnsDto) {
         try {
+            String mode = request.getParameter("mode");
+            String ctent = request.getParameter("ctent");
+            String writer = request.getParameter("writer");
+
             ProdInqryDto inqry = boardService.showOneInqry(idx);
+            m.addAttribute("ctent", ctent);
+            m.addAttribute("writer", writer);
             m.addAttribute("inqry", inqry);
+            m.addAttribute("mode", mode);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -126,28 +154,6 @@ public class BoardController {
         }
         return "/board/inqryAnsOk";
     }
-
-//    @PostMapping("/board/inqry/register/{idx}/{ctent}/{writer}")
-//    public ResponseEntity<String> regAns(@PathVariable Integer idx, @PathVariable String ctent, @PathVariable String writer, ProdInqryAnsDto prodInqryAnsDto){
-//        try {
-//            System.out.println("idx"+idx);
-//            prodInqryAnsDto.setIdx(idx);
-//            prodInqryAnsDto.setCtent(ctent);
-//            prodInqryAnsDto.setWriter(writer);
-////            if(boardService.insertInqry(prodInqryAnsDto) != 1) {
-////                throw new Exception("insert fail");
-////            }
-////            Integer idx = prodInqryAnsDto.getIdx();
-//            if(boardService.insertInqry(prodInqryAnsDto) != 1) {
-//                throw new Exception("insert failed");
-//            }
-//            boardService.changeAnsState(idx);  // 답변상태코드 2로 변경
-//            return new ResponseEntity<String>("insert ok", HttpStatus.OK);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return new ResponseEntity<String>("insert error", HttpStatus.BAD_REQUEST);
-//        }
-//    }
 
     @PostMapping("/board/inqry/register/answer")
     public ResponseEntity<String> regAns(Integer idx, String ctent, String writer) {
@@ -168,24 +174,26 @@ public class BoardController {
         }
     }
 
-//    @PostMapping("/board/inqry/register/answer")
-//    public ResponseEntity<String> regAnswer(@RequestBody ProdInqryAnsDto prodInqryAnsDto) {
-//        System.out.println("???");
-//        try {
-//            if(boardService.insertInqry(prodInqryAnsDto) != 1) {
-//                throw new Exception("insert failed");
-//            }
-//                Integer idx = prodInqryAnsDto.getIdx();
-//            System.out.println("idx = " + idx);
-//                boardService.changeAnsState(idx);
-//            return new ResponseEntity<String>("insert_ok", HttpStatus.OK);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return new ResponseEntity<String>("insert_err", HttpStatus.BAD_REQUEST);
-//        }
-//
-//    }
-
-//    @PatchMapping("/board/inqry/register/{}")
-
+    @PatchMapping("/board/inqry/{idx}/{ctent}/{writer}")
+    public ResponseEntity<String> updateAnswer(@PathVariable Integer idx, @PathVariable String ctent, @PathVariable String writer) {
+        System.out.println("ctent = " + ctent);
+        String msg = "";
+        ProdInqryAnsDto prodInqryAnsDto = new ProdInqryAnsDto();
+        prodInqryAnsDto.setIdx(idx);
+        prodInqryAnsDto.setCtent(ctent);
+        prodInqryAnsDto.setWriter(writer);
+        System.out.println("prodInqryAnsDto = " + prodInqryAnsDto.toString());
+        try {
+            if(boardService.updateAnswer(prodInqryAnsDto) != 1) {
+                msg = "UPDATE_ERR";
+                return ResponseEntity.status(400).body(msg);
+            }
+            msg = "UPDATE_OK";
+            return ResponseEntity.ok().body(msg);
+        } catch (Exception e) {
+            msg = "EXCEPTION_ERR";
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(msg);
+        }
+    }
 }
