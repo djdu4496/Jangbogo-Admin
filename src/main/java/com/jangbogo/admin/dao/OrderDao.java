@@ -14,6 +14,7 @@ import java.util.Map;
 
 @Repository
 public class OrderDao {
+
     @Autowired SqlSession session;                                                                                      // SqlSession 자동 주입
 
     private static String namespace="com.jangbogo.admin.dao.OrderMapper.";                                              // 대소문자 구분X
@@ -57,7 +58,6 @@ public class OrderDao {
     public List<OrderDto> getSearchDPSelectPage(SearchCondition sc) {                                                   // 메서드명 : getSearchDPSelectPage
         return session.selectList(namespace + "selectDPList", sc);                                                      // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 2인 주문내역 목록 조회 결과 반환
     }                                                                                                                   // 반환타입 : List<OrderDto> - 매개변수 : SearchCondition sc
-
 
     public List<OrderDto> getSearchDeliveringSelectPage(SearchCondition sc) {                                           // 메서드명 : getSearchDeliveringSelectPage
         return session.selectList(namespace + "selectDeliveringList", sc);                                              // 기   능 : orderMapper.xml에 있는 SQL문을 실행하여 상태코드가 3인 주문내역 목록 조회 결과 반환

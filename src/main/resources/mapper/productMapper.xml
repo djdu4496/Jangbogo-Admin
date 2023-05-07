@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jangbogo.admin.dao.ProductMapper">
+    <!--
+        태   그 : sql
+        아이디명 : searchCondition
+        기   능 : 반복 할 내용을 간단히 저장 후 재사용 - 주문 리스트 검색 조건 쿼리
+    -->
+    <sql id="searchCondition">
+        <choose>
+            <when test='option=="E"'>
+                AND A.IDX LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="N"'>
+                AND A.NAME LIKE concat('%', #{keyword}, '%')
+            </when>
+            <otherwise>
+                AND (A.IDX LIKE concat('%', #{keyword}, '%')
+                OR A.NAME LIKE concat('%', #{keyword}, '%'))
+            </otherwise>
+        </choose>
+    </sql>
+
+    <!--
+        태   그 : select
+        기   능 : '전체' 상품 내역 조회
+        아이디명 : selectAll
+    -->
+    <select id="selectAll" parameterType="SearchCondition" resultType="ProductDto">
+        SELECT A.IDX as idx, A.SELER_IDX as seler_idx, A.SELER_PROD_CD as seler_prod_cd, A.NAME as name, A.PRC as prc, A.DC_STATE_CD as dc_state_cd, A.DC_RATE as dc_rate,
+        B.REG_STATE_CD as reg_state_cd, B.STATE_CD as state_cd, B.SLE_START_TM as sle_start_tm, B.SLE_END_TM as sle_end_tm,
+        C.CPNM as cpnm
+        FROM PRODUCT A
+        JOIN PROD_DTL B
+        ON idx = B.PROD_IDX
+        JOIN SELER C
+        ON C.IDX = seler_idx
+        <include refid="searchCondition"/>
+        ORDER BY B.CREATE_TM DESC, A.IDX DESC
+        LIMIT #{offset}, #{pageSize};
+    </select>
+
+    <!--
+        태   그 : select
+        기   능 : '전체' 상품 내역 수 조회
+        아이디명 : selectResultCnt
+    -->
+    <select id="selectResultCnt" parameterType="SearchCondition" resultType="int">
+        SELECT count(*)
+        FROM PRODUCT A
+        JOIN PROD_DTL B
+        ON idx = B.PROD_IDX
+        JOIN SELER C
+        ON C.IDX = seler_idx
+        WHERE true
+        <include refid="searchCondition"/>
+    </select>
+    <!--
+        태   그 : select
+        기   능 : 상품 '상세' 조회
+        아이디명 : selectProduct
+    -->
+    <select id="selectProduct" parameterType="Integer" resultType="ProductDetailDto">
+        SELECT A.IDX as idx, A.SELER_PROD_CD as seler_prod_cd, A.NAME as name, A.PRC as prc, A.CTENT as ctent, A.DC_STATE_CD as dc_state_cd, A.DC_RATE as dc_rate, A.DSPLY_STATE_CD as dsply_state_cd,
+               B.ORPLC as orplc, B.SLE_UNIT as sle_unit, B.WEIGHT as weight, B.MFT_TM as mft_tm, B.DISTB_TLMT as distb_tlmt, B.WARN as warn, B.SLE_QUTY as sle_quty, B.MAX_SLE_QUTY as max_sle_quty, B.REG_STATE_CD as reg_state_cd,
+               B.STATE_CD as state_cd, B.SFKP_TP_STATE_CD as sfkp_tp_state_cd, B.CREATE_TM as create_tm, B.SLE_START_TM as sle_start_tm , B.SLE_END_TM as sle_end_tm, B.INV_QUTY as inv_quty, B.GUID as guid,
+               C.CPNM as cpnm,
+               E.DLVRY_TYPE_CD as dlvry_type_cd, E.PACK_STATE_CD as pack_state_cd, E.STATE_CD as dlvry_mthd_state_cd, E.WARN as dlvry_mthd_warn, E.DEXP_POLI as dexp_poli, E.DLVRY_VEND as dlvry_vend, E.TLMT as tlmt, E.DEXP as dexp
+        FROM PRODUCT A
+        JOIN PROD_DTL B
+        ON idx = B.PROD_IDX
+        JOIN SELER C
+        ON C.IDX = seler_idx
+        JOIN CATEGORY D
+        ON A.CATE_IDX = D.ID
+        JOIN DLVRY_MTHD E
+        ON E.IDX = D.DLVRY_EDI_IDX
+        WHERE B.PROD_IDX = ${prod_idx};
+    </select>
+
+    <!--
+        태   그 : select
+        기   능 : '승인대기' 상태인 상품 내역 수 조회
+        아이디명 : selectPendingResultCnt
+    -->
+    <select id="selectPendingResultCnt" parameterType="SearchCondition" resultType="int">
+        SELECT count(*)
+        FROM PRODUCT A
+        JOIN PROD_DTL B
+        ON idx = B.PROD_IDX
+        JOIN SELER C
+        ON C.IDX = seler_idx
+        JOIN CATEGORY D
+        ON A.CATE_IDX = D.ID
+        JOIN DLVRY_MTHD E
+        ON E.IDX = D.DLVRY_EDI_IDX
+        WHERE reg_state_cd = 1 AND TRUE
+        <include refid="searchCondition"/>
+        ORDER BY B.CREATE_TM DESC, A.IDX DESC
+        LIMIT #{offset}, #{pageSize};
+    </select>
+    <!--
+        태   그 : select
+        기   능 : '승인대기' 상태인 상품 내역 조회
+        아이디명 : selectPendingAll
+    -->
+    <select id="selectPendingAll" parameterType="SearchCondition" resultType="ProductDto">
+        SELECT A.IDX as idx, A.SELER_PROD_CD as seler_prod_cd, A.NAME as name, A.PRC as prc, A.CTENT as ctent, A.DC_STATE_CD as dc_state_cd, A.DC_RATE as dc_rate, A.DSPLY_STATE_CD as dsply_state_cd,
+               B.ORPLC as orplc, B.SLE_UNIT as sle_unit, B.WEIGHT as weight, B.MFT_TM as mft_tm, B.DISTB_TLMT as distb_tlmt, B.WARN as warn, B.SLE_QUTY as sle_quty, B.MAX_SLE_QUTY as max_sle_quty, B.REG_STATE_CD as reg_state_cd,
+               B.STATE_CD as state_cd, B.SFKP_TP_STATE_CD as sfkp_tp_state_cd, B.CREATE_TM as create_tm, B.SLE_START_TM as sle_start_tm , B.SLE_END_TM as sle_end_tm, B.INV_QUTY as inv_quty, B.GUID as guid,
+               C.CPNM as cpnm,
+               E.DLVRY_TYPE_CD as dlvry_type_cd, E.PACK_STATE_CD as pack_state_cd, E.STATE_CD as dlvry_mthd_state_cd, E.WARN as dlvry_mthd_warn, E.DEXP_POLI as dexp_poli, E.DLVRY_VEND as dlvry_vend, E.TLMT as tlmt, E.DEXP as dexp
+        FROM PRODUCT A
+        JOIN PROD_DTL B
+        ON idx = B.PROD_IDX
+        JOIN SELER C
+        ON C.IDX = seler_idx
+        JOIN CATEGORY D
+        ON A.CATE_IDX = D.ID
+        JOIN DLVRY_MTHD E
+        ON E.IDX = D.DLVRY_EDI_IDX
+        WHERE reg_state_cd = 1 AND TRUE
+        <include refid="searchCondition"/>
+        ORDER BY B.CREATE_TM DESC, A.IDX DESC
+        LIMIT #{offset}, #{pageSize};
+    </select>
+    <!--
+        태   그 : update
+        기   능 : '주문상태코드'가 3인 주문의 상태코드를 '4'로 수정
+         아이디명 : updateProductRegState
+    -->
+    <update id="updateProductRegState" parameterType="map">
+        UPDATE PROD_DTL
+        SET REG_STATE_CD = #{reg_state_cd}, UPT_TM = now()
+        WHERE PROD_IDX = ${prod_idx}
+    </update>
+</mapper>

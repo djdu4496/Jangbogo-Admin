@@ -101,7 +101,48 @@
         WHERE IDX = #{idx};
     </select>
 
+<!--  상품문의  -->
 
-
-
+<!--  상품문의 리스트 전체보기 - 상품테이블에서 상품이름, 회원테이블에서 회원닉네임 가져오기-->
+    <select id="showProdInqryList" resultType="ProdInqryDto">
+        select
+            p.name, pi.idx, pi.prod_idx, pi.user_idx, pi.title, pi.ctent, pi.writer, pi.res_state_cd, pi.state_cd, pi.wrt_tm, pd.state_cd as 'prodDetail_state_cd'
+        from prod_inqry pi
+                 join product p on p.idx = pi.prod_idx
+                 join prod_dtl pd on pd.prod_idx = p.idx;
+--         where pd.state_cd != 3
+    </select>
+<!--  상품문의 리스트 중 답변 대기이면서 삭제되지 않은 게시물 개수 보기  -->
+    <select id="cntWaitingAnswer" resultType="Integer">
+        select count(*)
+        from prod_inqry pi
+            join product p on p.idx = pi.prod_idx
+        where RES_STATE_CD = 1 and STATE_CD = 1;
+    </select>
+<!-- 상세페이지에서 답변이 없는 상품문의 한 개 보기 -->
+    <select id="showOneInqry" parameterType="Integer" resultType="ProdInqryDto">
+        select
+            pi.idx, pi.prod_idx, pi.user_idx, pi.title, pi.ctent, pi.writer, pi.res_state_cd, pi.state_cd, pi.wrt_tm
+        from prod_inqry pi
+        where pi.idx = #{idx};
+    </select>
+<!--  상세페이지에서 답변이 있는 상품문의 한 개 보기  -->
+    <select id="showAnsOKInqry" parameterType="Integer" resultType="ProdInqryDto">
+        select
+            pi.idx, pi.prod_idx, pi.user_idx, pi.title, pi.ctent, pi.writer, pi.res_state_cd, pi.state_cd, pi.wrt_tm, pia.ctent as 'ans_ctent', pia.writer as 'ans_writer', pia.RESPS_TM as 'ans_resps_tm', pia.CRT_IDX as 'ans_crt_idx', pia.UPT_IDX as 'ans_upt_idx', pia.STATE_CD as 'ans_state_cd'
+        from prod_inqry pi join prod_inqry_ans pia
+                                on pi.idx = pia.idx
+        where pi.idx = #{idx};
+    </select>
+<!--  상품문의 답변 추가하기  -->
+    <insert id="insertInqry" parameterType="ProdInqryAnsDto">
+        insert into prod_inqry_ans(idx, ctent, writer)
+        values (#{idx}, #{ctent}, #{writer});
+    </insert>
+<!-- 상품문의 답변 상태코드 답변완료로 변경하기 -->
+    <update id="changeAnsState" parameterType="Integer">
+        update prod_inqry
+        set RES_STATE_CD = 2
+        where idx = #{idx};
+    </update>
 </mapper>

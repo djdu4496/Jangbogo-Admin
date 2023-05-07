@@ -1,0 +1,48 @@
+.inqry_title {
+    display: flex;
+    margin-top: 16px;
+    justify-content: space-between;
+}
+.inqry_title .title {
+    width: 100px;
+    padding-top: 12px;
+}
+
+.inqry_title .title span {
+}
+.inqry_title .title_input {
+    height: 44px;
+    flex-grow: 6.5;
+    flex-shrink: 1;
+    flex-basis: 0;
+}
+.inqry_title .title_input input {
+    height: 44px;
+    width: 444px;
+    padding: 0px 11px 0px 15px;
+    font-size: 14px;
+}
+.inqry_content {
+    display: flex;
+    margin-top: 16px;
+    justify-content: space-between;
+}
+.inqry_content .content {
+    width: 100px;
+    padding-top: 12px;
+}
+.inqry_content .content span {
+}
+.inqry_content .content_input {
+    height: 205px;
+    /*width: 444px;*/
+    flex-grow: 6.5;
+    flex-shrink: 1;
+    flex-basis: 0;
+}
+.inqry_content .content_input input {
+    height: 265px;
+    width: 444px;
+    padding: 0px 11px 0px 15px;
+    font-size: 14px;
+}

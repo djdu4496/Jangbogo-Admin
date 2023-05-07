@@ -1,5 +1,7 @@
 package com.jangbogo.admin.dao;
 
+import com.jangbogo.admin.domain.ProdInqryAnsDto;
+import com.jangbogo.admin.domain.ProdInqryDto;
 import com.jangbogo.admin.domain.ProdReviewDto;
 import com.jangbogo.admin.domain.SearchCondition;
 import org.apache.ibatis.session.SqlSession;
@@ -46,5 +48,28 @@ public class BoardDaoImpl implements BoardDao {
         return session.selectOne( nameSpace + "checkState", idx);
     }
 
+//    상품 문의
+    public List<ProdInqryDto> showProdInqryList() throws Exception {
+        return session.selectList(nameSpace + "showProdInqryList");
+    }
 
+    public Integer cntWaitingAnswer() throws Exception {
+        return session.selectOne(nameSpace + "cntWaitingAnswer");
+    }
+
+    public ProdInqryDto showOneInqry(Integer idx) throws Exception {
+        return session.selectOne(nameSpace + "showOneInqry", idx);
+    }
+
+    public ProdInqryDto showAnsOKInqry(Integer idx) throws Exception {
+        return session.selectOne(nameSpace + "showAnsOKInqry", idx);
+    }
+
+    public Integer insertInqry(ProdInqryAnsDto prodInqryAnsDto) throws Exception {
+        return session.insert(nameSpace + "insertInqry", prodInqryAnsDto);
+    }
+
+    public Integer changeAnsState(Integer idx) throws Exception {
+        return session.update(nameSpace + "changeAnsState", idx);
+    }
 }

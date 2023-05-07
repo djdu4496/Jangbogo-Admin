@@ -5,13 +5,11 @@ import com.jangbogo.admin.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Map;
@@ -24,7 +22,7 @@ public class OrderController {
 
     // 메서드명 : getList
     // 기   능 : 주문 목록 가져오기
-    // 매개변수 : Model model
+    // 매개변수 : Model model, SearchCondition sc
     // 반환타입 : String
     @GetMapping("/order/list")
     public String getList(Model model, SearchCondition sc) {

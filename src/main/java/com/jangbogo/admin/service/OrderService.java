@@ -13,7 +13,8 @@ import java.util.List;
 @Service
 public class OrderService {
 
-    @Autowired OrderDao orderDao;
+    @Autowired
+    OrderDao orderDao;
 
     // 메서드명 : getList
     // 기   능 : OrderDao의 getList메서드 호출 - 전체주문조회

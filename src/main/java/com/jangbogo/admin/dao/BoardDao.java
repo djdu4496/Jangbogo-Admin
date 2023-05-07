@@ -1,5 +1,7 @@
 package com.jangbogo.admin.dao;
 
+import com.jangbogo.admin.domain.ProdInqryAnsDto;
+import com.jangbogo.admin.domain.ProdInqryDto;
 import com.jangbogo.admin.domain.ProdReviewDto;
 import com.jangbogo.admin.domain.SearchCondition;
 
@@ -14,4 +16,11 @@ public interface BoardDao {
     Integer toDeleteState(Integer idx) throws Exception;
     Integer toRegisterState(Integer idx) throws Exception;
     Integer checkState(Integer idx) throws Exception;
+
+    List<ProdInqryDto> showProdInqryList() throws Exception;
+    Integer cntWaitingAnswer() throws Exception;
+    ProdInqryDto showOneInqry(Integer idx) throws Exception;
+    ProdInqryDto showAnsOKInqry(Integer idx) throws Exception;
+    Integer insertInqry(ProdInqryAnsDto prodInqryAnsDto) throws Exception;
+    Integer changeAnsState(Integer idx) throws Exception;
 }
