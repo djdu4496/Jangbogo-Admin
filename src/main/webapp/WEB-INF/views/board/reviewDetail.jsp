@@ -139,6 +139,7 @@
                     success: function (msg) {
                         if (msg === "DELETE_OK") {
                             alert("삭제에 성공했습니다");
+                            console.log("h2");
                             location.href = redirect_url;
                         }
                     },
