@@ -23,7 +23,7 @@
             </when>
             <otherwise>
                 AND (PROD_LATE.IDX LIKE concat('%', #{keyword}, '%')
-                OR PROD_LATE.WRITER LIKE concat('%', #{keyword}, '%') OR PROD_LATE.PROD_IDX LIKE concat('%', #{keyword}, '%') OR PRODUCT.NAME LIKE concat('%', #{keyword}, '%') OR PROD_LATE.CTENT LIKE concat('%', #{keyword}, '%'))
+                OR PROD_LATE.WRITER LIKE concat('%', #{keyword}, '%') OR PROD_LATE.PROD_IDX LIKE concat('%', #{keyword}, '%') OR PRODUCT.NAME LIKE concat('%', #{keyword}, '%') OR PROD_LATE.CTENT LIKE concat('%', #{keyword}, '%') OR PROD_LATE.OPUB_YN LIKE concat('%', #{keyword}, '%'))
             </otherwise>
         </choose>
     </sql>
@@ -66,6 +66,39 @@
                            FROM PROD_LATE
                            WHERE IDX = #{idx}) AS PROD_LATE
         WHERE PRODUCT.IDX = PROD_LATE.PROD_IDX AND USER.IDX = PROD_LATE.USER_IDX;
+    </select>
+
+    <!--
+        태   그 : update
+        기   능 : '상품 후기' 테이블에서 해당 후기의 상태를 '2'(삭제)로 변경한다
+        아이디명 : toDeleteState
+    -->
+    <update id="toDeleteState" parameterType="int">
+        UPDATE PROD_LATE
+        SET STATE_CD = 2
+        WHERE IDX = #{idx};
+    </update>
+
+    <!--
+        태   그 : update
+        기   능 : '상품 후기' 테이블에서 해당 후기의 상태를 '1'(등록)로 변경한다
+        아이디명 : toRegisterState
+    -->
+    <update id="toRegisterState" parameterType="int">
+        UPDATE PROD_LATE
+        SET STATE_CD = 1
+        WHERE IDX = #{idx};
+    </update>
+
+    <!--
+        태   그 : select
+        기   능 : '상품 후기' 테이블에서 해당 후기의 상태를 조회한다
+        아이디명 : checkState
+    -->
+    <select id="checkState" parameterType="int" resultType="int">
+        select STATE_CD
+        FROM PROD_LATE
+        WHERE IDX = #{idx};
     </select>
 
 <!--  상품문의  -->

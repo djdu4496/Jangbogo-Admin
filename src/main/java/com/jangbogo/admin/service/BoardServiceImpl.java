@@ -28,8 +28,23 @@ public class BoardServiceImpl implements BoardService {
         return boardDao.ReviewSearchResultCnt(sc);
     }
 
+    @Override
     public ProdReviewDto selectReviewDetail(Integer idx) throws Exception {
         return boardDao.selectReviewDetail(idx);
+    }
+
+    @Override
+    public Integer toDeleteState(Integer idx) throws Exception {
+        return boardDao.toDeleteState(idx);
+    }
+
+    @Override
+    public Integer toRegisterState(Integer idx) throws Exception {
+        return boardDao.toRegisterState(idx);
+    }
+    @Override
+    public Integer checkState(Integer idx) throws Exception {
+        return boardDao.checkState(idx);
     }
 
 

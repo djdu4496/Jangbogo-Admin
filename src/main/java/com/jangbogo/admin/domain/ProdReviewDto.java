@@ -25,6 +25,7 @@ public class ProdReviewDto {
     private Integer rnk_cd; // 상품후기등급코드
     private String opub_yn; // 상품후기공개여부
     private Integer decl_cnt; // 상품후기신고개수
+    private Integer state_cd; // 상품후기상태코드 (등록,삭제)
     private Date crt_tm; // 최초등록일자
     private Integer crt_idx; // 최초등록자식별번호
     private Date upt_tm; // 최종수정일자
@@ -38,10 +39,15 @@ public class ProdReviewDto {
     private String nick_nm; // 닉네임
     private String mpno; // 휴대전화번호
 
+
+    // 상품상세(PROD_DTL)
+    private Integer prod_dtl_state_cd; // 상품상태코드
+
     // 생성자(Constructor)
     public ProdReviewDto() {}
 
     // Getter and Setter
+
 
     public Integer getIdx() {
         return idx;
@@ -147,6 +153,14 @@ public class ProdReviewDto {
         this.decl_cnt = decl_cnt;
     }
 
+    public Integer getState_cd() {
+        return state_cd;
+    }
+
+    public void setState_cd(Integer state_cd) {
+        this.state_cd = state_cd;
+    }
+
     public Date getCrt_tm() {
         return crt_tm;
     }
@@ -211,6 +225,14 @@ public class ProdReviewDto {
         this.mpno = mpno;
     }
 
+    public Integer getProd_dtl_state_cd() {
+        return prod_dtl_state_cd;
+    }
+
+    public void setProd_dtl_state_cd(Integer prod_dtl_state_cd) {
+        this.prod_dtl_state_cd = prod_dtl_state_cd;
+    }
+
     // toString()
 
     @Override
@@ -229,6 +251,7 @@ public class ProdReviewDto {
                 ", rnk_cd=" + rnk_cd +
                 ", opub_yn='" + opub_yn + '\'' +
                 ", decl_cnt=" + decl_cnt +
+                ", state_cd=" + state_cd +
                 ", crt_tm=" + crt_tm +
                 ", crt_idx=" + crt_idx +
                 ", upt_tm=" + upt_tm +
@@ -237,6 +260,7 @@ public class ProdReviewDto {
                 ", email='" + email + '\'' +
                 ", nick_nm='" + nick_nm + '\'' +
                 ", mpno='" + mpno + '\'' +
+                ", prod_dtl_state_cd=" + prod_dtl_state_cd +
                 '}';
     }
 }
