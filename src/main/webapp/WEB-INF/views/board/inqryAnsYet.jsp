@@ -170,7 +170,7 @@
 
                 success : function(){
                     alert("문의가 등록되었습니다.");
-                    location.href="<c:url value='/board/inqry/list'/>"
+                    location.href="/board/inqry/list";
                 },
                 error   : function(){ alert("insert error") } // 에러가 발생했을 때, 호출될 함수
             });
@@ -206,16 +206,16 @@
 
         $("#removeBtn").click(function(e) {
             let idx = $('#idx').data('idx');
-            console.log("idx=="+idx);
-            let mode = "${mode}";
-            let code = 2;
-            if(mode == "update") {
-                code = 1;
-            }
-            console.log("mode"+mode);
+            <%--console.log("idx=="+idx);--%>
+            <%--let mode = "${mode}";--%>
+            <%--let code = 2;--%>
+            <%--if(mode == "update") {--%>
+            <%--    code = 1;--%>
+            <%--}--%>
+            // console.log("mode"+mode);
             $.ajax({
                 type: 'PATCH',
-                url: '/board/inqry/'+idx+'?code='+code,
+                url: '/board/inqry/delete/'+idx,
                 success: function(msg) {
                     alert("success");
                     if(msg === "UPDATE_ERR") {

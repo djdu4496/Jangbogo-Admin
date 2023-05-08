@@ -114,8 +114,11 @@
                                                 <c:when test="${inqry.state_cd == 1}">
                                                     정상
                                                 </c:when>
+                                                <c:when test="${inqry.state_cd == 2}">
+                                                    관리자에 의해 삭제
+                                                </c:when>
                                                 <c:when test="${inqry.state_cd == 3}">
-                                                    삭제
+                                                    고객에 의해 삭제
                                                 </c:when>
                                             </c:choose>
                                         </td>

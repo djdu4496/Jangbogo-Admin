@@ -90,14 +90,18 @@
                                     id="listBtn">
                                 목록으로
                             </button>
-                            <button class="btn btn-facebook px-md-4 py-md-2 mr-2"
-                                    id="updateBtn">
-                                수정
-                            </button>
-                            <button class="btn btn-facebook px-md-4 py-md-2 mr-2"
-                                    id="removeBtn">
-                                삭제
-                            </button>
+                            <c:choose>
+                                <c:when test="${inqry.state_cd == 1}">
+                                    <button class="btn btn-facebook px-md-4 py-md-2 mr-2"
+                                            id="updateBtn">
+                                        수정
+                                    </button>
+                                    <button class="btn btn-facebook px-md-4 py-md-2 mr-2"
+                                            id="removeBtn">
+                                        삭제
+                                    </button>
+                                </c:when>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
@@ -116,7 +120,6 @@
 
 
     $(document).ready(function() {
-
         $("#listBtn").click(function(e) {
             location.href = "/board/inqry/list";
         })
@@ -134,10 +137,10 @@
 
         $("#removeBtn").click(function(e) {
             let idx = $('.idx').data('idx');
-            console.log("idx??? "+ idx)
+            // console.log("idx??? "+ idx)
             $.ajax({
                 type: 'PATCH',
-                url: '/board/inqry/'+idx+'?code='+1,
+                url: '/board/inqry/delete/'+idx,
                 success: function(msg) {
                     if(msg === "UPDATE_ERR") {
                         alert("답변 삭제중 오류가 발생했습니다.");
