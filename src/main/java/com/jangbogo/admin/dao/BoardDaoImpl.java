@@ -72,4 +72,16 @@ public class BoardDaoImpl implements BoardDao {
     public Integer changeAnsState(Integer idx) throws Exception {
         return session.update(nameSpace + "changeAnsState", idx);
     }
+
+    public Integer updateAnswer(ProdInqryAnsDto prodInqryAnsDto) throws Exception {
+        return session.update(nameSpace + "updateAnswer", prodInqryAnsDto);
+    }
+
+    public Integer updateAnsTbCode(Integer idx) throws Exception {
+        return session.update(nameSpace + "updateAnsTbCode", idx);
+    }
+
+    public Integer updateInqryTbCode(Integer idx) throws Exception {
+        return session.update(nameSpace + "updateInqryTbCode", idx);
+    }
 }
