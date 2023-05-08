@@ -61,6 +61,7 @@
                                     <th>상품명</th>
                                     <th>작성내용</th>
                                     <th>공개여부</th>
+                                    <th>후기상태</th>
                                     <th>작성일자</th>
                                     <th>수정일자</th>
                                 </tr>
@@ -79,6 +80,12 @@
                                         <td class="id">${fn:substring(review.ctent,0 ,10 )} ...</td>
                                         <td class="id">
                                                 ${review.opub_yn == 'Y' ? "공개" : "비공개"}
+                                        </td>
+                                        <td class="id">
+                                            <c:choose>
+                                                <c:when test="${review.state_cd == 1}">등록</c:when>
+                                                <c:when test="${review.state_cd == 2}">삭제</c:when>
+                                            </c:choose>
                                         </td>
                                         <td class="id">
                                             <fmt:formatDate value="${review.reg_tm}" pattern="yyyy-MM-dd hh:mm" type="date"/>
