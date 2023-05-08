@@ -196,4 +196,34 @@ public class BoardController {
             return ResponseEntity.status(500).body(msg);
         }
     }
+
+    @PatchMapping("/board/inqry/{idx}")
+    public ResponseEntity<String> deleteAnswer(@PathVariable Integer idx, String code) {
+        String msg = "";
+        System.out.println("idx = " + idx);
+        System.out.println("code = " + code);
+        try {
+            if(code == "1") {
+                if(boardService.updateAnsTbCode(idx) != 1 || boardService.updateInqryTbCode(idx) != 1) {
+                    msg = "UPDATE_ERR";
+                    return ResponseEntity.status(400).body(msg);
+                }
+                msg = "UPDATE_OK";
+                return ResponseEntity.ok().body(msg);
+            } else if(code == "2") {
+                if(boardService.updateInqryTbCode(idx) != 1) {
+                    msg = "UPDATE_ERR";
+                    return ResponseEntity.status(400).body(msg);
+                }
+                msg = "UPDATE_OK";
+                return ResponseEntity.ok().body(msg);
+            }
+            msg = "UPDATE_ERR";
+            return ResponseEntity.status(400).body(msg);
+        } catch (Exception e) {
+            e.printStackTrace();
+            msg = "UPDATE_ERR";
+            return ResponseEntity.status(500).body(msg);
+        }
+    }
 }

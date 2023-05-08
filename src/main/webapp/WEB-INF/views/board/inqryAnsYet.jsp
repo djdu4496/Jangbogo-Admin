@@ -138,13 +138,9 @@
 <%@ include file="/WEB-INF/views/include/script.jsp" %>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>--%>
 
 <script>
     $(document).ready(function() {
-        <%--let title = "문의"+"${mode}"--%>
-        <%--console.log("title"+title);--%>
-        // $("h5").append()
 
         $("#listBtn").click(function(e) {
             location.href = "/board/inqry/list";
@@ -208,26 +204,35 @@
             })
         })
 
-        // $("#removeBtn").click(function(e) {
-        //     $.ajax({
-        //         type: 'PATCH',
-        //         url: '/board/inqry/register/{}',
-        //         headers : { "content-type": "application/json"}, // 요청 헤더
-        //         data: JSON.stringify({idx: idx, ctent: ctent, writer:writer}),
-        //         success: function(msg) {
-        //             if(msg === "INSERT_ERR") {
-        //                 alert("답변등록중 오류가 발생했습니다.");
-        //             } else if(msg === "INSERT_OK") {
-        //                 alert("답변이 등록되었습니다.");
-        //             }
-        //         },
-        //         error: function() {
-        //             if(msg === "INSERT_ERR"){
-        //                 alert("요청중 오류가 발생했습니다.")
-        //             }
-        //         }
-        //     })
-        // })
+        $("#removeBtn").click(function(e) {
+            let idx = $('#idx').data('idx');
+            console.log("idx=="+idx);
+            let mode = "${mode}";
+            let code = 2;
+            if(mode == "update") {
+                code = 1;
+            }
+            console.log("mode"+mode);
+            $.ajax({
+                type: 'PATCH',
+                url: '/board/inqry/'+idx+'?code='+code,
+                success: function(msg) {
+                    alert("success");
+                    if(msg === "UPDATE_ERR") {
+                        alert("답변 삭제중 오류가 발생했습니다.");
+                    } else if(msg === "UPDATE_OK") {
+                        alert("답변이 삭제되었습니다.");
+                        location.href = "/board/inqry/list";
+                    }
+                },
+                error: function(msg) {
+                    alert("error")
+                    if(msg === "UPDATE_ERR"){
+                        alert("답변 삭제중 오류가 발생했습니다.")
+                    }
+                }
+            })
+        })
     })
 </script>
 </body>
