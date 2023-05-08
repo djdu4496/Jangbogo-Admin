@@ -48,8 +48,8 @@
         </a>
         <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/product/list/pending">승인 대기</a>
-                <a class="collapse-item" href="/product/list">전체</a>
+                <a class="collapse-item" href="/product/list">전체상품조회</a>
+                <a class="collapse-item" href="/product/list/pending">승인대기관리</a>
             </div>
         </div>
     </li>
@@ -71,6 +71,24 @@
                 <a class="collapse-item" href="/order/list/delivering">배송중관리</a>
             </div>
         </div>
+    </li>
+    <hr class="sidebar-divider d-none d-md-block">
+    <div class="sidebar-heading">
+        게시판 관리
+    </div>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
+           aria-expanded="true" aria-controls="collapseThree">
+            <i class="fas fa-fw fa-shopping-bag"></i>
+            <span>게시판 관리</span>
+        </a>
+        <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/board/review/list">상품 후기 조회</a>
+                <a class="collapse-item" href="/board/inqry/list">상품 문의 조회</a>
+            </div>
+        </div>
+
     </li>
     <hr class="sidebar-divider d-none d-md-block">
     <div class="text-center d-none d-md-inline">
