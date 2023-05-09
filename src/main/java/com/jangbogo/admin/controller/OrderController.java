@@ -1,7 +1,7 @@
 package com.jangbogo.admin.controller;
 
 import com.jangbogo.admin.domain.*;
-import com.jangbogo.admin.service.OrderService;
+import com.jangbogo.admin.service.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import java.util.Map;
 public class OrderController {
 
     @Autowired
-    OrderService orderService;
+    OrderServiceImpl orderService;
 
     // 메서드명 : getList
     // 기   능 : 주문 목록 가져오기
