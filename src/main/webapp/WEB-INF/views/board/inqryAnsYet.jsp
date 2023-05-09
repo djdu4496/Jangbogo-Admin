@@ -117,12 +117,12 @@
                                     수정
                                 </button>
                             </c:if>
-                            <c:if test="${mode eq ''}">
+<%--                            <c:if test="${mode eq ''}">--%>
                             <button class="btn btn-danger px-md-4 py-md-2 mr-2"
                                     id="registerBtn">
                                 등록
                             </button>
-                            </c:if>
+<%--                            </c:if>--%>
                             <button class="btn btn-facebook px-md-4 py-md-2 mr-2"
                                     id="removeBtn">
                                 삭제
