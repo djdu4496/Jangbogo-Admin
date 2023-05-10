@@ -132,19 +132,19 @@
                                 <c:if test="${ph.showPrev}">
                                     <li class="page-item">
                                         <a class="page-link"
-                                           href="<c:url value="/order/list${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
+                                           href="<c:url value="/order/list/delivering${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
                                     </li>
                                 </c:if>
                                 <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
                                     <li class="page-item ${i==ph.sc.page? "active" : ""}">
                                         <a class="page-link"
-                                           href="<c:url value="/order/list/deliveryPreparing${ph.sc.getQueryString(i)}"/>">${i}</a>
+                                           href="<c:url value="/order/list/delivering${ph.sc.getQueryString(i)}"/>">${i}</a>
                                     </li>
                                 </c:forEach>
                                 <c:if test="${ph.showNext}">
                                     <li class="page-item">
                                         <a class="page-link"
-                                           href="<c:url value="/order/list/deliveryPreparing${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>
+                                           href="<c:url value="/order/list/delivering${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>
                                     </li>
                                 </c:if>
                             </ul>
