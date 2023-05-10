@@ -94,12 +94,10 @@ public class BoardController {
     public String showInqryList(Model m) {
 
         try {
-//            System.out.println("changedby"+changedby); //ad
             List<ProdInqryDto> list = boardService.showProdInqryList();
             Integer totalCnt = boardService.cntWaitingAnswer();
             m.addAttribute("list", list);
             m.addAttribute("totalCnt", totalCnt);
-//            m.addAttribute("changedby", changedby);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -110,12 +108,9 @@ public class BoardController {
 //    문의 수정 페이지로 이동
     @GetMapping("/board/inqry/updatePage/{idx}/{ctent}/{writer}")
     public String showUpdatePage(@PathVariable Integer idx, @PathVariable String ctent, @PathVariable String writer, Model m) {
-        System.out.println("????");
         m.addAttribute("mode", "update");
         m.addAttribute("ctent", ctent);
         m.addAttribute("writer", writer);
-        System.out.println("ctent="+ctent);
-        System.out.println("writer = " + writer);
 
         return "redirect:/board/inqry/ans/yet/"+idx;
     }
@@ -178,13 +173,11 @@ public class BoardController {
 
     @PatchMapping("/board/inqry/{idx}/{ctent}/{writer}")
     public ResponseEntity<String> updateAnswer(@PathVariable Integer idx, @PathVariable String ctent, @PathVariable String writer) {
-        System.out.println("ctent = " + ctent);
         String msg = "";
         ProdInqryAnsDto prodInqryAnsDto = new ProdInqryAnsDto();
         prodInqryAnsDto.setIdx(idx);
         prodInqryAnsDto.setCtent(ctent);
         prodInqryAnsDto.setWriter(writer);
-        System.out.println("prodInqryAnsDto = " + prodInqryAnsDto.toString());
         try {
             if(boardService.updateAnswer(prodInqryAnsDto) != 1) {
                 msg = "UPDATE_ERR";
@@ -202,8 +195,6 @@ public class BoardController {
     @PatchMapping("/board/inqry/delete/{idx}")
     public ResponseEntity<String> deleteAnswer(@PathVariable Integer idx, String code) {
         String msg = "";
-        System.out.println("idx = " + idx);
-        System.out.println("code = " + code);
         try {  //고객이 단 문의를 삭제한다.
             if(boardService.updateInqryTbCode(idx) != 1) {
                 msg = "UPDATE_ERR";
