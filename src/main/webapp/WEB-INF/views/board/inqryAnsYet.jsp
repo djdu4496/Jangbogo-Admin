@@ -20,8 +20,12 @@
             width: 750px;
             height: 200px;
             box-sizing: border-box;
-
         }
+
+        .input_name {
+            display: flex;
+        }
+
     </style>
 </head>
 <body id="page-top">
@@ -85,7 +89,7 @@
                                 <td class="col-3 light-blue">답변 작성자</td>
                                 <td class="id">
                                     <div class="input-line">
-                                        <div class="input-box">
+                                        <div class="input-box input_name">
                                             <div class="input">
                                                 <input
                                                         name="writer"
@@ -94,6 +98,7 @@
                                                         value="${writer}"
                                                 />
                                             </div>
+                                            <div id="writer_text_cnt" class="text_cnt">(0 / 20)</div>
                                             <div class="error-msg nick"></div>
                                         </div>
                                     </div>
@@ -102,7 +107,8 @@
                             <tr>
                                 <td class="col-3 light-blue">답변작성</td>
                                 <td class="id">
-                                    <textarea name="answer">${ctent}</textarea>
+                                    <textarea name="answer" id="answer">${ctent}</textarea>
+                                    <div id="ctent_text_cnt" class="text_cnt">(0 / 3000)</div>
                                 </td>
                             </tr>
                         </table>
@@ -117,12 +123,12 @@
                                     수정
                                 </button>
                             </c:if>
-<%--                            <c:if test="${mode eq ''}">--%>
+                            <c:if test="${mode ne 'update'}">
                             <button class="btn btn-danger px-md-4 py-md-2 mr-2"
                                     id="registerBtn">
                                 등록
                             </button>
-<%--                            </c:if>--%>
+                            </c:if>
                             <button class="btn btn-facebook px-md-4 py-md-2 mr-2"
                                     id="removeBtn">
                                 삭제
@@ -141,8 +147,38 @@
 
 <script>
     $(document).ready(function() {
+        let writer= $('input[name=writer]').val();
+        let answer = $('textarea[name=answer]').val();
+
+        let writer_cnt = writer.length;
+        $('#writer_text_cnt').html("("+writer_cnt+" / 20)");
+
+        let answer_cnt = answer.length;
+        $('#ctent_text_cnt').html("("+answer_cnt+" / 3000)");
+
+        $("#writer").on('keyup', function() {
+            $('#writer_text_cnt').html("("+$("#writer").val().length+" / 20)");
+
+            if($(this).val().length > 20) {
+                $(this).val($(this).val().substring(0, 20));
+                $('#writer_text_cnt').html("(20 / 20)");
+                alert("작성 가능 문자수를 초과하셨습니다");
+            }
+        })
+
+        $("#answer").on('keyup', function() {
+            $('#ctent_text_cnt').html("("+$("#answer").val().length+" / 3000)");
+
+            if($(this).val().length > 3000) {
+                $(this).val($(this).val().substring(0, 3000));
+                $('#ctent_text_cnt').html("(3000 / 3000)");
+                alert("작성 가능 문자수를 초과하셨습니다");
+            }
+        })
 
         $("#listBtn").click(function(e) {
+            $('#writer_text_cnt').html("(0 / 20)");
+            $('#ctent_text_cnt').html("(0 / 3000)");
             location.href = "/board/inqry/list";
         })
 
@@ -174,6 +210,9 @@
                 },
                 error   : function(){ alert("insert error") } // 에러가 발생했을 때, 호출될 함수
             });
+
+            $('#writer_text_cnt').html("(0 / 20)");
+            $('#ctent_text_cnt').html("(0 / 3000)");
         })
 
         $('#updateBtn').click(function(){
@@ -184,6 +223,8 @@
             console.log("ctent" + ctent)
             console.log("idx" +idx);
 
+            $('#writer_text_cnt').html("(0 / 20)");
+            $('#ctent_text_cnt').html("(0 / 3000)");
 
             $.ajax({
                 type:'PATCH',
@@ -206,18 +247,14 @@
 
         $("#removeBtn").click(function(e) {
             let idx = $('#idx').data('idx');
-            <%--console.log("idx=="+idx);--%>
-            <%--let mode = "${mode}";--%>
-            <%--let code = 2;--%>
-            <%--if(mode == "update") {--%>
-            <%--    code = 1;--%>
-            <%--}--%>
-            // console.log("mode"+mode);
+
+            $('#writer_text_cnt').html("(0 / 20)");
+            $('#ctent_text_cnt').html("(0 / 3000)");
+
             $.ajax({
                 type: 'PATCH',
                 url: '/board/inqry/delete/'+idx,
                 success: function(msg) {
-                    alert("success");
                     if(msg === "UPDATE_ERR") {
                         alert("답변 삭제중 오류가 발생했습니다.");
                     } else if(msg === "UPDATE_OK") {
@@ -226,7 +263,6 @@
                     }
                 },
                 error: function(msg) {
-                    alert("error")
                     if(msg === "UPDATE_ERR"){
                         alert("답변 삭제중 오류가 발생했습니다.")
                     }

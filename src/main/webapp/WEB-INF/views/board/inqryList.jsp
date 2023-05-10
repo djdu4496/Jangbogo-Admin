@@ -138,34 +138,6 @@
                             </table>
                         </div>
                     </div>
-                    <%--  end of card-body  --%>
-<%--                    <c:choose>--%>
-<%--                        <c:when test="${totalCnt == null || totalCnt == 0}">--%>
-<%--                            <div class="pb-5 text-center">판매자가 존재하지 않습니다</div>--%>
-<%--                        </c:when>--%>
-<%--                        <c:otherwise>--%>
-<%--                            <ul class="d-flex justify-content-center pagination">--%>
-<%--                                <c:if test="${ph.showPrev}">--%>
-<%--                                    <li class="page-item">--%>
-<%--                                        <a class="page-link"--%>
-<%--                                           href="<c:url value="/user/list${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>--%>
-<%--                                    </li>--%>
-<%--                                </c:if>--%>
-<%--                                <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">--%>
-<%--                                    <li class="page-item ${i==ph.sc.page? "active" : ""}">--%>
-<%--                                        <a class="page-link"--%>
-<%--                                           href="<c:url value="/user/list${ph.sc.getQueryString(i)}"/>">${i}</a>--%>
-<%--                                    </li>--%>
-<%--                                </c:forEach>--%>
-<%--                                <c:if test="${ph.showNext}">--%>
-<%--                                    <li class="page-item">--%>
-<%--                                        <a class="page-link"--%>
-<%--                                           href="<c:url value="/user/list${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>--%>
-<%--                                    </li>--%>
-<%--                                </c:if>--%>
-<%--                            </ul>--%>
-<%--                        </c:otherwise>--%>
-<%--                    </c:choose>--%>
                 </div>
             </div>
         </div>

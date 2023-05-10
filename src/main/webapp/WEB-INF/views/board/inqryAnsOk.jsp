@@ -137,7 +137,6 @@
 
         $("#removeBtn").click(function(e) {
             let idx = $('.idx').data('idx');
-            // console.log("idx??? "+ idx)
             $.ajax({
                 type: 'PATCH',
                 url: '/board/inqry/delete/'+idx,
