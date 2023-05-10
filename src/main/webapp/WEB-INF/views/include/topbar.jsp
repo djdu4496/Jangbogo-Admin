@@ -17,7 +17,7 @@
     <form
             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
         <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+            <input type="text" class="form-control bg-light border-0 small" placeholder="검색어를 입력해주세요."
                    aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="button">
@@ -75,8 +75,8 @@
                         </div>
                     </div>
                     <div>
-                        <div class="small text-gray-500">December 12, 2019</div>
-                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                        <div class="small text-gray-500">May 24, 2023</div>
+                        <span class="font-weight-bold">새로운 주문이 접수되었습니다.</span>
                     </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -86,8 +86,8 @@
                         </div>
                     </div>
                     <div>
-                        <div class="small text-gray-500">December 7, 2019</div>
-                        $290.29 has been deposited into your account!
+                        <div class="small text-gray-500">May 24, 2023</div>
+                        <span class="font-weight-bold">새로운 주문이 접수되었습니다.</span>
                     </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -97,8 +97,8 @@
                         </div>
                     </div>
                     <div>
-                        <div class="small text-gray-500">December 2, 2019</div>
-                        Spending Alert: We've noticed unusually high spending for your account.
+                        <div class="small text-gray-500">May 24, 2023</div>
+                        <span class="font-weight-bold">새로운 주문이 접수되었습니다.</span>
                     </div>
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
@@ -128,7 +128,7 @@
                     <div class="font-weight-bold">
                         <div class="text-truncate">Hi there! I am wondering if you can help me with a
                             problem I've been having.</div>
-                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                        <div class="small text-gray-500">문하늘 팀원 · 58m</div>
                     </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -140,7 +140,7 @@
                     <div>
                         <div class="text-truncate">I have the photos that you ordered last month, how
                             would you like them sent to you?</div>
-                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                        <div class="small text-gray-500">남궁진 팀원 · 1d</div>
                     </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -152,7 +152,7 @@
                     <div>
                         <div class="text-truncate">Last month's report looks great, I am very happy with
                             the progress so far, keep up the good work!</div>
-                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                        <div class="small text-gray-500">김미소 팀원 · 2d</div>
                     </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -164,7 +164,7 @@
                     <div>
                         <div class="text-truncate">Am I a good boy? The reason I ask is because someone
                             told me that people say this to all dogs, even if they aren't good...</div>
-                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                        <div class="small text-gray-500">정지우 팀장 · 2w</div>
                     </div>
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
@@ -177,7 +177,7 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자 계정</span>
                 <img class="img-profile rounded-circle"
                      src="/img/undraw_profile.svg">
             </a>

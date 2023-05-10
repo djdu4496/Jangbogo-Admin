@@ -38,7 +38,7 @@
         JOIN SELER C
         ON C.IDX = seler_idx
         <include refid="searchCondition"/>
-        ORDER BY B.CREATE_TM DESC, A.IDX DESC
+        ORDER BY A.CRT_TM DESC, A.IDX DESC
         LIMIT #{offset}, #{pageSize};
     </select>
 
@@ -98,7 +98,7 @@
         ON E.IDX = D.DLVRY_EDI_IDX
         WHERE reg_state_cd = 1 AND TRUE
         <include refid="searchCondition"/>
-        ORDER BY B.CREATE_TM DESC, A.IDX DESC
+        ORDER BY A.CRT_TM DESC, A.IDX DESC
         LIMIT #{offset}, #{pageSize};
     </select>
     <!--
