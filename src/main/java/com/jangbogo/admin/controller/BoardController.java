@@ -108,12 +108,9 @@ public class BoardController {
 //    문의 수정 페이지로 이동
     @GetMapping("/board/inqry/updatePage/{idx}/{ctent}/{writer}")
     public String showUpdatePage(@PathVariable Integer idx, @PathVariable String ctent, @PathVariable String writer, Model m) {
-        System.out.println("????");
         m.addAttribute("mode", "update");
         m.addAttribute("ctent", ctent);
         m.addAttribute("writer", writer);
-        System.out.println("ctent="+ctent);
-        System.out.println("writer = " + writer);
 
         return "redirect:/board/inqry/ans/yet/"+idx;
     }
@@ -176,13 +173,11 @@ public class BoardController {
 
     @PatchMapping("/board/inqry/{idx}/{ctent}/{writer}")
     public ResponseEntity<String> updateAnswer(@PathVariable Integer idx, @PathVariable String ctent, @PathVariable String writer) {
-        System.out.println("ctent = " + ctent);
         String msg = "";
         ProdInqryAnsDto prodInqryAnsDto = new ProdInqryAnsDto();
         prodInqryAnsDto.setIdx(idx);
         prodInqryAnsDto.setCtent(ctent);
         prodInqryAnsDto.setWriter(writer);
-        System.out.println("prodInqryAnsDto = " + prodInqryAnsDto.toString());
         try {
             if(boardService.updateAnswer(prodInqryAnsDto) != 1) {
                 msg = "UPDATE_ERR";
@@ -197,29 +192,16 @@ public class BoardController {
         }
     }
 
-    @PatchMapping("/board/inqry/{idx}")
+    @PatchMapping("/board/inqry/delete/{idx}")
     public ResponseEntity<String> deleteAnswer(@PathVariable Integer idx, String code) {
         String msg = "";
-        System.out.println("idx = " + idx);
-        System.out.println("code = " + code);
-        try {
-            if(code == "1") {
-                if(boardService.updateAnsTbCode(idx) != 1 || boardService.updateInqryTbCode(idx) != 1) {
-                    msg = "UPDATE_ERR";
-                    return ResponseEntity.status(400).body(msg);
-                }
-                msg = "UPDATE_OK";
-                return ResponseEntity.ok().body(msg);
-            } else if(code == "2") {
-                if(boardService.updateInqryTbCode(idx) != 1) {
-                    msg = "UPDATE_ERR";
-                    return ResponseEntity.status(400).body(msg);
-                }
-                msg = "UPDATE_OK";
-                return ResponseEntity.ok().body(msg);
+        try {  //고객이 단 문의를 삭제한다.
+            if(boardService.updateInqryTbCode(idx) != 1) {
+                msg = "UPDATE_ERR";
+                return ResponseEntity.status(400).body(msg);
             }
-            msg = "UPDATE_ERR";
-            return ResponseEntity.status(400).body(msg);
+            msg = "UPDATE_OK";
+            return ResponseEntity.ok().body(msg);
         } catch (Exception e) {
             e.printStackTrace();
             msg = "UPDATE_ERR";
