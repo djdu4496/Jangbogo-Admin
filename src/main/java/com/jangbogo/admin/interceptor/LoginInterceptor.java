@@ -11,11 +11,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle (HttpServletRequest req, HttpServletResponse resp, Object obj) throws Exception {
-
         HttpSession session = req.getSession();
-        User admin = (User)session.getAttribute("admin");
-
-        if(session == null || admin == null) { //세션이 없거나 admin에 저장된 세션이 없는 경우
+        String admin = (String)session.getAttribute("admin");
+        if(session == null || admin == null) { // 세션이 없거나 admin에 저장된 이메일 값이 없는 경우
             resp.sendRedirect("/login");
             return false;
         }
