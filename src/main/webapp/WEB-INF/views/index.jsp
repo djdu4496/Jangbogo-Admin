@@ -13,6 +13,7 @@
     <div id="content-wrapper" class="d-flex flex-column">
         <!-- Main Content -->
         <div id="content">
+            <%@ include file="/WEB-INF/views/include/topbar.jsp" %>
             <div class="h-auto w-auto bg-white p-lg-5">
                 <div class="row">
                     <div class="col p-5">
