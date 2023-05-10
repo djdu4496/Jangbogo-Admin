@@ -128,8 +128,6 @@
             e.preventDefault();
             let writer = $("#ans_writer").text();
             let ctent = $("#ans_ctent").text();
-            console.log(writer);
-            console.log(ctent);
 
             let idx = $(".idx").data("idx");
             location.href="<c:url value='/board/inqry/updatePage/"+ idx +"/"+ ctent +"/"+ writer +"'/>"
