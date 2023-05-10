@@ -62,7 +62,9 @@ public class ProductController {
 
             return "/product/read";                                                                                      // "/order/order.jsp" 뷰 이름 반환 - 뷰 렌더링
         } catch(Exception e) {                                                                                          // 에러 발생 시
-            e.printStackTrace();                                                                                        // 1) 에러 내용을 로그에 출력
+            e.printStackTrace();
+            // 1) 에러 내용을 로그에 출력
+            rattr.addFlashAttribute("msg", "EXCEPTION_ERR");
             return "redirect:/";                                                                                        // 2) 메인 페이지로 리다이렉트
         }
     }
