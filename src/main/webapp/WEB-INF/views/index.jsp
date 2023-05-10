@@ -28,13 +28,13 @@
                             <tbody>
                             <tr>
                                 <th scope="row">결제완료</th>
-                                <td>20건</td>
-                                <td>430,000원</td>
+                                <td>31건</td>
+                                <td>1,150,000원</td>
                             </tr>
                             <tr>
                                 <th scope="row">배송준비중</th>
-                                <td>24건</td>
-                                <td>1,750,000원</td>
+                                <td>7건</td>
+                                <td>495,000원</td>
                             </tr>
                             <tr>
                                 <th scope="row">환불요청</th>
@@ -57,28 +57,28 @@
                             <tbody>
                             <tr>
                                 <th scope="row">배송준비중처리</th>
-                                <td>0건</td>
-                                <td>0원</td>
+                                <td>8건</td>
+                                <td>517,000원</td>
                             </tr>
                             <tr>
                                 <th scope="row">배송중처리</th>
-                                <td>0건</td>
-                                <td>0원</td>
+                                <td>1건</td>
+                                <td>22,000원</td>
                             </tr>
                             <tr>
                                 <th scope="row">환불완료</th>
-                                <td>3건</td>
-                                <td>70,000원</td>
+                                <td>1건</td>
+                                <td>24,000원</td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="w-100"></div>
                     <div class="col p-5">
-                        <h4>오늘 주문 상품 금액</h4>
-                        <input type="text" class="form-control-lg pr-2 pl-3 pt-1 pb-1 mt-4" id="floatingInputGrid" value="850,000원(15건)" readonly>
+                        <h4>오늘 총 주문 금액</h4>
+                        <input type="text" class="form-control-lg pr-1 pl-3 pt-1 pb-1 mt-4" id="floatingInputGrid" value="1,667,000원(39건)" readonly>
                         <h4 class="mt-5">재고현황</h4>
-                        <table class="table">
+                        <table class="table mt-4">
                             <thead>
                             <tr>
                                 <th scope="col">재고부족</th>
@@ -152,7 +152,7 @@
             labels: ['1월', '2월', '3월', '4월', '5월', '6월'],
             datasets: [{
                 label: '주문 건수',
-                data: [12, 19, 3, 5, 2, 0],
+                data: [1240, 1510, 1820, 1700, 550, 0],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(255, 159, 64, 0.2)',
