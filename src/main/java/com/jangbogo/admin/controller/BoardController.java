@@ -91,11 +91,12 @@ public class BoardController {
 
 //    상품문의
     @GetMapping("/board/inqry/list")
-    public String showInqryList(Model m) {
+    public String showInqryList(Model m, SearchCondition sc) {
 
         try {
-            List<ProdInqryDto> list = boardService.showProdInqryList();
             Integer totalCnt = boardService.cntWaitingAnswer();
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);    // PageHandler 객체 생성(인자 - totalCnt, sc)
+            List<ProdInqryDto> list = boardService.showProdInqryList(sc);
             m.addAttribute("list", list);
             m.addAttribute("totalCnt", totalCnt);
         } catch (Exception e) {

@@ -29,9 +29,10 @@
                             name="option"
                     >
 <%--                        <option value="A"  ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>이메일+브랜드명</option>--%>
-                        <option value="S" ${ph.sc.option=='S' ? "selected" : ""}>상태코드</option>
-                        <option value="E" ${ph.sc.option=='E' ? "selected" : ""}>작성자</option>
-                        <option value="N" ${ph.sc.option=='N' ? "selected" : ""}>브랜드명</option>
+                        <option value="A" ${ph.sc.option=='A' ? "selected" : ""}>전체</option>
+                        <option value="W" ${ph.sc.option=='W' ? "selected" : ""}>작성자</option>
+                        <option value="P" ${ph.sc.option=='P' ? "selected" : ""}>상품이름</option>
+                        <option value="T" ${ph.sc.option=='T' ? "selected" : ""}>제목</option>
                     </select>
                     <div class="input-group col-md-5">
                         <input type="text"

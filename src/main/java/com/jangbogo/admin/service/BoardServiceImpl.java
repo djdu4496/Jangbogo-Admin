@@ -49,8 +49,8 @@ public class BoardServiceImpl implements BoardService {
 
 
 //    상품문의
-    public List<ProdInqryDto> showProdInqryList() throws Exception {
-        return boardDao.showProdInqryList();
+    public List<ProdInqryDto> showProdInqryList(SearchCondition sc) throws Exception {
+        return boardDao.showProdInqryList(sc);
     }
     public Integer cntWaitingAnswer() throws Exception {
         return boardDao.cntWaitingAnswer();
