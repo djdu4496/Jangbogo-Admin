@@ -84,7 +84,7 @@
                         type:'PATCH',                                                                                   // 요청 메서드
                         url:'/order/deliveryForm/' + waybill_number + "/" + order_idx,                                  // 요청 URI, 주문번호(order_idx), 운송장번호(waybill_number)를 파라미터에 담아 요청
                         success : (result) => {                                                                         // 서버로부터 성공 응답이 도착하면 호출될 함수
-                            location.href = "http://localhost:8080/order/list/deliveryPreparing";
+                            location.href = redirect_url;
                         },
 
                         error : () => {                                                                                 // 서버로부터 실패 응답이 도착하면 호출될 함수
