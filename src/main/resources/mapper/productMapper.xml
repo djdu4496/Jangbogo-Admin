@@ -132,8 +132,18 @@
          아이디명 : updateProductRegState
     -->
     <update id="updateProductRegState" parameterType="map">
-        UPDATE PROD_DTL
-        SET REG_STATE_CD = #{reg_state_cd}, UPT_TM = now()
-        WHERE PROD_IDX = ${prod_idx}
+        UPDATE PRODUCT, PROD_DTL
+        SET
+            <choose>
+            <when test='reg_state_cd==2'>
+                PRODUCT.DSPLY_STATE_CD = 1,
+            </when>
+            <when test='reg_state_cd==3'>
+                PRODUCT.DSPLY_STATE_CD = 0,
+            </when>
+            </choose>
+            PROD_DTL.REG_STATE_CD = #{reg_state_cd},
+            PROD_DTL.UPT_TM = now()
+        WHERE PRODUCT.IDX = PROD_DTL.PROD_IDX AND PRODUCT.IDX = ${prod_idx}
     </update>
 </mapper>

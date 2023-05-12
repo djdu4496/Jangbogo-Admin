@@ -27,6 +27,7 @@
         }
 
     </style>
+    <title>관리자 | 상품문의 답변대기</title>
 </head>
 <body id="page-top">
 <div id="wrapper">

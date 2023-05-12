@@ -11,6 +11,7 @@
     <head>
         <%@ include file="/WEB-INF/views/include/header.jsp" %>
         <script src = "/js/order/format.js"></script>
+        <title>관리자 | 전체주문내역</title>
     </head>
     <body>
     <div id="wrapper">
@@ -28,9 +29,9 @@
                                 class="custom-select col-xl-3"
                                 name="option"
                         >
-                            <option value="A"  ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>전체</option>
-                            <option value="E" ${ph.sc.option=='E' ? "selected" : ""}>주문자명</option>
+                            <option value="A"  ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>주문번호+주문자명</option>
                             <option value="N" ${ph.sc.option=='N' ? "selected" : ""}>주문번호</option>
+                            <option value="E" ${ph.sc.option=='E' ? "selected" : ""}>주문자명</option>
                         </select>
                         <div class="input-group col-md-5">
                             <input type="text"

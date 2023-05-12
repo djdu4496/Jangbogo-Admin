@@ -13,6 +13,7 @@
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
     <link rel="stylesheet" href="/css/color.css">
     <link rel="stylesheet" href="/css/display.css">
+    <title>관리자 | 상품문의 답변완료</title>
 </head>
 <body id="page-top">
 <div id="wrapper">
