@@ -5,6 +5,7 @@
 <head>
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
     <link rel="stylesheet" href="/css/color.css">
+    <title>관리자 | 판매자상세</title>
 </head>
 <body id="page-top">
 <div id="wrapper">

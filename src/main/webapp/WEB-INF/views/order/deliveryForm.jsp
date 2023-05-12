@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
-        <title>Title</title>
+        <title>관리자 | 운송장번호 입력</title>
         <%@ include file="/WEB-INF/views/include/header.jsp" %>
         <style>
             .input-label label {
