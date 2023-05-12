@@ -74,7 +74,7 @@
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">수정일자</td>
-                                <td class="id">${list.upt_tm}</td>
+                                <td class="id"><fmt:formatDate value="${list.chg_tm}" pattern="yyyy-MM-dd hh:mm" type="date"/></td>
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">작성내용</td>
@@ -140,7 +140,6 @@
                     success: function (msg) {
                         if (msg === "DELETE_OK") {
                             alert("삭제에 성공했습니다");
-                            console.log("h2");
                             location.href = redirect_url;
                         }
                     },
