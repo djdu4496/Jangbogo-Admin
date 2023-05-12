@@ -49,8 +49,9 @@ public class BoardDaoImpl implements BoardDao {
     }
 
 //    상품 문의
-    public List<ProdInqryDto> showProdInqryList() throws Exception {
-        return session.selectList(nameSpace + "showProdInqryList");
+
+    public List<ProdInqryDto> showProdInqryList(SearchCondition sc) throws Exception {
+        return session.selectList(nameSpace + "showProdInqryList", sc);
     }
 
     public Integer cntWaitingAnswer() throws Exception {

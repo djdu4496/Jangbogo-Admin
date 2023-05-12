@@ -10,6 +10,7 @@
 <html>
     <head>
         <%@ include file="/WEB-INF/views/include/header.jsp" %>
+        <title>관리자 | '승인대기' 상품내역</title>
     </head>
     <body>
     <div id="wrapper">
@@ -27,7 +28,7 @@
                                     class="custom-select col-xl-3"
                                     name="option"
                             >
-                                <option value="A"  ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>전체</option>
+                                <option value="A"  ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>상품번호+상품이름</option>
                                 <option value="E" ${ph.sc.option=='E' ? "selected" : ""}>상품번호</option>
                                 <option value="N" ${ph.sc.option=='N' ? "selected" : ""}>상품이름</option>
                             </select>
