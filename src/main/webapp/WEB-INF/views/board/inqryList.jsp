@@ -11,6 +11,7 @@
 <html>
 <head>
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
+    <title>관리자 | 상품문의내역</title>
 </head>
 <body id="page-top">
 <div id="wrapper">
@@ -57,7 +58,7 @@
 <%--                                    승인 대기 판매자 리스트--%>
                                 </c:when>
                                 <c:otherwise>
-                                    정상 문의 답변 대기
+                                    상품문의내역
                                 </c:otherwise>
                             </c:choose>
                         </h6>

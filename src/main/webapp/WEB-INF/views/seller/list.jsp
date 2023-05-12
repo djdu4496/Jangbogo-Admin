@@ -4,6 +4,7 @@
 <html>
 <head>
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
+    <title>관리자 | 판매자목록</title>
 </head>
 <body id="page-top">
 <div id="wrapper">

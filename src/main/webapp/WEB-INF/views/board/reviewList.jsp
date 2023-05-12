@@ -6,6 +6,7 @@
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
     <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+    <title>관리자 | 상품후기내역</title>
 </head>
 <body>
 <div id="wrapper">

@@ -13,7 +13,7 @@
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
     <link rel="stylesheet" href="/css/color.css">
     <link rel="stylesheet" href="/css/display.css">
-    <title>Title</title>
+    <title>관리자 | 주문이력내역</title>
   </head>
   <body id="page-top">
     <div id="wrapper">

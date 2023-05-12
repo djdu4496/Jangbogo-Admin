@@ -13,6 +13,7 @@
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
     <link rel="stylesheet" href="/css/color.css">
     <link rel="stylesheet" href="/css/display.css">
+    <title>관리자 | 상품후기 상세</title>
 </head>
 <body id="page-top">
 <div id="wrapper">
@@ -24,7 +25,7 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-md-4">
                         <h5 class="m-0 font-weight-bold text-primary">
-                            후기 상세
+                            상품후기 상세
                         </h5>
                     </div>
                     <div class="card-body py-5 px-5">
