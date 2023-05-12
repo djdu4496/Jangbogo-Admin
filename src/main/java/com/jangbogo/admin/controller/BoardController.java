@@ -55,7 +55,7 @@ public class BoardController {
         try {
             list = boardService.selectReviewDetail(idx);                      // orderService의 getList메서드 호출, 반환값을 list에 저장
             m.addAttribute("list", list);                         // Model에 list를 K/V로 저장
-            System.out.println("list = " + list);
+//            System.out.println("list = " + list);
             m.addAttribute("idx", idx);                           // Model에 idx를 K/V로 저장
 
             return "/board/reviewDetail";                                     // "/order/order.jsp" 뷰 이름 반환 - 뷰 렌더링
