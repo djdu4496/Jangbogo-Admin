@@ -30,7 +30,7 @@
                             <div class="card-body py-5 px-5">
                                 <table class="table table-bordered py-md-3" id="dataTable" width="100%" cellspacing="0">
                                     <tr>
-                                        <td class="col-3 light-blue">상품번호</td>
+                                        <td class="col-10 light-blue">상품번호</td>
                                         <td>${product.idx}</td>
                                     </tr>
                                     <tr>
