@@ -39,9 +39,9 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <c:forEach var="order" items="${list}">
+                  <c:forEach var="order" items="${list}" varStatus="status">
                       <tr>
-                        <td class="id">${order.chg_tm}</td>
+                        <td class="id chg-date"  id='chg_tm' data-time="${order.chg_tm}">${order.chg_tm}</td>
                         <td class="id">${order.ord_dtl_idx}</td>
                         <td class="id">${order.prod_nm}</td>
                         <td class="id">
@@ -90,6 +90,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script>
       $(document).ready(() => {
+        let date_list = $(".chg-date");                                                                                 // 변수명 : date_list - 저장값: 클래스 이름이 chg-date인 '주문변경일시' 요소 리스트
+
+        date_list.each((index, item) => {                                                                               // each함수 사용 - 인자 1. index : 인덱스값 2. item : '주문변경일시' 요소 리스트 중 한 요소
+          let date = $(item).data("time");                                                                              // 변수명 : date - 저장값 : item의 data 속성 값
+          let now24Date = moment(new Date(date)).format("YYYY-MM-DD hh:mm:ss");                                         // 변수명 : now24Date - 저장값 : '주문변경일시'에 moment.js format 적용 값
+          $(item).html(now24Date);                                                                                      // item에 now24Date 렌더링
+        });
+
         $("#detailBtn").click((e) => {
           let order_idx = $("#orderIdx").text();
           let url = "/order/" + order_idx;

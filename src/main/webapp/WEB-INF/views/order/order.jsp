@@ -45,7 +45,7 @@
                                     <tbody>
                                         <c:forEach var="order" items="${list}">
                                                 <tr>
-                                                    <td class="id">${order.ord_tm}</td>
+                                                    <td class="id" id="ord_tm" data-time="${order.ord_tm}">${order.ord_tm}</td>
                                                     <td class="id">${order.ordr_nm}</td>
                                                     <td class="id">${order.prod_nm}</td>
                                                     <td class="id">${order.prod_prc}원</td>
@@ -101,6 +101,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script>
             $(document).ready(() => {
+                let date = $("#ord_tm").data("time");
+
+                let now24Date = moment(new Date(date)).format("YYYY-MM-DD hh:mm:ss");
+                $("#ord_tm").html(now24Date);
+
                 let redirect_url = "<c:url value='/order/list'/>"
                 $("#history_btn").click((e) => {
                     let order_idx = $("#orderIdx").text();
