@@ -142,7 +142,6 @@
     </div>
 </div>
 <%@ include file="/WEB-INF/views/include/script.jsp" %>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script>
     $(document).ready(function () {
