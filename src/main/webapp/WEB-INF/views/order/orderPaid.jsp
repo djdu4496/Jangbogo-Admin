@@ -77,7 +77,7 @@
                                     <tr>
                                         <th>선택</th>
                                         <th>주문일자</th>
-                                        <th>주문번호(idx)</th>
+                                        <th>주문번호</th>
                                         <th>주문자명</th>
                                         <th>상품명</th>
                                         <th>주문총금액</th>
@@ -91,7 +91,7 @@
                                             <td class="id">
                                                 <input type="checkbox" />
                                             </td>
-                                            <td class="id" id="ord_tm" data-time="${order.ord_tm}">${order.ord_tm}</td>
+                                            <td class="id ord-date" id="ord_tm" data-time="${order.ord_tm}">${order.ord_tm}</td>
                                             <td class="id data-oid">${order.idx}</td>
                                             <td class="id">${order.ordr_nm}</td>
                                             <td class="id">${order.prod_nm}</td>
@@ -149,11 +149,13 @@
     <%@ include file="/WEB-INF/views/include/script.jsp" %>
     <script>
         $(document).ready(() => {
-            let date = $("#ord_tm").data("time");
+            let date_list = $(".ord-date");                                                                             // 변수명 : date_list - 저장값: 클래스 이름이 chg-date인 '주문변경일시' 요소 리스트
 
-            let now24Date = moment(new Date(date)).format("YYYY-MM-DD hh:mm:ss")
-
-            $("#ord_tm").html(now24Date);
+            date_list.each((index, item) => {                                                                           // each함수 사용 - 인자 1. index : 인덱스값 2. item : '주문변경일시' 요소 리스트 중 한 요소
+                let date = $(item).data("time");                                                                        // 변수명 : date - 저장값 : item의 data 속성 값
+                let now24Date = moment(new Date(date)).format("YYYY-MM-DD hh:mm:ss");                                   // 변수명 : now24Date - 저장값 : '주문변경일시'에 moment.js format 적용 값
+                $(item).html(now24Date);                                                                                // item에 now24Date 렌더링
+            });
 
             $("#deliveryPrepareBtn").click((e) => {                                                                          // 체크된 주문에 대해 '배송준비중' 처리
                                                                                                                         // 1. 변수 선언
