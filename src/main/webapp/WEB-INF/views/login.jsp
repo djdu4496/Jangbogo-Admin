@@ -16,7 +16,7 @@
                 <div class="col-lg login-align">
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                            <h1 class="h4 text-gray-900 mb-4">관리자 페이지</h1>
                         </div>
                         <form class="user" action="/login" method="post" id="login_form">
                             <div class="form-group">
@@ -24,7 +24,7 @@
                                         type="email"
                                         name="email"
                                         class="form-control form-control-user"
-                                        placeholder="Enter Email Address..."
+                                        placeholder="아이디 입력하기"
                                 />
                             </div>
                             <div class="form-group">
@@ -33,7 +33,7 @@
                                         name="pwd"
                                         class="form-control form-control-user"
                                         id="exampleInputPassword"
-                                        placeholder="Password"
+                                        placeholder="비밀번호 입력하기"
                                 />
                             </div>
                             <div class="form-group">
@@ -44,17 +44,17 @@
                                             id="customCheck"
                                     />
                                     <label class="custom-control-label" for="customCheck">
-                                        Remember Me
+                                        로그인 상태 유지
                                     </label>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary btn-user btn-block" id="login">
-                                Login
+                                로그인
                             </button>
                             <hr/>
                         </form>
                         <div class="text-center">
-                            <a class="small" href="/">Forgot Password?</a>
+                            <a class="small" href="/">비밀번호를 잊어버리셨나요?</a>
                         </div>
                     </div>
                 </div>
