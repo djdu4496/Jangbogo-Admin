@@ -63,7 +63,7 @@
         아이디명 : selectProduct
     -->
     <select id="selectProduct" parameterType="Integer" resultType="ProductDetailDto">
-        SELECT A.IDX as idx, A.SELER_PROD_CD as seler_prod_cd, A.NAME as name, A.PRC as prc, A.CTENT as ctent, A.DC_STATE_CD as dc_state_cd, A.DC_RATE as dc_rate, A.DSPLY_STATE_CD as dsply_state_cd,
+        SELECT A.IDX as idx, A.SELER_PROD_CD as seler_prod_cd, A.NAME as name, A.PRC as prc, A.CTENT as ctent, A.DC_STATE_CD as dc_state_cd, A.DC_RATE as dc_rate, A.DSPLY_STATE_CD as dsply_state_cd, A.UPLOAD_PATH as upload_path,
                B.ORPLC as orplc, B.SLE_UNIT as sle_unit, B.WEIGHT as weight, B.MFT_TM as mft_tm, B.DISTB_TLMT as distb_tlmt, B.WARN as warn, B.SLE_QUTY as sle_quty, B.MAX_SLE_QUTY as max_sle_quty, B.REG_STATE_CD as reg_state_cd,
                B.STATE_CD as state_cd, B.SFKP_TP_STATE_CD as sfkp_tp_state_cd, B.CREATE_TM as create_tm, B.SLE_START_TM as sle_start_tm , B.SLE_END_TM as sle_end_tm, B.INV_QUTY as inv_quty, B.GUID as guid,
                C.CPNM as cpnm,
@@ -107,7 +107,7 @@
         아이디명 : selectPendingAll
     -->
     <select id="selectPendingAll" parameterType="SearchCondition" resultType="ProductDto">
-        SELECT A.IDX as idx, A.SELER_PROD_CD as seler_prod_cd, A.NAME as name, A.PRC as prc, A.CTENT as ctent, A.DC_STATE_CD as dc_state_cd, A.DC_RATE as dc_rate, A.DSPLY_STATE_CD as dsply_state_cd,
+        SELECT A.IDX as idx, A.SELER_PROD_CD as seler_prod_cd, A.NAME as name, A.PRC as prc, A.CTENT as ctent, A.DC_STATE_CD as dc_state_cd, A.DC_RATE as dc_rate, A.DSPLY_STATE_CD as dsply_state_cd, A.UPLOAD_PATH as upload_path,
                B.ORPLC as orplc, B.SLE_UNIT as sle_unit, B.WEIGHT as weight, B.MFT_TM as mft_tm, B.DISTB_TLMT as distb_tlmt, B.WARN as warn, B.SLE_QUTY as sle_quty, B.MAX_SLE_QUTY as max_sle_quty, B.REG_STATE_CD as reg_state_cd,
                B.STATE_CD as state_cd, B.SFKP_TP_STATE_CD as sfkp_tp_state_cd, B.CREATE_TM as create_tm, B.SLE_START_TM as sle_start_tm , B.SLE_END_TM as sle_end_tm, B.INV_QUTY as inv_quty, B.GUID as guid,
                C.CPNM as cpnm,
@@ -146,4 +146,8 @@
             PROD_DTL.UPT_TM = now()
         WHERE PRODUCT.IDX = PROD_DTL.PROD_IDX AND PRODUCT.IDX = ${prod_idx}
     </update>
+
+    <select id="selectPdFiles" resultType="ProductFile">
+        SELECT * FROM PROD_FILE WHERE PROD_IDX = #{prod_idx}
+    </select>
 </mapper>

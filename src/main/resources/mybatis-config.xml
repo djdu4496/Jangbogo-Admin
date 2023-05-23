@@ -13,6 +13,7 @@
         <typeAlias alias="OrderDetailDto" type="com.jangbogo.admin.domain.OrderDetailDto"/>
         <typeAlias alias="ProdReviewDto" type="com.jangbogo.admin.domain.ProdReviewDto"/>
         <typeAlias alias="ProductDto" type="com.jangbogo.admin.domain.ProductDto"/>
+        <typeAlias alias="ProductFile" type="com.jangbogo.admin.domain.ProductFile"/>
         <typeAlias alias="ProductDetailDto" type="com.jangbogo.admin.domain.ProductDetailDto"/>
         <typeAlias alias="ProdInqryDto" type="com.jangbogo.admin.domain.ProdInqryDto"/>
         <typeAlias alias="ProdInqryAnsDto" type="com.jangbogo.admin.domain.ProdInqryAnsDto"/>

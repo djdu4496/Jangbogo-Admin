@@ -13,6 +13,11 @@
         <%@ include file="/WEB-INF/views/include/header.jsp" %>
         <link rel="stylesheet" href="/css/color.css">
         <link rel="stylesheet" href="/css/display.css">
+        <style>
+            img {
+                width: 100%;
+            }
+        </style>
     </head>
     <body id="page-top">
         <div id="wrapper">
@@ -122,6 +127,20 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td class="col-3 light-blue">상품 썸네일</td>
+                                        <td class="id">
+                                            <img class="banner" src="${product.upload_path}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-3 light-blue">상품 상세 이미지</td>
+                                        <td class="id">
+                                            <c:forEach items="${fileList}" var="file">
+                                                <img class="banner" src="${file.upload_path}">
+                                            </c:forEach>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td class="col-3 light-blue">상품등록상태코드</td>
                                         <td class="id">
                                             <c:choose>
@@ -161,13 +180,21 @@
                                     <tr>
                                         <td class="col-3 light-blue">상품판매시작일</td>
                                         <td class="id">
-                                            ${product.sle_start_tm}
+                                            <fmt:formatDate
+                                                    value="${product.sle_start_tm}"
+                                                    pattern="yyyy-MM-dd"
+                                                    type="date"
+                                            />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="col-3 light-blue">상품판매종료일</td>
                                         <td class="id">
-                                            ${product.sle_end_tm}
+                                            <fmt:formatDate
+                                                    value="${product.sle_end_tm}"
+                                                    pattern="yyyy-MM-dd"
+                                                    type="date"
+                                            />
                                         </td>
                                     </tr>
                                     <tr>

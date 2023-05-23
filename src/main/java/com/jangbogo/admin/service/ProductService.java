@@ -2,6 +2,7 @@ package com.jangbogo.admin.service;
 
 import com.jangbogo.admin.domain.ProductDetailDto;
 import com.jangbogo.admin.domain.ProductDto;
+import com.jangbogo.admin.domain.ProductFile;
 import com.jangbogo.admin.domain.SearchCondition;
 
 import java.util.List;
@@ -43,4 +44,7 @@ public interface ProductService {
     // 반환타입 : int
     // 매개변수 : Map<Integer, Integer> pathVarsMap - Integer prod_idx (상품번호), reg_state_cd (상품상태코드)
     int updateProductRegState(Map<Integer, Integer> pathVarsMap);
+
+    //상품 첨부파일 조회
+    List<ProductFile> selectPdFiles (Integer prod_idx) throws Exception;
 }
