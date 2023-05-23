@@ -65,7 +65,6 @@
                                     <th>판매자상품코드</th>
                                     <th>상품이름</th>
                                     <th>상품가격</th>
-                                    <th>상품할인상태</th>
                                     <th>상품할인율</th>
                                     <th>상품등록상태</th>
                                     <th>상품판매시작일</th>
@@ -84,18 +83,16 @@
                                                     ${product.name}
                                             </a>
                                         </td>
-                                        <td class="id">${product.prc}원</td>
-                                        <td class="id">
-                                            <c:choose>
-                                                <c:when test="${product.dc_state_cd== 1}">
-                                                    할인적용
-                                                </c:when>
-                                                <c:when test="${product.dc_state_cd== 2}">
-                                                    할인없음
-                                                </c:when>
-                                            </c:choose>
-                                        </td>
-                                        <td class="id">${product.dc_rate}%</td>
+                                        <td class="id"><fmt:formatNumber value="${product.prc}" pattern="#,###"/>원</td>
+                                        <c:choose>
+                                            <c:when test="${product.dc_rate != 0}">
+                                                <td class="id">${product.dc_rate}%</td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td class="id"></td>
+                                            </c:otherwise>
+                                        </c:choose>
+
                                         <td class="id">
                                             <c:choose>
                                                 <c:when test="${product.state_cd== 1}">
