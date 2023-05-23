@@ -2,3 +2,15 @@
     positon: relative;
     margin: 0 auto;
 }
+
+.login-header {
+    margin-bottom: 20px;
+}
+
+.login-header img {
+    height: 50px;
+}
+
+.login-header h1 {
+    margin: 10px 0 30px 0;
+}

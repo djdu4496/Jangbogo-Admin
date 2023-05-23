@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <jsp:include page="include/header.jsp"/>
-    <link rel="stylesheet" href="/css/login.css"/>
+    <link rel="stylesheet" href="/css/login.css?v=2"/>
 </head>
 <body class="bg-gradient-primary">
 <div class="row justify-content-center">
@@ -15,8 +15,9 @@
             <div class="card-body p-0">
                 <div class="col-lg login-align">
                     <div class="p-5">
-                        <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">관리자 페이지</h1>
+                        <div class="text-center login-header">
+                            <img src="/img/jangbogo_logo.png">
+                            <h1 class="h4 text-gray-900">관리자 페이지</h1>
                         </div>
                         <form class="user" action="/login" method="post" id="login_form">
                             <div class="form-group">
