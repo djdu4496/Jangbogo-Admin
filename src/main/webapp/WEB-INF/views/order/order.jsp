@@ -25,7 +25,7 @@
                         <div class="card shadow mb-4">
                             <div class="card-header py-md-4">
                                 <h5 class="m-0 font-weight-bold text-primary">
-                                    주문 상세 - 주문번호 : <span id="orderIdx">${idx}</span> | 주문총금액 <span id="orderTotalAmt"> ${list[0].tot_amt}</span>원
+                                    주문 상세 - 주문번호 : <span id="orderIdx">${idx}</span> | 주문총금액 <span id="orderTotalAmt"><fmt:formatNumber value="${list[0].tot_amt}" pattern="#,###"/></span>원
                                 </h5>
                             </div>
                             <div class="card-body py-5 px-5">
@@ -48,9 +48,9 @@
                                                     <td class="id">${order.ord_tm}</td>
                                                     <td class="id">${order.ordr_nm}</td>
                                                     <td class="id">${order.prod_nm}</td>
-                                                    <td class="id">${order.prod_prc}원</td>
+                                                    <td class="id"><fmt:formatNumber value="${order.prod_prc}" pattern="#,###"/>원</td>
                                                     <td class="id">${order.prod_qty}개</td>
-                                                    <td class="id">${order.prod_prc * order.prod_qty}원</td>
+                                                    <td class="id"><fmt:formatNumber value="${order.prod_prc * order.prod_qty}" pattern="#,###"/>원</td>
                                                     <td class="id">
                                                         ${order.setl_mn_cd == 1 ? "카카오페이" : "네이버페이"}
                                                     </td>

@@ -52,7 +52,7 @@
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">상품가격</td>
-                                <td class="id">${product.prc}</td>
+                                <td class="id"><fmt:formatNumber value="${(product.prc)}" pattern="#,###"/>원</td>
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">상품설명</td>
@@ -73,7 +73,9 @@
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">할인적용가</td>
-                                <td class="id">${product.dc_rate * product.prc * 0.01}원</td>
+                                <td class="id"><fmt:formatNumber value="${(product.prc - Math.floor(product.prc / 100 * product.dc_rate))}" pattern="#,###"/>원</td>
+
+
                             </tr>
                             <tr>
                                 <td class="col-3 light-blue">상품전시상태</td>
@@ -117,7 +119,7 @@
                             <tr>
                                 <td class="col-3 light-blue">상품판매량</td>
                                 <td class="id">
-                                    ${product.sle_quty}일
+                                    ${product.sle_quty}개
                                 </td>
                             </tr>
                             <tr>
@@ -262,7 +264,7 @@
                             </tr>
                             <td class="col-3 light-blue">배송비</td>
                             <td class="id">
-                                ${product.dexp}원
+                                <fmt:formatNumber value="${(product.dexp)}" pattern="#,###"/>원
                             </td>
                             </tr>
                         </table>

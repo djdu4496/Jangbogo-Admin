@@ -105,7 +105,7 @@
                                         </td>
                                         <td class="id">${order.ordr_nm}</td>
                                         <td class="id">${order.prod_nm}</td>
-                                        <td class="id">${order.tot_amt}원</td>
+                                        <td class="id"><fmt:formatNumber value="${order.tot_amt}" pattern="#,###"/>원</td>
                                         <td class="id">
                                                 ${order.setl_mn_cd == 1 ? "카카오페이" : "네이버페이"}
                                         </td>
