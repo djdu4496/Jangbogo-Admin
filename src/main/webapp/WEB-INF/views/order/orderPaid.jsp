@@ -91,7 +91,7 @@
                                             <td class="id">
                                                 <input type="checkbox" />
                                             </td>
-                                            <td class="id">${order.ord_tm}</td>
+                                            <td class="id" id="ord_tm" data-time="${order.ord_tm}">${order.ord_tm}</td>
                                             <td class="id data-oid">${order.idx}</td>
                                             <td class="id">${order.ordr_nm}</td>
                                             <td class="id">${order.prod_nm}</td>
@@ -149,6 +149,12 @@
     <%@ include file="/WEB-INF/views/include/script.jsp" %>
     <script>
         $(document).ready(() => {
+            let date = $("#ord_tm").data("time");
+
+            let now24Date = moment(new Date(date)).format("YYYY-MM-DD hh:mm:ss")
+
+            $("#ord_tm").html(now24Date);
+
             $("#deliveryPrepareBtn").click((e) => {                                                                          // 체크된 주문에 대해 '배송준비중' 처리
                                                                                                                         // 1. 변수 선언
                 let length = $("#dataTable tBody").children().length;                                                   // 변수명 : length - 저정값 : 테이블 행 개수

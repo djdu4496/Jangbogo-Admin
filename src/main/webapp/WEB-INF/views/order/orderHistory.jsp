@@ -41,7 +41,7 @@
                   <tbody>
                   <c:forEach var="order" items="${list}">
                       <tr>
-                        <td class="id">${order.chg_tm}</td>
+                        <td class="id" id="chg_tm" data-time="${order.chg_tm}">${order.chg_tm}</td>
                         <td class="id">${order.ord_dtl_idx}</td>
                         <td class="id">${order.prod_nm}</td>
                         <td class="id">
@@ -90,6 +90,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script>
       $(document).ready(() => {
+
+        let date = $("#chg_tm").data("time");
+
+        let now24Date = moment(new Date(date)).format("YYYY-MM-DD hh:mm:ss");
+
+        $("#chg_tm").html(now24Date);
+
         $("#detailBtn").click((e) => {
           let order_idx = $("#orderIdx").text();
           let url = "/order/" + order_idx;
