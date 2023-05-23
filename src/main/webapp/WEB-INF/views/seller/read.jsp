@@ -6,6 +6,15 @@
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
     <link rel="stylesheet" href="/css/color.css">
     <title>관리자 | 판매자상세</title>
+    <style>
+        img {
+            height: 100%;
+        }
+
+        img.banner {
+            width: 100%;
+        }
+    </style>
 </head>
 <body id="page-top">
 <div id="wrapper">
@@ -84,7 +93,7 @@
                             <tr>
                                 <td class="col-3 light-blue">브랜드 배너</td>
                                 <td class="id">
-                                    <img src="${pageContext.request.contextPath}/display?fileName=${seller.brnd_bnr_upload_path}">
+                                    <img class="banner" src="${pageContext.request.contextPath}/display?fileName=${seller.brnd_bnr_upload_path}">
                                 </td>
                             </tr>
                             <tr>

@@ -2,6 +2,7 @@ package com.jangbogo.admin.dao;
 
 import com.jangbogo.admin.domain.ProductDetailDto;
 import com.jangbogo.admin.domain.ProductDto;
+import com.jangbogo.admin.domain.ProductFile;
 import com.jangbogo.admin.domain.SearchCondition;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,10 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public int updateProductRegState(Map<Integer, Integer> pathVarsMap) {                                               // 메서드명 : updateProductRegState
         return session.update(namespace + "updateProductRegState", pathVarsMap);                                     // 기   능 : productMapper.xml에 있는 SQL문을 실행하여 '승인대기' 상태인 상품을 특정 상태로를 수정
-    }                                                                                                                   // 반환타입 : int - 매개변수 : Map<Integer, Integer> pathVarsMap
+    }// 반환타입 : int - 매개변수 : Map<Integer, Integer> pathVarsMap
+
+    @Override
+    public List<ProductFile> selectPdFiles (Integer prod_idx) throws Exception {
+        return session.selectList(namespace + "selectPdFiles", prod_idx);
+    }
 }
