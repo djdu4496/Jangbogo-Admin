@@ -44,7 +44,7 @@
                         <td class="id chg-date"  id='chg_tm' data-time="${order.chg_tm}">${order.chg_tm}</td>
                         <td class="id">${order.ord_dtl_idx}</td>
                         <td class="id">${order.prod_nm}</td>
-                        <td class="id">
+                        <td class="id ord-state" data-state="${order.ord_state_cd}">
                           <c:choose>
                             <c:when test="${order.ord_state_cd== 1}">
                               결제완료
@@ -97,6 +97,15 @@
           let now24Date = moment(new Date(date)).format("YYYY-MM-DD hh:mm:ss");                                         // 변수명 : now24Date - 저장값 : '주문변경일시'에 moment.js format 적용 값
           $(item).html(now24Date);                                                                                      // item에 now24Date 렌더링
         });
+
+        let ord_state = $(".ord-state");
+
+        ord_state.each((index, item) => {
+          if(index + 1 == ord_state.length) {
+            $(item).css('color', 'rgb(240, 63, 64)');
+            $(item).css('font-weight', '600');
+          }
+        })
 
         $("#detailBtn").click((e) => {
           let order_idx = $("#orderIdx").text();
