@@ -22,11 +22,11 @@ public class UploadController {
     @GetMapping("/display")
     @ResponseBody
     public ResponseEntity<byte[]> getFile(String fileName) {
-        log.info("fileName: " + fileName); // 받아온 파일 이름 확인
+//        log.info("fileName: " + fileName); // 받아온 파일 이름 확인
 
-        File file = new File("/Users/namgungjin/Desktop/upload/temp/" + fileName); // 파일 업로드할 폴더 경로랑 파일 이름 합쳐서 파일 객체 생성.
+        File file = new File("/Users/jiwoo/jangbogo-3rd/upload/temp/" + fileName); // 파일 업로드할 폴더 경로랑 파일 이름 합쳐서 파일 객체 생성.
 
-        log.info("file: " + file); // 파일 객체 제대로 만들어졌나 로그로 확인
+//        log.info("file: " + file); // 파일 객체 제대로 만들어졌나 로그로 확인
 
         ResponseEntity<byte[]> result = null; // 바이트 배열 지네릭의 responseEntity null로 초기화.
 
