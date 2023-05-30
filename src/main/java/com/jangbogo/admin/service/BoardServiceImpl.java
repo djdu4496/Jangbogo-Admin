@@ -16,8 +16,6 @@ public class BoardServiceImpl implements BoardService {
     @Autowired
     BoardDao boardDao;
 
-
-
     @Override
     public List<ProdReviewDto> ReviewSelectedPage(SearchCondition sc) throws Exception {
         return boardDao.ReviewSelectedPage(sc);
@@ -49,8 +47,13 @@ public class BoardServiceImpl implements BoardService {
 
 
 //    상품문의
+    @Override
     public List<ProdInqryDto> showProdInqryList(SearchCondition sc) throws Exception {
         return boardDao.showProdInqryList(sc);
+    }
+    @Override
+    public Integer selectResultCnt(SearchCondition sc) throws Exception {
+        return boardDao.getSearchResultCnt(sc);
     }
     public Integer cntWaitingAnswer() throws Exception {
         return boardDao.cntWaitingAnswer();

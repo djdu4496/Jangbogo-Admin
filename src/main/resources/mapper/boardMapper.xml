@@ -21,9 +21,9 @@
                 AND pi.title LIKE concat('%', #{keyword}, '%')
             </when>
             <otherwise>
-                AND (pi.writer LIKE concat('%', #{keyword}, '%')
-                OR p.name LIKE concat('%', #{keyword}, '%'))
-                OR pi.title LIKE concat('%', #{keyword}, '%'))
+                AND pi.writer LIKE concat('%', #{keyword}, '%')
+                OR p.name LIKE concat('%', #{keyword}, '%')
+                OR pi.title LIKE concat('%', #{keyword}, '%')
             </otherwise>
         </choose>
     </sql>
@@ -128,17 +128,39 @@
 
 <!--  상품문의  -->
 <!--  상품문의 리스트 전체보기 - 상품테이블에서 상품이름, 회원테이블에서 회원닉네임 가져오기-->
-    <select id="showProdInqryList" parameterType="SearchCondition" resultType="ProdInqryDto">
-        select
-            p.name, pi.idx, pi.prod_idx, pi.user_idx, pi.title, pi.ctent, pi.writer, pi.res_state_cd, pi.state_cd, pi.wrt_tm, pd.state_cd as 'prodDetail_state_cd'
-        from prod_inqry pi
-                 join product p on p.idx = pi.prod_idx
-                 join prod_dtl pd on pd.prod_idx = p.idx
+    <!--
+        태   그 : select
+        기   능 : '상품문의' 테이블의 전체 데이터 조회
+        아이디명 : selectProdInqryPage
+    -->
+    <select id="selectProdInqryPage" parameterType="SearchCondition" resultType="ProdInqryDto">
+        SELECT
+        p.name, pi.idx, pi.prod_idx, pi.user_idx, pi.title, pi.ctent, pi.writer, pi.res_state_cd, pi.state_cd, pi.wrt_tm, pd.state_cd as 'prodDetail_state_cd'
+        FROM prod_inqry pi
+        JOIN product p
+            ON p.idx = pi.prod_idx
+        JOIN prod_dtl pd
+            ON pd.prod_idx = p.idx
         WHERE TRUE
         <include refid="InquerySearchCondition"/>
         ORDER BY pi.crt_tm DESC, pi.IDX DESC
         LIMIT #{offset}, #{pageSize};
     </select>
+
+    <!--
+        태   그 : select
+        기   능 : '주문상세' 테이블과 '주문이력' 테이블의 조인 데이터 조회
+        아이디명 : selectResultCnt
+    -->
+    <select id="selectResultCnt" parameterType="SearchCondition" resultType="int">
+        SELECT COUNT(*)
+        FROM prod_inqry pi
+        JOIN product p ON p.idx = pi.prod_idx
+        WHERE true
+        <include refid="InquerySearchCondition"/>
+    </select>
+
+
 <!--  상품문의 리스트 중 답변 대기이면서 삭제되지 않은 게시물 개수 보기 (답변을 달아줘야하는 총 게시물 개수) -->
     <select id="cntWaitingAnswer" resultType="Integer">
         select count(*)
