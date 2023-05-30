@@ -49,9 +49,13 @@ public class BoardDaoImpl implements BoardDao {
     }
 
 //    상품 문의
-
+    @Override
     public List<ProdInqryDto> showProdInqryList(SearchCondition sc) throws Exception {
-        return session.selectList(nameSpace + "showProdInqryList", sc);
+        return session.selectList(nameSpace + "selectProdInqryPage", sc);
+    }
+    @Override
+    public int getSearchResultCnt(SearchCondition sc) {                                                                 // 메서드명 : getSearchResultCnt
+        return session.selectOne(nameSpace + "selectResultCnt", sc);                                                 // 기   능 : boardMapper.xml에 있는 SQL문을 실행하여 주문내역 수 조회 결과 반환
     }
 
     public Integer cntWaitingAnswer() throws Exception {

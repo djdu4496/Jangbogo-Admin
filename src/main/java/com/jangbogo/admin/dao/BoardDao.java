@@ -17,7 +17,10 @@ public interface BoardDao {
     Integer toRegisterState(Integer idx) throws Exception;
     Integer checkState(Integer idx) throws Exception;
 
-    List<ProdInqryDto> showProdInqryList(SearchCondition sc) throws Exception;
+
+    public List<ProdInqryDto> showProdInqryList(SearchCondition sc) throws Exception;
+    public int getSearchResultCnt(SearchCondition sc);
+
     Integer cntWaitingAnswer() throws Exception;
     ProdInqryDto showOneInqry(Integer idx) throws Exception;
     ProdInqryDto showAnsOKInqry(Integer idx) throws Exception;

@@ -94,16 +94,18 @@ public class BoardController {
     public String showInqryList(Model m, SearchCondition sc) {
 
         try {
-            Integer totalCnt = boardService.cntWaitingAnswer();
+            Integer totalCnt = boardService.selectResultCnt(sc);
             PageHandler pageHandler = new PageHandler(totalCnt, sc);    // PageHandler 객체 생성(인자 - totalCnt, sc)
             List<ProdInqryDto> list = boardService.showProdInqryList(sc);
             m.addAttribute("list", list);
             m.addAttribute("totalCnt", totalCnt);
+            m.addAttribute("ph", pageHandler);
+            return "/board/inqryList";
         } catch (Exception e) {
             e.printStackTrace();
+            return "redirect:/";
         }
 
-        return "/board/inqryList";
     }
 
 //    문의 수정 페이지로 이동

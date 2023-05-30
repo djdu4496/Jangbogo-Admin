@@ -19,6 +19,7 @@ public interface BoardService {
 //    상품문의
     List<ProdInqryDto> showProdInqryList(SearchCondition sc) throws Exception;
     Integer cntWaitingAnswer() throws Exception;
+    public Integer selectResultCnt(SearchCondition sc) throws Exception;
     ProdInqryDto showOneInqry(Integer idx) throws Exception;
     ProdInqryDto showAnsOKInqry(Integer idx) throws Exception;
     Integer insertInqry(ProdInqryAnsDto prodInqryAnsDto) throws Exception;
